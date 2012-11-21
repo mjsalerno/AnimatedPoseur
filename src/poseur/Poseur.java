@@ -175,5 +175,6 @@ public class Poseur
         // GET THE GUI AND START IT UP
         PoseurGUI window = app.getGUI();
         window.setVisible(true);
+        window.setResizable(true);
     }
 }

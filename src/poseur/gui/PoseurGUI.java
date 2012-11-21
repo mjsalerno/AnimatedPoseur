@@ -91,6 +91,7 @@ public class PoseurGUI extends JFrame
     private JPanel northPanel;
     private JPanel northOfNorthPanel;
     private JPanel southOfNorthPanel;
+    private JPanel southOfCenterPanel;
     
     // FILE CONTROLS
     private JToolBar fileToolbar;
@@ -134,6 +135,13 @@ public class PoseurGUI extends JFrame
     private JButton customColorSelectorButton;
     private JLabel alphaLabel;
     private JSlider transparencySlider;
+    
+    //SPEED COLTROL
+    private JToolBar speedControlToolbar;
+    private JButton speedUpButton;
+    private JButton slowDownButton;
+    private JButton startButton;
+    private JButton stopButton;
 
     /**
      * Default constructor for initializing the GUI. Note that the Poseur
@@ -496,6 +504,7 @@ public class PoseurGUI extends JFrame
         northPanel = new JPanel();
         northOfNorthPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         southOfNorthPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        southOfCenterPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         
         // WE'LL BATCH LOAD THE IMAGES
         MediaTracker tracker = new MediaTracker(this);
@@ -585,6 +594,14 @@ public class PoseurGUI extends JFrame
         transparencySlider.setToolTipText(ALPHA_TOOLTIP);
         transparencySlider.setSnapToTicks(false);
         
+        
+        //SPEED CONTROLESTOOLBAR
+        speedControlToolbar = new JToolBar();
+        startButton = (JButton)initButton(START_IMAGE_FILE, speedControlToolbar, tracker, idCounter++, JButton.class, null, START_TOOLTIP);
+        stopButton = (JButton)initButton(STOP_IMAGE_FILE, speedControlToolbar, tracker, idCounter++, JButton.class, null, STOP_TOOLTIP);
+        speedUpButton = (JButton)initButton(SPEED_UP_IMAGE_FILE, speedControlToolbar, tracker, idCounter++, JButton.class, null, SPEED_UP_TOOLTIP);
+        slowDownButton = (JButton)initButton(SLOW_DOWN_IMAGE_FILE, speedControlToolbar, tracker, idCounter++, JButton.class, null, SLOW_DOWN_TOOLTIP);
+        
         // NOW WE NEED TO WAIT FOR ALL THE IMAGES THE
         // MEDIA TRACKER HAS BEEN GIVEN TO FULLY LOAD
         try
@@ -627,17 +644,19 @@ public class PoseurGUI extends JFrame
         northOfNorthPanel.add(fileToolbar);
         northOfNorthPanel.add(editToolbar);
         northOfNorthPanel.add(shapeToolbar);
-        southOfNorthPanel.add(zoomToolbar);
+        southOfNorthPanel.add(zoomToolbar);        
         southOfNorthPanel.add(colorSelectionToolbar);
+        southOfCenterPanel.add(speedControlToolbar);
         
         // NOW PUT ALL THE CONTROLS IN THE NORTH
         northPanel.setLayout(new BorderLayout());
         northPanel.add(northOfNorthPanel, BorderLayout.NORTH);
         northPanel.add(southOfNorthPanel, BorderLayout.SOUTH);        
-
+        
         // AND NOW PUT EVERYTHING INSIDE THE FRAME
         add(northPanel, BorderLayout.NORTH);
         add(canvasSplitPane, BorderLayout.CENTER);
+        add(southOfCenterPanel,BorderLayout.SOUTH);
     }
     
     /**

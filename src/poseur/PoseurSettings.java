@@ -78,6 +78,12 @@ public class PoseurSettings
     public static final String ZOOM_IN_IMAGE_FILE = BUTTON_IMAGES_PATH + "ZoomIn.png";
     public static final String ZOOM_OUT_IMAGE_FILE = BUTTON_IMAGES_PATH + "ZoomOut.png";
     public static final String POSE_DIMENSIONS_IMAGE_FILE = BUTTON_IMAGES_PATH + "Dimensions.png";
+    
+    // BUTTON IMAGES FOR SPEED TOOLBAR
+    public static final String SPEED_UP_IMAGE_FILE = BUTTON_IMAGES_PATH + "SpeedUpAnimationButton.png";
+    public static final String SLOW_DOWN_IMAGE_FILE = BUTTON_IMAGES_PATH + "SlowDownAnimationButton.png";
+    public static final String START_IMAGE_FILE = BUTTON_IMAGES_PATH + "StartAnimationButton.png";
+    public static final String STOP_IMAGE_FILE = BUTTON_IMAGES_PATH + "StopAnimationButton.png";
 
     // BUTTON IMAGES FOR THE SHAPES TOOLBAR
     public static final String RECT_SELECTION_IMAGE_FILE = BUTTON_IMAGES_PATH + "Rect.png";
@@ -112,6 +118,12 @@ public class PoseurSettings
     public static final String ZOOM_IN_TOOLTIP = "Zoom In";
     public static final String ZOOM_OUT_TOOLTIP = "Zoom Out";
     public static final String CHANGE_POSE_DIMENSIONS_TOOLTIP = "Change Pose Dimensions";
+    
+    //TOOLTIPS FOR SPEED CONTROLES
+    public static final String SPEED_UP_TOOLTIP = "Speed Up";
+    public static final String SLOW_DOWN_TOOLTIP = "Slow Down";
+    public static final String STOP_TOOLTIP = "Stop";
+    public static final String START_TOOLTIP = "Start";
 
     // TOOLIPS FOR CONTROLS ON SHAPES TOOLBAR
     public static final String RECT_TOOLTIP = "Draw a Rectangle";
