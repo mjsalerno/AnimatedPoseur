@@ -50,6 +50,10 @@ import poseur.events.files.SavePoseHandler;
 import poseur.events.shapes.EllipseSelectionHandler;
 import poseur.events.shapes.LineSelectionHandler;
 import poseur.events.shapes.RectangleSelectionHandler;
+import poseur.events.speed.SlowDownHandler;
+import poseur.events.speed.SpeedUpHandler;
+import poseur.events.speed.StartHandler;
+import poseur.events.speed.StopHandler;
 import poseur.events.window.PoseurWindowHandler;
 import poseur.events.zoom.ChangePoseDimensionsHandler;
 import poseur.events.zoom.ZoomInHandler;
@@ -832,6 +836,13 @@ public class PoseurGUI extends JFrame
         PoseCanvasComponentHandler pcch = new PoseCanvasComponentHandler();
         trueCanvas.addComponentListener(pcch);
         zoomableCanvas.addComponentListener(pcch);
+        
+        
+        //SPEED CONTOL HANDLERS
+        speedUpButton.addActionListener(new SpeedUpHandler());
+        slowDownButton.addActionListener(new SlowDownHandler());
+        startButton.addActionListener(new StartHandler());
+        stopButton.addActionListener(new StopHandler());
     }
        
     // METHODS FOR ENABLING AND DISABLING GROUPS OF CONTROLS.
