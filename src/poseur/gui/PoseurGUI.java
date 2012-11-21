@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Insets;
@@ -13,18 +14,23 @@ import java.text.NumberFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractButton;
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JSplitPane;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
+import javax.swing.ScrollPaneConstants;
 import poseur.Poseur;
 import static poseur.PoseurSettings.*;
 import poseur.events.canvas.PoseCanvasComponentHandler;
@@ -146,6 +152,11 @@ public class PoseurGUI extends JFrame
     private JButton slowDownButton;
     private JButton startButton;
     private JButton stopButton;
+    
+    //SCROLLPAIN
+    public DefaultListModel<Integer> listModel;
+    private JList scrollPaneList;
+    private JScrollPane scrollPane;
 
     /**
      * Default constructor for initializing the GUI. Note that the Poseur
@@ -508,7 +519,26 @@ public class PoseurGUI extends JFrame
         northPanel = new JPanel();
         northOfNorthPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         southOfNorthPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        southOfCenterPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        //southOfCenterPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        southOfCenterPanel = new JPanel(new BorderLayout());
+        
+        //ADDED
+        //SCROLL PANE         
+        Integer a[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,111111,11111111,11111111,11111,11111,1111,1111,11111,1111111};
+        listModel = new DefaultListModel<>();
+        scrollPaneList = new JList(listModel);
+        scrollPaneList.setAlignmentX(10f);
+        scrollPaneList.setFixedCellHeight(64);
+        scrollPaneList.setFixedCellWidth(64);
+        scrollPaneList.setVisibleRowCount(1);
+        scrollPaneList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+        scrollPaneList.setListData(a);
+        
+        
+        scrollPane = new JScrollPane(scrollPaneList);
+        //scrollPane.setSize(300,100);
+        scrollPane.setPreferredSize(new Dimension(0,100));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         
         // WE'LL BATCH LOAD THE IMAGES
         MediaTracker tracker = new MediaTracker(this);
@@ -650,7 +680,11 @@ public class PoseurGUI extends JFrame
         northOfNorthPanel.add(shapeToolbar);
         southOfNorthPanel.add(zoomToolbar);        
         southOfNorthPanel.add(colorSelectionToolbar);
-        southOfCenterPanel.add(speedControlToolbar);
+        southOfCenterPanel.add(speedControlToolbar, BorderLayout.NORTH);
+        
+        //ADDED
+        //SCROLL PANE
+        southOfCenterPanel.add(scrollPane, BorderLayout.SOUTH);
         
         // NOW PUT ALL THE CONTROLS IN THE NORTH
         northPanel.setLayout(new BorderLayout());
@@ -661,6 +695,7 @@ public class PoseurGUI extends JFrame
         add(northPanel, BorderLayout.NORTH);
         add(canvasSplitPane, BorderLayout.CENTER);
         add(southOfCenterPanel,BorderLayout.SOUTH);
+       
     }
     
     /**
