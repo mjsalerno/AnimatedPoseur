@@ -124,6 +124,14 @@ public class PoseurSettings
     public static final String SLOW_DOWN_TOOLTIP = "Slow Down";
     public static final String STOP_TOOLTIP = "Stop";
     public static final String START_TOOLTIP = "Start";
+    
+    //TOOLTIPS FOR POSE CONTROLES
+    public static final String ADD_POSE_TOOLTIP = "Add Pose to Pose List";
+    public static final String REMOVE_POSE_TOOLTIP = "Remove Pose From Pose List";
+    public static final String MOVE_POSE_RIGHT_TOOLTIP = "Move Pose Right";
+    public static final String MOVE_POSE_LEFT_TOOLTIP = "Move Pose Left";
+    public static final String SET_POSE_POS_TOOLTIP = "Set Position of Pose in List";
+    public static final String SET_POSE_PAUSE_TOOLTIP = "Set Pause Value of Pose Image";
 
     // TOOLIPS FOR CONTROLS ON SHAPES TOOLBAR
     public static final String RECT_TOOLTIP = "Draw a Rectangle";

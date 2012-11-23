@@ -14,7 +14,6 @@ import java.text.NumberFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractButton;
-import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -53,6 +52,12 @@ import poseur.events.files.NewPoseHandler;
 import poseur.events.files.OpenPoseHandler;
 import poseur.events.files.SavePoseAsHandler;
 import poseur.events.files.SavePoseHandler;
+import poseur.events.poselist.AddPoseHandler;
+import poseur.events.poselist.MovePoseLeftHandler;
+import poseur.events.poselist.MovePoseRightHandler;
+import poseur.events.poselist.RemovePoseHandler;
+import poseur.events.poselist.SetPosePauseHandler;
+import poseur.events.poselist.SetPosePosHandler;
 import poseur.events.shapes.EllipseSelectionHandler;
 import poseur.events.shapes.LineSelectionHandler;
 import poseur.events.shapes.RectangleSelectionHandler;
@@ -102,6 +107,7 @@ public class PoseurGUI extends JFrame
     private JPanel northOfNorthPanel;
     private JPanel southOfNorthPanel;
     private JPanel southOfCenterPanel;
+    private JPanel northInSouthOfCenterPanel;
     
     // FILE CONTROLS
     private JToolBar fileToolbar;
@@ -152,6 +158,16 @@ public class PoseurGUI extends JFrame
     private JButton slowDownButton;
     private JButton startButton;
     private JButton stopButton;
+    
+    //ADDED
+    //POSE LIST CONTROLS TOOLBAR
+    private JToolBar poseListToolbar;
+    private JButton addPoseButton;
+    private JButton removePoseButton;
+    private JButton movePoseRightButton;
+    private JButton movePoseLeftButton;
+    private JButton setPosePosButton;
+    private JButton setPosePauseButton;
     
     //SCROLLPAIN
     public DefaultListModel<Integer> listModel;
@@ -521,6 +537,7 @@ public class PoseurGUI extends JFrame
         southOfNorthPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         //southOfCenterPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         southOfCenterPanel = new JPanel(new BorderLayout());
+        northInSouthOfCenterPanel = new JPanel(new FlowLayout(-10, 1, 1));
         
         //ADDED
         //SCROLL PANE         
@@ -629,13 +646,24 @@ public class PoseurGUI extends JFrame
         transparencySlider.setSnapToTicks(false);
         
         
-        //SPEED CONTROLESTOOLBAR
+        //SPEED CONTROLES TOOLBAR
         speedControlToolbar = new JToolBar();
         startButton = (JButton)initButton(START_IMAGE_FILE, speedControlToolbar, tracker, idCounter++, JButton.class, null, START_TOOLTIP);
         stopButton = (JButton)initButton(STOP_IMAGE_FILE, speedControlToolbar, tracker, idCounter++, JButton.class, null, STOP_TOOLTIP);
         speedUpButton = (JButton)initButton(SPEED_UP_IMAGE_FILE, speedControlToolbar, tracker, idCounter++, JButton.class, null, SPEED_UP_TOOLTIP);
         slowDownButton = (JButton)initButton(SLOW_DOWN_IMAGE_FILE, speedControlToolbar, tracker, idCounter++, JButton.class, null, SLOW_DOWN_TOOLTIP);
         
+        //ADDED
+        //POSE LIST CONTROLS TOOLBAR
+        //FIXME:make img for pose controles
+        poseListToolbar = new JToolBar();
+        addPoseButton = (JButton)initButton(START_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, ADD_POSE_TOOLTIP);
+        removePoseButton = (JButton)initButton(STOP_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, REMOVE_POSE_TOOLTIP);
+        movePoseRightButton = (JButton)initButton(SPEED_UP_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, MOVE_POSE_RIGHT_TOOLTIP);       
+        movePoseLeftButton = (JButton)initButton(SLOW_DOWN_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, MOVE_POSE_LEFT_TOOLTIP);
+        setPosePosButton = (JButton)initButton(SLOW_DOWN_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, SET_POSE_POS_TOOLTIP);
+        setPosePauseButton = (JButton)initButton(SLOW_DOWN_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, SET_POSE_PAUSE_TOOLTIP);
+
         // NOW WE NEED TO WAIT FOR ALL THE IMAGES THE
         // MEDIA TRACKER HAS BEEN GIVEN TO FULLY LOAD
         try
@@ -680,7 +708,9 @@ public class PoseurGUI extends JFrame
         northOfNorthPanel.add(shapeToolbar);
         southOfNorthPanel.add(zoomToolbar);        
         southOfNorthPanel.add(colorSelectionToolbar);
-        southOfCenterPanel.add(speedControlToolbar, BorderLayout.NORTH);
+        southOfCenterPanel.add(northInSouthOfCenterPanel, BorderLayout.NORTH);
+        northInSouthOfCenterPanel.add(speedControlToolbar);
+        northInSouthOfCenterPanel.add(poseListToolbar);
         
         //ADDED
         //SCROLL PANE
@@ -878,6 +908,14 @@ public class PoseurGUI extends JFrame
         slowDownButton.addActionListener(new SlowDownHandler());
         startButton.addActionListener(new StartHandler());
         stopButton.addActionListener(new StopHandler());
+        
+        //POSE LIST CONTROLES HANDLERS
+        addPoseButton.addActionListener(new AddPoseHandler());
+        removePoseButton.addActionListener(new RemovePoseHandler());
+        movePoseRightButton.addActionListener(new MovePoseRightHandler());
+        movePoseLeftButton.addActionListener(new MovePoseLeftHandler());
+        setPosePosButton.addActionListener(new SetPosePosHandler());
+        setPosePauseButton.addActionListener(new SetPosePauseHandler());
     }
        
     // METHODS FOR ENABLING AND DISABLING GROUPS OF CONTROLS.
