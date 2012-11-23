@@ -9,13 +9,14 @@ import java.awt.event.ActionListener;
 
 /**
  *
- * @author roofis0
+ * @author Michael Salerno
  */
 public class SpeedUpHandler implements ActionListener {
 
-    public SpeedUpHandler() {
-    }
-
+    /**
+     * When a pose is being played, this will speed up the animation
+     * @param ae the even being thrown
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
         System.out.println("---PRESSED THE SPEED UP BUTTON");

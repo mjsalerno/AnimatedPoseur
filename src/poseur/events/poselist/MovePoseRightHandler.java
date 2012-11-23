@@ -13,9 +13,11 @@ import java.awt.event.ActionListener;
  */
 public class MovePoseRightHandler implements ActionListener {
 
-    public MovePoseRightHandler() {
-    }
-
+    /**
+     * when a pose is selected,it will be 
+     * moved to the right in the pose list
+     * @param e the event being thrown
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("---CLICKED MOVE POSE RIGHT BUTTON");

@@ -13,9 +13,11 @@ import java.awt.event.ActionListener;
  */
 public class SetPosePauseHandler implements ActionListener {
 
-    public SetPosePauseHandler() {
-    }
-
+    /**
+     * when a pose is selected, this will ask the user 
+     * how long the pose should pause for.
+     * @param e the event being thrown
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("---PRESSED SET PAUSE BUTTON");

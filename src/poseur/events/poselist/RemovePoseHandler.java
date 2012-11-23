@@ -13,9 +13,10 @@ import java.awt.event.ActionListener;
  */
 public class RemovePoseHandler implements ActionListener {
 
-    public RemovePoseHandler() {
-    }
-
+    /**
+     * when a pose is selected, it will be deleted
+     * @param e the event being thrown
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("---PRESSED REMOVE POSE BUTTON");

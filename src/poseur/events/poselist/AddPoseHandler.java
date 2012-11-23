@@ -13,9 +13,11 @@ import java.awt.event.ActionListener;
  */
 public class AddPoseHandler implements ActionListener {
 
-    public AddPoseHandler() {
-    }
-
+    /**
+     * when a pose is being drawn, it will
+     * be added to the pose list
+     * @param e the event being thrown
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("---CLICKED ADD POSE");;

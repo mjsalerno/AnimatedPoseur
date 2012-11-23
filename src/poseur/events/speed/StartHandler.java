@@ -10,13 +10,14 @@ import poseur.Poseur;
 
 /**
  *
- * @author roofis0
+ * @author Michael Salerno
  */
 public class StartHandler implements ActionListener {
 
-    public StartHandler() {
-    }
-
+    /**
+     * when an pose is loaded, this will start the animation
+     * @param ae the even being thrown
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
         System.out.println("---PRESSED START BUTTON");                

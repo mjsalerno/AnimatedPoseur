@@ -9,13 +9,15 @@ import java.awt.event.ActionListener;
 
 /**
  *
- * @author roofis0
+ * @author Michael Salerno
  */
 public class SlowDownHandler implements ActionListener {
 
-    public SlowDownHandler() {
-    }
 
+    /**
+     * When a pose is being played, this will slow it down.
+     * @param ae an event that will be thrown to this method 
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
         System.out.println("---PRESSED SLOW DOWN BUTTON");
