@@ -1,6 +1,7 @@
 package poseur.gui;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Cursor;
@@ -10,9 +11,12 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.MediaTracker;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -30,6 +34,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SpringLayout;
 import poseur.Poseur;
 import static poseur.PoseurSettings.*;
 import poseur.events.canvas.PoseCanvasComponentHandler;
@@ -108,6 +113,7 @@ public class PoseurGUI extends JFrame
     private JPanel southOfNorthPanel;
     private JPanel southOfCenterPanel;
     private JPanel northInSouthOfCenterPanel;
+    private JPanel westInSouthOfCenterPanel;
     
     // FILE CONTROLS
     private JToolBar fileToolbar;
@@ -169,9 +175,12 @@ public class PoseurGUI extends JFrame
     private JButton setPosePosButton;
     private JButton setPosePauseButton;
     
+    private JComboBox stateList;
+    private JButton removeStateButton;
+    
     //SCROLLPAIN
-    public DefaultListModel<Integer> listModel;
-    private JList scrollPaneList;
+    public DefaultListModel<ImageIcon> listModel;
+    private JList<ImageIcon> scrollPaneList;
     private JScrollPane scrollPane;
 
     /**
@@ -538,18 +547,38 @@ public class PoseurGUI extends JFrame
         //southOfCenterPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         southOfCenterPanel = new JPanel(new BorderLayout());
         northInSouthOfCenterPanel = new JPanel(new FlowLayout(-10, 1, 1));
+        //FIXME:OMG
+//        SpringLayout spring = new SpringLayout();
+//        stateList = new JComboBox();
+//         removeStateButton = new JButton("remove state");
+//        spring.putConstraint(SpringLayout.EAST, stateList, 5, SpringLayout.WEST, westInSouthOfCenterPanel);
+//        spring.putConstraint(SpringLayout.NORTH, removeStateButton, 5, SpringLayout.SOUTH, stateList);
+//        westInSouthOfCenterPanel.add(stateList);
+//         westInSouthOfCenterPanel.add(removeStateButton);
+//        westInSouthOfCenterPanel = new JPanel(spring);
         
         //ADDED
-        //SCROLL PANE         
-        Integer a[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,111111,11111111,11111111,11111,11111,1111,1111,11111,1111111};
+        //SCROLL PANE  
+        //FIXME: TESTING CODE
+        Image imgg = null;
+        try {
+            imgg = ImageIO.read(new File("test.png"));
+        } catch (IOException e) {
+        }
+        ImageIcon iii = new ImageIcon(imgg.getScaledInstance(64, 64, Image.SCALE_SMOOTH));
+        //ImageIcon iii = new ImageIcon(imgg);
+        
         listModel = new DefaultListModel<>();
-        scrollPaneList = new JList(listModel);
-        scrollPaneList.setAlignmentX(10f);
-        scrollPaneList.setFixedCellHeight(64);
-        scrollPaneList.setFixedCellWidth(64);
+        scrollPaneList = new JList<>(listModel);
+        //scrollPaneList.setAlignmentX(10f);
+        //scrollPaneList.setAlignmentY(10f);
+        //scrollPaneList.setFixedCellHeight(64);
+       // scrollPaneList.setFixedCellWidth(64);
         scrollPaneList.setVisibleRowCount(1);
         scrollPaneList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-        scrollPaneList.setListData(a);
+        for (int i = 0; i < 100; i++) {
+            listModel.addElement(iii);
+        }
         
         
         scrollPane = new JScrollPane(scrollPaneList);
@@ -708,13 +737,43 @@ public class PoseurGUI extends JFrame
         northOfNorthPanel.add(shapeToolbar);
         southOfNorthPanel.add(zoomToolbar);        
         southOfNorthPanel.add(colorSelectionToolbar);
-        southOfCenterPanel.add(northInSouthOfCenterPanel, BorderLayout.NORTH);
-        northInSouthOfCenterPanel.add(speedControlToolbar);
-        northInSouthOfCenterPanel.add(poseListToolbar);
+        southOfCenterPanel.add(northInSouthOfCenterPanel, BorderLayout.NORTH);        
+        
+        westInSouthOfCenterPanel = new JPanel(new BorderLayout());
+        northInSouthOfCenterPanel.add(speedControlToolbar);        
+        northInSouthOfCenterPanel.add(poseListToolbar); 
+        stateList = new JComboBox();
+        JButton btn1 = new JButton("Create New Pose List");
+        JButton btn2 = new JButton("Rename Pose List");
+         removeStateButton = new JButton("remove PoseList");
+        JPanel pnl = new JPanel(new BorderLayout());
+        westInSouthOfCenterPanel.add(stateList,BorderLayout.NORTH);
+        westInSouthOfCenterPanel.add(removeStateButton,BorderLayout.SOUTH);
+        westInSouthOfCenterPanel.add(pnl,BorderLayout.CENTER);
+        pnl.add(btn1, BorderLayout.NORTH);
+        pnl.add(btn2, BorderLayout.SOUTH);
+
+        southOfCenterPanel.add(westInSouthOfCenterPanel, BorderLayout.WEST);
+        //southOfCenterPanel.add(poseListToolbar, BorderLayout.SOUTH);
+        
+         
+         
+//         String[] sa = {"---ONE---","TWO","THREE","FOUR"};
+//         westInSouthOfCenterPanel.add(new JComboBox(sa));
+//         westInSouthOfCenterPanel.add(new JButton("ONE"));
+//         westInSouthOfCenterPanel.add(new JButton("TWO"));
+//         westInSouthOfCenterPanel.add(new JButton("THREE"));
+         
+         //CONSTRAINTS
+//         stateList = new JComboBox(sa);
+//         removeStateButton = new JButton("remove state");
+//         westInSouthOfCenterPanel.add(stateList);
+//         westInSouthOfCenterPanel.add(removeStateButton);
+         
         
         //ADDED
         //SCROLL PANE
-        southOfCenterPanel.add(scrollPane, BorderLayout.SOUTH);
+        southOfCenterPanel.add(scrollPane, BorderLayout.CENTER);
         
         // NOW PUT ALL THE CONTROLS IN THE NORTH
         northPanel.setLayout(new BorderLayout());

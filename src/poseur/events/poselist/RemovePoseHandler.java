@@ -19,7 +19,7 @@ public class RemovePoseHandler implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("---PRESSED REMOVE POSE BUTTON");
+        System.out.println("---PRESSED REMOVE POSE BUTTON");        
     }
     
 }
