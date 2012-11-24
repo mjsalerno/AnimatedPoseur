@@ -1,11 +1,9 @@
 package poseur.gui;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Insets;
@@ -18,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -34,7 +33,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.SpringLayout;
+import javax.swing.border.BevelBorder;
 import poseur.Poseur;
 import static poseur.PoseurSettings.*;
 import poseur.events.canvas.PoseCanvasComponentHandler;
@@ -58,9 +57,12 @@ import poseur.events.files.OpenPoseHandler;
 import poseur.events.files.SavePoseAsHandler;
 import poseur.events.files.SavePoseHandler;
 import poseur.events.poselist.AddPoseHandler;
+import poseur.events.poselist.CreateNewAnimationStateHandler;
 import poseur.events.poselist.MovePoseLeftHandler;
 import poseur.events.poselist.MovePoseRightHandler;
+import poseur.events.poselist.RemoveAnimationStateHandler;
 import poseur.events.poselist.RemovePoseHandler;
+import poseur.events.poselist.RenameAnimationStateHandler;
 import poseur.events.poselist.SetPosePauseHandler;
 import poseur.events.poselist.SetPosePosHandler;
 import poseur.events.shapes.EllipseSelectionHandler;
@@ -114,6 +116,7 @@ public class PoseurGUI extends JFrame
     private JPanel southOfCenterPanel;
     private JPanel northInSouthOfCenterPanel;
     private JPanel westInSouthOfCenterPanel;
+    private JPanel centerInWestInSouthOfCenterPanel;
     
     // FILE CONTROLS
     private JToolBar fileToolbar;
@@ -175,8 +178,11 @@ public class PoseurGUI extends JFrame
     private JButton setPosePosButton;
     private JButton setPosePauseButton;
     
+    //TODO:make buttons
     private JComboBox stateList;
     private JButton removeStateButton;
+    private JButton newPoseListButton;
+    private JButton renamePoseListButton;
     
     //SCROLLPAIN
     public DefaultListModel<ImageIcon> listModel;
@@ -546,7 +552,10 @@ public class PoseurGUI extends JFrame
         southOfNorthPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         //southOfCenterPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         southOfCenterPanel = new JPanel(new BorderLayout());
-        northInSouthOfCenterPanel = new JPanel(new FlowLayout(-10, 1, 1));
+        //northInSouthOfCenterPanel = new JPanel(new FlowLayout(-10, 1, 1));
+        northInSouthOfCenterPanel = new JPanel(new FlowLayout());
+        centerInWestInSouthOfCenterPanel = new JPanel(new BorderLayout());
+        westInSouthOfCenterPanel = new JPanel(new BorderLayout());
         //FIXME:OMG
 //        SpringLayout spring = new SpringLayout();
 //        stateList = new JComboBox();
@@ -566,24 +575,16 @@ public class PoseurGUI extends JFrame
         } catch (IOException e) {
         }
         ImageIcon iii = new ImageIcon(imgg.getScaledInstance(64, 64, Image.SCALE_SMOOTH));
-        //ImageIcon iii = new ImageIcon(imgg);
         
         listModel = new DefaultListModel<>();
         scrollPaneList = new JList<>(listModel);
-        //scrollPaneList.setAlignmentX(10f);
-        //scrollPaneList.setAlignmentY(10f);
-        //scrollPaneList.setFixedCellHeight(64);
-       // scrollPaneList.setFixedCellWidth(64);
         scrollPaneList.setVisibleRowCount(1);
         scrollPaneList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
         for (int i = 0; i < 100; i++) {
             listModel.addElement(iii);
         }
         
-        
-        scrollPane = new JScrollPane(scrollPaneList);
-        //scrollPane.setSize(300,100);
-        scrollPane.setPreferredSize(new Dimension(0,100));
+        scrollPane = new JScrollPane(scrollPaneList);        
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         
         // WE'LL BATCH LOAD THE IMAGES
@@ -678,20 +679,29 @@ public class PoseurGUI extends JFrame
         //SPEED CONTROLES TOOLBAR
         speedControlToolbar = new JToolBar();
         startButton = (JButton)initButton(START_IMAGE_FILE, speedControlToolbar, tracker, idCounter++, JButton.class, null, START_TOOLTIP);
+        slowDownButton = (JButton)initButton(SLOW_DOWN_IMAGE_FILE, speedControlToolbar, tracker, idCounter++, JButton.class, null, SLOW_DOWN_TOOLTIP);
         stopButton = (JButton)initButton(STOP_IMAGE_FILE, speedControlToolbar, tracker, idCounter++, JButton.class, null, STOP_TOOLTIP);
         speedUpButton = (JButton)initButton(SPEED_UP_IMAGE_FILE, speedControlToolbar, tracker, idCounter++, JButton.class, null, SPEED_UP_TOOLTIP);
-        slowDownButton = (JButton)initButton(SLOW_DOWN_IMAGE_FILE, speedControlToolbar, tracker, idCounter++, JButton.class, null, SLOW_DOWN_TOOLTIP);
+        
         
         //ADDED
         //POSE LIST CONTROLS TOOLBAR
-        //FIXME:make img for pose controles
+        //TODO:make img for pose controles        
         poseListToolbar = new JToolBar();
-        addPoseButton = (JButton)initButton(START_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, ADD_POSE_TOOLTIP);
-        removePoseButton = (JButton)initButton(STOP_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, REMOVE_POSE_TOOLTIP);
-        movePoseRightButton = (JButton)initButton(SPEED_UP_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, MOVE_POSE_RIGHT_TOOLTIP);       
-        movePoseLeftButton = (JButton)initButton(SLOW_DOWN_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, MOVE_POSE_LEFT_TOOLTIP);
-        setPosePosButton = (JButton)initButton(SLOW_DOWN_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, SET_POSE_POS_TOOLTIP);
-        setPosePauseButton = (JButton)initButton(SLOW_DOWN_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, SET_POSE_PAUSE_TOOLTIP);
+        addPoseButton = (JButton)initButton(ADD_POSE_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, ADD_POSE_TOOLTIP);
+        removePoseButton = (JButton)initButton(REMOVE_POSE_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, REMOVE_POSE_TOOLTIP);
+        movePoseLeftButton = (JButton)initButton(MOVE_POSE_LEFT_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, MOVE_POSE_LEFT_TOOLTIP);
+        setPosePosButton = (JButton)initButton(SET_POSE_POS_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, SET_POSE_POS_TOOLTIP);
+        movePoseRightButton = (JButton)initButton(MOVE_POSE_RIGHT_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, MOVE_POSE_RIGHT_TOOLTIP);        
+        setPosePauseButton = (JButton)initButton(SET_POSE_PAUSE_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, SET_POSE_PAUSE_TOOLTIP);
+        //TODO: init buttons
+        
+        String sa[] = {"Select Animation State"};
+        stateList = new JComboBox(sa);
+        removeStateButton = (JButton)initButton(REMOVE_STATE_IMAGE_FILE, centerInWestInSouthOfCenterPanel, tracker, idCounter++, JButton.class, null, REMOVE_STATE_TOOLTIP);
+        newPoseListButton = (JButton)initButton(NEW_POSE_LIST_IMAGE_FILE, centerInWestInSouthOfCenterPanel, tracker, idCounter++, JButton.class, null, NEW_POSE_LIST_TOOLTIP);
+        renamePoseListButton = (JButton)initButton(RENAME_IMAGE_FILE, centerInWestInSouthOfCenterPanel, tracker, idCounter++, JButton.class, null, RENAME_POSE_LIST_TOOLTIP);
+        
 
         // NOW WE NEED TO WAIT FOR ALL THE IMAGES THE
         // MEDIA TRACKER HAS BEEN GIVEN TO FULLY LOAD
@@ -739,38 +749,29 @@ public class PoseurGUI extends JFrame
         southOfNorthPanel.add(colorSelectionToolbar);
         southOfCenterPanel.add(northInSouthOfCenterPanel, BorderLayout.NORTH);        
         
-        westInSouthOfCenterPanel = new JPanel(new BorderLayout());
         northInSouthOfCenterPanel.add(speedControlToolbar);        
-        northInSouthOfCenterPanel.add(poseListToolbar); 
-        stateList = new JComboBox();
-        JButton btn1 = new JButton("Create New Pose List");
-        JButton btn2 = new JButton("Rename Pose List");
-         removeStateButton = new JButton("remove PoseList");
-        JPanel pnl = new JPanel(new BorderLayout());
-        westInSouthOfCenterPanel.add(stateList,BorderLayout.NORTH);
-        westInSouthOfCenterPanel.add(removeStateButton,BorderLayout.SOUTH);
-        westInSouthOfCenterPanel.add(pnl,BorderLayout.CENTER);
-        pnl.add(btn1, BorderLayout.NORTH);
-        pnl.add(btn2, BorderLayout.SOUTH);
-
+        northInSouthOfCenterPanel.add(poseListToolbar);
+        westInSouthOfCenterPanel.add(stateList,BorderLayout.NORTH);      
+        
+        
+        centerInWestInSouthOfCenterPanel = new JPanel(new FlowLayout());
+        centerInWestInSouthOfCenterPanel.add(newPoseListButton);
+        centerInWestInSouthOfCenterPanel.add(renamePoseListButton);
+        centerInWestInSouthOfCenterPanel.add(removeStateButton);
+        
+        
+        
+//      westInSouthOfCenterPanel.add(removeStateButton,BorderLayout.SOUTH);
+//        westInSouthOfCenterPanel.add(centerInWestInSouthOfCenterPanel,BorderLayout.CENTER);
+//        centerInWestInSouthOfCenterPanel.add(newPoseListButton, BorderLayout.NORTH);
+//        centerInWestInSouthOfCenterPanel.add(renamePoseListButton, BorderLayout.SOUTH);
+//
         southOfCenterPanel.add(westInSouthOfCenterPanel, BorderLayout.WEST);
+        westInSouthOfCenterPanel.add(centerInWestInSouthOfCenterPanel, BorderLayout.CENTER);
+        //----------------------
+        //TODO:add things
         //southOfCenterPanel.add(poseListToolbar, BorderLayout.SOUTH);
-        
-         
-         
-//         String[] sa = {"---ONE---","TWO","THREE","FOUR"};
-//         westInSouthOfCenterPanel.add(new JComboBox(sa));
-//         westInSouthOfCenterPanel.add(new JButton("ONE"));
-//         westInSouthOfCenterPanel.add(new JButton("TWO"));
-//         westInSouthOfCenterPanel.add(new JButton("THREE"));
-         
-         //CONSTRAINTS
-//         stateList = new JComboBox(sa);
-//         removeStateButton = new JButton("remove state");
-//         westInSouthOfCenterPanel.add(stateList);
-//         westInSouthOfCenterPanel.add(removeStateButton);
-         
-        
+            
         //ADDED
         //SCROLL PANE
         southOfCenterPanel.add(scrollPane, BorderLayout.CENTER);
@@ -824,6 +825,11 @@ public class PoseurGUI extends JFrame
         try 
         {
             // LOAD THE IMAGE AND MAKE AN ICON
+            //TODO:default icon
+            
+            File file = new File(imageFile);
+            if(!file.exists()) imageFile = DEFAULT_IMAGE_FILE;
+            
             Image img = batchLoadImage(imageFile, tracker, id);
             ImageIcon ii = new ImageIcon(img);
             
@@ -975,6 +981,14 @@ public class PoseurGUI extends JFrame
         movePoseLeftButton.addActionListener(new MovePoseLeftHandler());
         setPosePosButton.addActionListener(new SetPosePosHandler());
         setPosePauseButton.addActionListener(new SetPosePauseHandler());
+        
+        //HANDLERS FOR POSELIST EDITING
+        removeStateButton.addActionListener(new RemoveAnimationStateHandler());
+        newPoseListButton.addActionListener(new CreateNewAnimationStateHandler());
+        renamePoseListButton.addActionListener(new RenameAnimationStateHandler());
+        
+        //TODO:add action listeners
+        
     }
        
     // METHODS FOR ENABLING AND DISABLING GROUPS OF CONTROLS.
@@ -990,7 +1004,6 @@ public class PoseurGUI extends JFrame
         
         // THESE BUTTONS START OFF AS DISABLED
         saveButton.setEnabled(false);
-        //TODO:Not sure when the save as button should be clickable.
         //saveAsButton.setEnabled(false);
         exportButton.setEnabled(false);
         saveAsButton.setEnabled(false);

@@ -2,6 +2,8 @@ package poseur;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import static poseur.PoseurSettings.*;
 import poseur.files.PoseurFileManager;
 import poseur.files.PoseurGUILoader;
@@ -164,7 +166,7 @@ public class Poseur
      * 
      * @param args Command line arguments are not used by this application.
      */
-    public static void main(String[] args)
+    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException
     {
         // HERE IS THE CONSTRUCTION OF THE SINGLETON Poseur OBJECT,
         // SINCE THIS IS THE FIRST REFERENCE TO getPoseur. THE CONSTRUCTOR

@@ -84,6 +84,19 @@ public class PoseurSettings
     public static final String SLOW_DOWN_IMAGE_FILE = BUTTON_IMAGES_PATH + "SlowDownAnimationButton.png";
     public static final String START_IMAGE_FILE = BUTTON_IMAGES_PATH + "StartAnimationButton.png";
     public static final String STOP_IMAGE_FILE = BUTTON_IMAGES_PATH + "StopAnimationButton.png";
+    
+    // BUTTON IMAGES FOR POSE LIST
+    public static final String ADD_POSE_IMAGE_FILE = BUTTON_IMAGES_PATH + "AddPose.png";
+    public static final String REMOVE_POSE_IMAGE_FILE = BUTTON_IMAGES_PATH + "RemovePose.png";
+    public static final String MOVE_POSE_RIGHT_IMAGE_FILE = BUTTON_IMAGES_PATH + "MovePoseRight.png";
+    public static final String MOVE_POSE_LEFT_IMAGE_FILE = BUTTON_IMAGES_PATH + "MovePoseLeft.png"; 
+    public static final String SET_POSE_POS_IMAGE_FILE = BUTTON_IMAGES_PATH + "SetPosePos.png";
+    public static final String SET_POSE_PAUSE_IMAGE_FILE = BUTTON_IMAGES_PATH + "SetPosePause.png";
+    
+    // BUTTON IMAGES FOR ANIMATION STATE EDITING
+    public static final String REMOVE_STATE_IMAGE_FILE = BUTTON_IMAGES_PATH + "RemoveAnimationState.png";
+    public static final String NEW_POSE_LIST_IMAGE_FILE = BUTTON_IMAGES_PATH + "NewAnimationState.png";
+    public static final String RENAME_IMAGE_FILE = BUTTON_IMAGES_PATH + "RenameAnimationState.png";
 
     // BUTTON IMAGES FOR THE SHAPES TOOLBAR
     public static final String RECT_SELECTION_IMAGE_FILE = BUTTON_IMAGES_PATH + "Rect.png";
@@ -94,6 +107,12 @@ public class PoseurSettings
     public static final String CUSTOM_COLOR_SELECTOR_IMAGE_FILE = BUTTON_IMAGES_PATH + "CustomColor.png";
     public static final String FILL_COLOR_IMAGE_FILE = BUTTON_IMAGES_PATH + "Fill.png";
     public static final String OUTLINE_COLOR_IMAGE_FILE = BUTTON_IMAGES_PATH + "Outline.png";
+    
+    
+    
+    
+    //DEFAULT ICON
+    public static final String DEFAULT_IMAGE_FILE = BUTTON_IMAGES_PATH + "Default.png";
 
     /***** TOOLTIPS (MOUSE-OVER TEXT) *****/
     // THIS LISTS ALL THE TOOLTIPS FOR OUR CONTROLS. THEY
@@ -132,6 +151,11 @@ public class PoseurSettings
     public static final String MOVE_POSE_LEFT_TOOLTIP = "Move Pose Left";
     public static final String SET_POSE_POS_TOOLTIP = "Set Position of Pose in List";
     public static final String SET_POSE_PAUSE_TOOLTIP = "Set Pause Value of Pose Image";
+    
+    //TOOLTIPS FOR POSLIST CONTROLES
+    public static final String REMOVE_STATE_TOOLTIP = "Remove Animation State";
+    public static final String NEW_POSE_LIST_TOOLTIP = "Create New Pose List";
+    public static final String RENAME_POSE_LIST_TOOLTIP = "Rename Animation State";
 
     // TOOLIPS FOR CONTROLS ON SHAPES TOOLBAR
     public static final String RECT_TOOLTIP = "Draw a Rectangle";
