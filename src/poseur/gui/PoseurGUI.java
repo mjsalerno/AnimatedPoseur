@@ -180,6 +180,7 @@ public class PoseurGUI extends JFrame
     
     //TODO:make buttons
     private JComboBox stateList;
+    private JToolBar animationStateToolbar;
     private JButton removeStateButton;
     private JButton newPoseListButton;
     private JButton renamePoseListButton;
@@ -668,6 +669,7 @@ public class PoseurGUI extends JFrame
         
         //SPEED CONTROLES TOOLBAR
         speedControlToolbar = new JToolBar();
+        speedControlToolbar.setFloatable(false);
         startButton = (JButton)initButton(START_IMAGE_FILE, speedControlToolbar, tracker, idCounter++, JButton.class, null, START_TOOLTIP);
         slowDownButton = (JButton)initButton(SLOW_DOWN_IMAGE_FILE, speedControlToolbar, tracker, idCounter++, JButton.class, null, SLOW_DOWN_TOOLTIP);
         stopButton = (JButton)initButton(STOP_IMAGE_FILE, speedControlToolbar, tracker, idCounter++, JButton.class, null, STOP_TOOLTIP);
@@ -678,6 +680,7 @@ public class PoseurGUI extends JFrame
         //POSE LIST CONTROLS TOOLBAR
         //TODO:make img for pose controles        
         poseListToolbar = new JToolBar();
+        poseListToolbar.setFloatable(false);
         addPoseButton = (JButton)initButton(ADD_POSE_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, ADD_POSE_TOOLTIP);
         removePoseButton = (JButton)initButton(REMOVE_POSE_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, REMOVE_POSE_TOOLTIP);
         movePoseLeftButton = (JButton)initButton(MOVE_POSE_LEFT_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, MOVE_POSE_LEFT_TOOLTIP);
@@ -685,6 +688,8 @@ public class PoseurGUI extends JFrame
         movePoseRightButton = (JButton)initButton(MOVE_POSE_RIGHT_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, MOVE_POSE_RIGHT_TOOLTIP);        
         setPosePauseButton = (JButton)initButton(SET_POSE_PAUSE_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, SET_POSE_PAUSE_TOOLTIP);
         
+        animationStateToolbar = new JToolBar();
+        animationStateToolbar.setFloatable(false);
         String sa[] = {"Select Animation State"};
         stateList = new JComboBox(sa);
         removeStateButton = (JButton)initButton(REMOVE_STATE_IMAGE_FILE, centerInWestInSouthOfCenterPanel, tracker, idCounter++, JButton.class, null, REMOVE_STATE_TOOLTIP);
@@ -738,15 +743,25 @@ public class PoseurGUI extends JFrame
         southOfNorthPanel.add(colorSelectionToolbar);
         southOfCenterPanel.add(northInSouthOfCenterPanel, BorderLayout.NORTH);        
         
-        northInSouthOfCenterPanel.add(speedControlToolbar);        
+        northInSouthOfCenterPanel.add(speedControlToolbar);    
+        
+        northInSouthOfCenterPanel.add(new JLabel(""
+                + "                                 "
+                + "                                  "
+                + "                             "));
+        
         northInSouthOfCenterPanel.add(poseListToolbar);
         westInSouthOfCenterPanel.add(stateList,BorderLayout.NORTH);      
         
         
         centerInWestInSouthOfCenterPanel = new JPanel(new FlowLayout());
-        centerInWestInSouthOfCenterPanel.add(newPoseListButton);
-        centerInWestInSouthOfCenterPanel.add(renamePoseListButton);
-        centerInWestInSouthOfCenterPanel.add(removeStateButton);
+        animationStateToolbar.add(newPoseListButton);
+        animationStateToolbar.add(renamePoseListButton);
+        animationStateToolbar.add(removeStateButton);
+        centerInWestInSouthOfCenterPanel.add(animationStateToolbar);
+//        centerInWestInSouthOfCenterPanel.add(newPoseListButton);
+//        centerInWestInSouthOfCenterPanel.add(renamePoseListButton);
+//        centerInWestInSouthOfCenterPanel.add(removeStateButton);
        
         southOfCenterPanel.add(westInSouthOfCenterPanel, BorderLayout.WEST);
         westInSouthOfCenterPanel.add(centerInWestInSouthOfCenterPanel, BorderLayout.CENTER);

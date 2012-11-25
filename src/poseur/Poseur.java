@@ -178,6 +178,5 @@ public class Poseur
         PoseurGUI window = app.getGUI();
         window.setVisible(true);
         window.setResizable(true);
-        getPoseur().addDebugText("Hello");
     }
 }
