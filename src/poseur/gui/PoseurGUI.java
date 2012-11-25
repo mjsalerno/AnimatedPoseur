@@ -556,17 +556,7 @@ public class PoseurGUI extends JFrame
         northInSouthOfCenterPanel = new JPanel(new FlowLayout());
         centerInWestInSouthOfCenterPanel = new JPanel(new BorderLayout());
         westInSouthOfCenterPanel = new JPanel(new BorderLayout());
-        //FIXME:OMG
-//        SpringLayout spring = new SpringLayout();
-//        stateList = new JComboBox();
-//         removeStateButton = new JButton("remove state");
-//        spring.putConstraint(SpringLayout.EAST, stateList, 5, SpringLayout.WEST, westInSouthOfCenterPanel);
-//        spring.putConstraint(SpringLayout.NORTH, removeStateButton, 5, SpringLayout.SOUTH, stateList);
-//        westInSouthOfCenterPanel.add(stateList);
-//         westInSouthOfCenterPanel.add(removeStateButton);
-//        westInSouthOfCenterPanel = new JPanel(spring);
         
-        //ADDED
         //SCROLL PANE  
         //FIXME: TESTING CODE
         Image imgg = null;
@@ -694,7 +684,6 @@ public class PoseurGUI extends JFrame
         setPosePosButton = (JButton)initButton(SET_POSE_POS_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, SET_POSE_POS_TOOLTIP);
         movePoseRightButton = (JButton)initButton(MOVE_POSE_RIGHT_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, MOVE_POSE_RIGHT_TOOLTIP);        
         setPosePauseButton = (JButton)initButton(SET_POSE_PAUSE_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, SET_POSE_PAUSE_TOOLTIP);
-        //TODO: init buttons
         
         String sa[] = {"Select Animation State"};
         stateList = new JComboBox(sa);
@@ -758,21 +747,9 @@ public class PoseurGUI extends JFrame
         centerInWestInSouthOfCenterPanel.add(newPoseListButton);
         centerInWestInSouthOfCenterPanel.add(renamePoseListButton);
         centerInWestInSouthOfCenterPanel.add(removeStateButton);
-        
-        
-        
-//      westInSouthOfCenterPanel.add(removeStateButton,BorderLayout.SOUTH);
-//        westInSouthOfCenterPanel.add(centerInWestInSouthOfCenterPanel,BorderLayout.CENTER);
-//        centerInWestInSouthOfCenterPanel.add(newPoseListButton, BorderLayout.NORTH);
-//        centerInWestInSouthOfCenterPanel.add(renamePoseListButton, BorderLayout.SOUTH);
-//
+       
         southOfCenterPanel.add(westInSouthOfCenterPanel, BorderLayout.WEST);
         westInSouthOfCenterPanel.add(centerInWestInSouthOfCenterPanel, BorderLayout.CENTER);
-        //----------------------
-        //TODO:add things
-        //southOfCenterPanel.add(poseListToolbar, BorderLayout.SOUTH);
-            
-        //ADDED
         //SCROLL PANE
         southOfCenterPanel.add(scrollPane, BorderLayout.CENTER);
         
@@ -825,8 +802,6 @@ public class PoseurGUI extends JFrame
         try 
         {
             // LOAD THE IMAGE AND MAKE AN ICON
-            //TODO:default icon
-            
             File file = new File(imageFile);
             if(!file.exists()) imageFile = DEFAULT_IMAGE_FILE;
             
