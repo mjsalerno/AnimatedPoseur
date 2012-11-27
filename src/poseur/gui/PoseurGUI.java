@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -554,7 +555,7 @@ public class PoseurGUI extends JFrame
         //southOfCenterPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         southOfCenterPanel = new JPanel(new BorderLayout());
         //northInSouthOfCenterPanel = new JPanel(new FlowLayout(-10, 1, 1));
-        northInSouthOfCenterPanel = new JPanel(new FlowLayout());
+        northInSouthOfCenterPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         centerInWestInSouthOfCenterPanel = new JPanel(new BorderLayout());
         westInSouthOfCenterPanel = new JPanel(new BorderLayout());
         
@@ -741,16 +742,24 @@ public class PoseurGUI extends JFrame
         northOfNorthPanel.add(shapeToolbar);
         southOfNorthPanel.add(zoomToolbar);        
         southOfNorthPanel.add(colorSelectionToolbar);
-        southOfCenterPanel.add(northInSouthOfCenterPanel, BorderLayout.NORTH);        
+        southOfCenterPanel.add(northInSouthOfCenterPanel, BorderLayout.NORTH);     
         
-        northInSouthOfCenterPanel.add(speedControlToolbar);    
+        Box box = Box.createHorizontalBox();
+        box.add(Box.createHorizontalStrut(175));
+        box.add(speedControlToolbar);
+        box.add(Box.createHorizontalStrut(340));
+        box.add(poseListToolbar);
+        northInSouthOfCenterPanel.add(box);
         
-        northInSouthOfCenterPanel.add(new JLabel(""
-                + "                                 "
-                + "                                  "
-                + "                             "));
+       // northInSouthOfCenterPanel.add(speedControlToolbar);    
         
-        northInSouthOfCenterPanel.add(poseListToolbar);
+        
+//        northInSouthOfCenterPanel.add(new JLabel(""
+//                + "                                 "
+//                + "                                  "
+//                + "                             "));
+        
+        //northInSouthOfCenterPanel.add(poseListToolbar);
         westInSouthOfCenterPanel.add(stateList,BorderLayout.NORTH);      
         
         
