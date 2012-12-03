@@ -151,11 +151,13 @@ public class PoseurSettings
     public static final String MOVE_POSE_LEFT_TOOLTIP = "Move Pose Left";
     public static final String SET_POSE_POS_TOOLTIP = "Set Position of Pose in List";
     public static final String SET_POSE_PAUSE_TOOLTIP = "Set Pause Value of Pose Image";
+    public static final String COPY_POSE_TOOLTIP = "Copy Pose";
     
     //TOOLTIPS FOR POSLIST CONTROLES
     public static final String REMOVE_STATE_TOOLTIP = "Remove Animation State";
     public static final String NEW_POSE_LIST_TOOLTIP = "Create New Pose List";
     public static final String RENAME_POSE_LIST_TOOLTIP = "Rename Animation State";
+    public static final String COPY_ANIMATION_STATE_TOOLTIP ="Copy Animation Satae";
 
     // TOOLIPS FOR CONTROLS ON SHAPES TOOLBAR
     public static final String RECT_TOOLTIP = "Draw a Rectangle";

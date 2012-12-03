@@ -16,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -34,7 +33,6 @@ import javax.swing.JSplitPane;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.BevelBorder;
 import poseur.Poseur;
 import static poseur.PoseurSettings.*;
 import poseur.events.canvas.PoseCanvasComponentHandler;
@@ -66,6 +64,7 @@ import poseur.events.poselist.RemovePoseHandler;
 import poseur.events.poselist.RenameAnimationStateHandler;
 import poseur.events.poselist.SetPosePauseHandler;
 import poseur.events.poselist.SetPosePosHandler;
+import poseur.events.poselist.copyAnimationStateHandler;
 import poseur.events.shapes.EllipseSelectionHandler;
 import poseur.events.shapes.LineSelectionHandler;
 import poseur.events.shapes.RectangleSelectionHandler;
@@ -178,13 +177,15 @@ public class PoseurGUI extends JFrame
     private JButton movePoseLeftButton;
     private JButton setPosePosButton;
     private JButton setPosePauseButton;
+    private JButton copyPoseButton;
     
     //TODO:make buttons
     private JComboBox stateList;
     private JToolBar animationStateToolbar;
     private JButton removeStateButton;
-    private JButton newPoseListButton;
-    private JButton renamePoseListButton;
+    private JButton newAnimationStateButton;
+    private JButton renameAnimationStateButton;
+    private JButton copyStateButton;
     
     //SCROLLPAIN
     public DefaultListModel<ImageIcon> listModel;
@@ -684,19 +685,21 @@ public class PoseurGUI extends JFrame
         poseListToolbar.setFloatable(false);
         addPoseButton = (JButton)initButton(ADD_POSE_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, ADD_POSE_TOOLTIP);
         removePoseButton = (JButton)initButton(REMOVE_POSE_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, REMOVE_POSE_TOOLTIP);
+        copyPoseButton = (JButton)initButton(COPY_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, COPY_POSE_TOOLTIP);
         movePoseLeftButton = (JButton)initButton(MOVE_POSE_LEFT_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, MOVE_POSE_LEFT_TOOLTIP);
         setPosePosButton = (JButton)initButton(SET_POSE_POS_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, SET_POSE_POS_TOOLTIP);
         movePoseRightButton = (JButton)initButton(MOVE_POSE_RIGHT_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, MOVE_POSE_RIGHT_TOOLTIP);        
-        setPosePauseButton = (JButton)initButton(SET_POSE_PAUSE_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, SET_POSE_PAUSE_TOOLTIP);
+        setPosePauseButton = (JButton)initButton(SET_POSE_PAUSE_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, SET_POSE_PAUSE_TOOLTIP);        
         
         animationStateToolbar = new JToolBar();
         animationStateToolbar.setFloatable(false);
+        //TODO: testing code
         String sa[] = {"Select Animation State"};
         stateList = new JComboBox(sa);
         removeStateButton = (JButton)initButton(REMOVE_STATE_IMAGE_FILE, centerInWestInSouthOfCenterPanel, tracker, idCounter++, JButton.class, null, REMOVE_STATE_TOOLTIP);
-        newPoseListButton = (JButton)initButton(NEW_POSE_LIST_IMAGE_FILE, centerInWestInSouthOfCenterPanel, tracker, idCounter++, JButton.class, null, NEW_POSE_LIST_TOOLTIP);
-        renamePoseListButton = (JButton)initButton(RENAME_IMAGE_FILE, centerInWestInSouthOfCenterPanel, tracker, idCounter++, JButton.class, null, RENAME_POSE_LIST_TOOLTIP);
-        
+        newAnimationStateButton = (JButton)initButton(NEW_POSE_LIST_IMAGE_FILE, centerInWestInSouthOfCenterPanel, tracker, idCounter++, JButton.class, null, NEW_POSE_LIST_TOOLTIP);
+        renameAnimationStateButton = (JButton)initButton(RENAME_IMAGE_FILE, centerInWestInSouthOfCenterPanel, tracker, idCounter++, JButton.class, null, RENAME_POSE_LIST_TOOLTIP);
+        copyStateButton = (JButton)initButton(COPY_IMAGE_FILE, centerInWestInSouthOfCenterPanel, tracker, idCounter++, JButton.class, null, COPY_ANIMATION_STATE_TOOLTIP);
 
         // NOW WE NEED TO WAIT FOR ALL THE IMAGES THE
         // MEDIA TRACKER HAS BEEN GIVEN TO FULLY LOAD
@@ -745,9 +748,9 @@ public class PoseurGUI extends JFrame
         southOfCenterPanel.add(northInSouthOfCenterPanel, BorderLayout.NORTH);     
         
         Box box = Box.createHorizontalBox();
-        box.add(Box.createHorizontalStrut(175));
+        box.add(Box.createHorizontalStrut(180));
         box.add(speedControlToolbar);
-        box.add(Box.createHorizontalStrut(340));
+        box.add(Box.createHorizontalStrut(315));
         box.add(poseListToolbar);
         northInSouthOfCenterPanel.add(box);
         
@@ -764,12 +767,13 @@ public class PoseurGUI extends JFrame
         
         
         centerInWestInSouthOfCenterPanel = new JPanel(new FlowLayout());
-        animationStateToolbar.add(newPoseListButton);
-        animationStateToolbar.add(renamePoseListButton);
+        animationStateToolbar.add(newAnimationStateButton);
+        animationStateToolbar.add(renameAnimationStateButton);
         animationStateToolbar.add(removeStateButton);
+        animationStateToolbar.add(copyStateButton);
         centerInWestInSouthOfCenterPanel.add(animationStateToolbar);
-//        centerInWestInSouthOfCenterPanel.add(newPoseListButton);
-//        centerInWestInSouthOfCenterPanel.add(renamePoseListButton);
+//        centerInWestInSouthOfCenterPanel.add(newAnimationStateButton);
+//        centerInWestInSouthOfCenterPanel.add(renameAnimationStateButton);
 //        centerInWestInSouthOfCenterPanel.add(removeStateButton);
        
         southOfCenterPanel.add(westInSouthOfCenterPanel, BorderLayout.WEST);
@@ -980,11 +984,13 @@ public class PoseurGUI extends JFrame
         movePoseLeftButton.addActionListener(new MovePoseLeftHandler());
         setPosePosButton.addActionListener(new SetPosePosHandler());
         setPosePauseButton.addActionListener(new SetPosePauseHandler());
+        copyPoseButton.addActionListener(new copyPoseHandler());
         
         //HANDLERS FOR POSELIST EDITING
         removeStateButton.addActionListener(new RemoveAnimationStateHandler());
-        newPoseListButton.addActionListener(new CreateNewAnimationStateHandler());
-        renamePoseListButton.addActionListener(new RenameAnimationStateHandler());
+        newAnimationStateButton.addActionListener(new CreateNewAnimationStateHandler());
+        renameAnimationStateButton.addActionListener(new RenameAnimationStateHandler());
+        copyStateButton.addActionListener(new copyAnimationStateHandler());
         
         //TODO:add action listeners
         
