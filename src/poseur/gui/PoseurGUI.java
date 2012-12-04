@@ -190,7 +190,7 @@ public class PoseurGUI extends JFrame
     private JButton copyStateButton;
     
     //SCROLLPAIN
-    public DefaultListModel<ImageIcon> listModel;
+    public DefaultListModel<ImageIcon> listModel = new DefaultListModel<>();
     private JList<ImageIcon> scrollPaneList;
     private JScrollPane scrollPane;
 
@@ -265,7 +265,18 @@ public class PoseurGUI extends JFrame
      * as currently set by the transparency slider.
      */
     public int getAlphaTransparency() { return transparencySlider.getValue(); }
-
+    
+    /**
+     * Accessor method for getting the list model
+     * @return the ListModel for the pose list
+     */
+    public DefaultListModel<ImageIcon> getPoseListModel(){return this.listModel;}
+    
+    
+    public int getSelectedPoseIndex() { return this.scrollPaneList.getSelectedIndex();}
+    
+    public void setSelectedPoseIndex(int index) { this.scrollPaneList.setSelectedIndex(index);}
+    
     /**
      * Accessor method for getting the canvas that will
      * not zoom and will render the pose as is.
@@ -565,18 +576,22 @@ public class PoseurGUI extends JFrame
         //SCROLL PANE  
         //FIXME: TESTING CODE
         Image imgg = null;
+        Image imgg2 = null;
         try {
             imgg = ImageIO.read(new File("test.png"));
+            imgg2 = ImageIO.read(new File("testt.png"));
         } catch (IOException e) {
         }
         ImageIcon iii = new ImageIcon(imgg.getScaledInstance(64, 64, Image.SCALE_SMOOTH));
+        ImageIcon iii2 = new ImageIcon(imgg2.getScaledInstance(64, 64, Image.SCALE_SMOOTH));
         
-        listModel = new DefaultListModel<>();
+        //listModel = new DefaultListModel<>();
         scrollPaneList = new JList<>(listModel);
         scrollPaneList.setVisibleRowCount(1);
         scrollPaneList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 25; i++) {
             listModel.addElement(iii);
+            listModel.addElement(iii2);
         }
         
         scrollPane = new JScrollPane(scrollPaneList);        
@@ -966,9 +981,9 @@ public class PoseurGUI extends JFrame
         //POSE LIST CONTROLES HANDLERS
         addPoseButton.addActionListener(new AddPoseHandler());
         removePoseButton.addActionListener(new RemovePoseHandler());
-        movePoseRightButton.addActionListener(new MovePoseRightHandler());
-        movePoseLeftButton.addActionListener(new MovePoseLeftHandler());
-        setPosePosButton.addActionListener(new SetPosePosHandler());
+        movePoseRightButton.addActionListener(new MovePoseRightHandler(this, this.listModel));
+        movePoseLeftButton.addActionListener(new MovePoseLeftHandler(this, this.listModel));
+        setPosePosButton.addActionListener(new SetPosePosHandler(this, this.listModel));
         setPosePauseButton.addActionListener(new SetPosePauseHandler());
         copyPoseButton.addActionListener(new CopyPoseHandler());
         scrollPaneList.addListSelectionListener(new SelectPoseHandler());

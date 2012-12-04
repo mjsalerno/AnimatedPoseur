@@ -6,12 +6,24 @@ package poseur.events.poselist;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import poseur.gui.PoseurGUI;
 
 /**
  *
  * @author Michael
  */
 public class SetPosePosHandler implements ActionListener {
+    
+    DefaultListModel<ImageIcon> lm;
+    PoseurGUI gui;
+    
+    public SetPosePosHandler(PoseurGUI gui, DefaultListModel<ImageIcon> lm){
+        this.gui = gui;
+        this.lm = lm;
+    }
 
     /**
      * when a pose is selected in the list, this will ask the user
@@ -19,8 +31,27 @@ public class SetPosePosHandler implements ActionListener {
      * @param e the event being thrown
      */
     @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("---PRESSED SET POS BUTTON");
+    public void actionPerformed(ActionEvent e) {        
+        //FIXME: still needs to move them to the actualobject
+        
+        if(gui.getSelectedPoseIndex() >= 0){
+            int first = gui.getSelectedPoseIndex();
+            String input = JOptionPane.showInputDialog ( "Enter a New Position, \nYou Are At Position " + gui.getSelectedPoseIndex() );
+            if (input == null) return;
+            int second =  Integer.parseInt(input);
+            if (second < 0 || second > lm.getSize()-1){
+                JOptionPane.showMessageDialog(null, "Position must be [0, "+ (lm.getSize()-1) + "] : " + second, "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            ImageIcon i1 = lm.get(first);
+            ImageIcon i2 = lm.get(second);
+
+            lm.set(first, i2);
+            lm.set(second, i1);
+
+            gui.setSelectedPoseIndex(second);       
+        }
     }
     
 }
