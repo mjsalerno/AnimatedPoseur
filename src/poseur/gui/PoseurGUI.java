@@ -64,7 +64,9 @@ import poseur.events.poselist.RemovePoseHandler;
 import poseur.events.poselist.RenameAnimationStateHandler;
 import poseur.events.poselist.SetPosePauseHandler;
 import poseur.events.poselist.SetPosePosHandler;
-import poseur.events.poselist.copyAnimationStateHandler;
+import poseur.events.poselist.CopyAnimationStateHandler;
+import poseur.events.poselist.CopyPoseHandler;
+import poseur.events.poselist.SelectPoseHandler;
 import poseur.events.shapes.EllipseSelectionHandler;
 import poseur.events.shapes.LineSelectionHandler;
 import poseur.events.shapes.RectangleSelectionHandler;
@@ -696,10 +698,10 @@ public class PoseurGUI extends JFrame
         //TODO: testing code
         String sa[] = {"Select Animation State"};
         stateList = new JComboBox(sa);
-        removeStateButton = (JButton)initButton(REMOVE_STATE_IMAGE_FILE, centerInWestInSouthOfCenterPanel, tracker, idCounter++, JButton.class, null, REMOVE_STATE_TOOLTIP);
-        newAnimationStateButton = (JButton)initButton(NEW_POSE_LIST_IMAGE_FILE, centerInWestInSouthOfCenterPanel, tracker, idCounter++, JButton.class, null, NEW_POSE_LIST_TOOLTIP);
-        renameAnimationStateButton = (JButton)initButton(RENAME_IMAGE_FILE, centerInWestInSouthOfCenterPanel, tracker, idCounter++, JButton.class, null, RENAME_POSE_LIST_TOOLTIP);
-        copyStateButton = (JButton)initButton(COPY_IMAGE_FILE, centerInWestInSouthOfCenterPanel, tracker, idCounter++, JButton.class, null, COPY_ANIMATION_STATE_TOOLTIP);
+        removeStateButton = (JButton)initButton(REMOVE_STATE_IMAGE_FILE, animationStateToolbar, tracker, idCounter++, JButton.class, null, REMOVE_STATE_TOOLTIP);
+        newAnimationStateButton = (JButton)initButton(NEW_POSE_LIST_IMAGE_FILE, animationStateToolbar, tracker, idCounter++, JButton.class, null, NEW_POSE_LIST_TOOLTIP);
+        renameAnimationStateButton = (JButton)initButton(RENAME_IMAGE_FILE, animationStateToolbar, tracker, idCounter++, JButton.class, null, RENAME_POSE_LIST_TOOLTIP);
+        copyStateButton = (JButton)initButton(COPY_IMAGE_FILE, animationStateToolbar, tracker, idCounter++, JButton.class, null, COPY_ANIMATION_STATE_TOOLTIP);
 
         // NOW WE NEED TO WAIT FOR ALL THE IMAGES THE
         // MEDIA TRACKER HAS BEEN GIVEN TO FULLY LOAD
@@ -745,7 +747,7 @@ public class PoseurGUI extends JFrame
         northOfNorthPanel.add(shapeToolbar);
         southOfNorthPanel.add(zoomToolbar);        
         southOfNorthPanel.add(colorSelectionToolbar);
-        southOfCenterPanel.add(northInSouthOfCenterPanel, BorderLayout.NORTH);     
+        southOfCenterPanel.add(northInSouthOfCenterPanel, BorderLayout.NORTH);
         
         Box box = Box.createHorizontalBox();
         box.add(Box.createHorizontalStrut(180));
@@ -754,27 +756,11 @@ public class PoseurGUI extends JFrame
         box.add(poseListToolbar);
         northInSouthOfCenterPanel.add(box);
         
-       // northInSouthOfCenterPanel.add(speedControlToolbar);    
-        
-        
-//        northInSouthOfCenterPanel.add(new JLabel(""
-//                + "                                 "
-//                + "                                  "
-//                + "                             "));
-        
-        //northInSouthOfCenterPanel.add(poseListToolbar);
-        westInSouthOfCenterPanel.add(stateList,BorderLayout.NORTH);      
+        westInSouthOfCenterPanel.add(stateList,BorderLayout.NORTH);
         
         
         centerInWestInSouthOfCenterPanel = new JPanel(new FlowLayout());
-        animationStateToolbar.add(newAnimationStateButton);
-        animationStateToolbar.add(renameAnimationStateButton);
-        animationStateToolbar.add(removeStateButton);
-        animationStateToolbar.add(copyStateButton);
         centerInWestInSouthOfCenterPanel.add(animationStateToolbar);
-//        centerInWestInSouthOfCenterPanel.add(newAnimationStateButton);
-//        centerInWestInSouthOfCenterPanel.add(renameAnimationStateButton);
-//        centerInWestInSouthOfCenterPanel.add(removeStateButton);
        
         southOfCenterPanel.add(westInSouthOfCenterPanel, BorderLayout.WEST);
         westInSouthOfCenterPanel.add(centerInWestInSouthOfCenterPanel, BorderLayout.CENTER);
@@ -784,7 +770,7 @@ public class PoseurGUI extends JFrame
         // NOW PUT ALL THE CONTROLS IN THE NORTH
         northPanel.setLayout(new BorderLayout());
         northPanel.add(northOfNorthPanel, BorderLayout.NORTH);
-        northPanel.add(southOfNorthPanel, BorderLayout.SOUTH);        
+        northPanel.add(southOfNorthPanel, BorderLayout.SOUTH);
         
         // AND NOW PUT EVERYTHING INSIDE THE FRAME
         add(northPanel, BorderLayout.NORTH);
@@ -984,13 +970,14 @@ public class PoseurGUI extends JFrame
         movePoseLeftButton.addActionListener(new MovePoseLeftHandler());
         setPosePosButton.addActionListener(new SetPosePosHandler());
         setPosePauseButton.addActionListener(new SetPosePauseHandler());
-        copyPoseButton.addActionListener(new copyPoseHandler());
+        copyPoseButton.addActionListener(new CopyPoseHandler());
+        scrollPaneList.addListSelectionListener(new SelectPoseHandler());
         
         //HANDLERS FOR POSELIST EDITING
         removeStateButton.addActionListener(new RemoveAnimationStateHandler());
         newAnimationStateButton.addActionListener(new CreateNewAnimationStateHandler());
         renameAnimationStateButton.addActionListener(new RenameAnimationStateHandler());
-        copyStateButton.addActionListener(new copyAnimationStateHandler());
+        copyStateButton.addActionListener(new CopyAnimationStateHandler());        
         
         //TODO:add action listeners
         

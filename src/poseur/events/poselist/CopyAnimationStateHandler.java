@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
  *
  * @author Michael Salerno
  */
-public class copyAnimationStateHandler implements ActionListener {
+public class CopyAnimationStateHandler implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {

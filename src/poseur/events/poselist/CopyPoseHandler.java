@@ -2,21 +2,23 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package poseur.gui;
+package poseur.events.poselist;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
  * @author roofis0
  */
-class copyPoseHandler implements ActionListener {
+public class CopyPoseHandler implements ActionListener{
 
-
+   
     @Override
     public void actionPerformed(ActionEvent ae) {
-        System.out.println("---PRESSED COPY POSE BUTTON");
+        System.out.println("---PRESSED COPY POSE");
     }
     
 }
