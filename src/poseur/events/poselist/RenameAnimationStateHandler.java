@@ -6,6 +6,9 @@ package poseur.events.poselist;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import poseur.Poseur;
+import sprite_renderer.AnimationState;
 
 /**
  *
@@ -20,7 +23,13 @@ public class RenameAnimationStateHandler implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("---CLICKED RENAME ANIMATION STATE");
+        Poseur p = Poseur.getPoseur();
+        AnimationState as = p.getGUI().getSelectedAnimationState();
+        String newName = JOptionPane.showInputDialog("Enter a new state name");
+        AnimationState newAS = AnimationState.valueOf(newName.toUpperCase());
+        p.getAnimatedSPrite().renameAnimationState(as, newAS);
+        p.getGUI().animationStatesModel.removeElement(as);
+        p.getGUI().animationStatesModel.addElement(newAS);
     }
     
 }
