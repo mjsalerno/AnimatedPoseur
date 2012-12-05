@@ -16,7 +16,7 @@ public class SelectPoseHandler implements ListSelectionListener {
     @Override
     public void valueChanged(ListSelectionEvent lse) {
         if(lse.getValueIsAdjusting()){
-            System.out.println("---PRESSED COPY POSE BUTTON");
+            System.out.println("---SELECTED POSE FROM LIST");
         }
     }
 

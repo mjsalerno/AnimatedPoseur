@@ -9,7 +9,10 @@ import java.awt.event.ActionListener;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import poseur.Poseur;
 import poseur.gui.PoseurGUI;
+import poseur.sprite.AnimatedSprite;
+import sprite_renderer.AnimationState;
 
 /**
  *
@@ -43,6 +46,10 @@ public class SetPosePosHandler implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Position must be [0, "+ (lm.getSize()-1) + "] : " + second, "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            
+             //TODO:move on selected state
+            AnimatedSprite as = Poseur.getPoseur().getAnimatedSPrite();
+            as.swapPose(AnimationState.IDLE, first, second);
 
             ImageIcon i1 = lm.get(first);
             ImageIcon i2 = lm.get(second);

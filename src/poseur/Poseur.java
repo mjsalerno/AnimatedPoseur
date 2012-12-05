@@ -2,12 +2,12 @@ package poseur;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import static poseur.PoseurSettings.*;
 import poseur.files.PoseurFileManager;
 import poseur.files.PoseurGUILoader;
 import poseur.gui.PoseurGUI;
+import poseur.sprite.AnimatedSprite;
 import poseur.state.PoseurStateManager;
 /**
  * The Poseur application is a pose editor, allowing the user to construct
@@ -43,6 +43,8 @@ public class Poseur
     // TEXT ON THE SCREEN WHILE TESTING OUR APP
     private ArrayList<String> debugText;
     private boolean debugTextEnabled;
+    
+    private AnimatedSprite sprite;
 
     // THIS IS A SINGLETON OBJECT, SO WE HAVE A CONSTRUCTOR THAT
     // IS PRIVATE THAT DOES NOTHING
@@ -57,6 +59,8 @@ public class Poseur
      */
     public void init()
     {
+        
+        sprite = new AnimatedSprite();
         // INITIALIZE THE DATA MANAGER
         poseurStateManager = new PoseurStateManager();
             
@@ -158,6 +162,12 @@ public class Poseur
     {
         debugText.clear();
     }
+    
+    /**
+     * Accessor method for getting this application's AnimatedSprite. Note
+     * that since this is a singleton, anyone can get access to this object.
+     */
+    public AnimatedSprite getAnimatedSPrite(){return this.sprite;}
 
     /**
      * Entry point for the Poseur application, code starts its execution

@@ -10,6 +10,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import poseur.Poseur;
 import poseur.gui.PoseurGUI;
+import poseur.sprite.AnimatedSprite;
+import sprite_renderer.AnimationState;
 
 /**
  *
@@ -38,6 +40,9 @@ public class MovePoseRightHandler implements ActionListener {
         
         if(gui.getSelectedPoseIndex() >= 0 && gui.getSelectedPoseIndex() < lm.getSize()-1){
             int first = gui.getSelectedPoseIndex();
+            //TODO:move on selected state
+            AnimatedSprite as = Poseur.getPoseur().getAnimatedSPrite();
+            as.movePoseRight(AnimationState.IDLE, first);
             int second = first + 1;
 
             ImageIcon i1 = lm.get(first);

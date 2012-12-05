@@ -85,6 +85,7 @@ import poseur.state.ColorPalletState;
 import poseur.state.PoseCanvasState;
 import poseur.state.PoseurState;
 import poseur.state.PoseurStateManager;
+import sprite_renderer.AnimationState;
 /**
  * This class provides the full Graphical User Interface for the
  * Poseur application. It contains references to all GUI components,
@@ -182,13 +183,14 @@ public class PoseurGUI extends JFrame
     private JButton copyPoseButton;
     
     //TODO:make buttons
-    private JComboBox stateList;
+    private JComboBox<AnimationState> stateList;
     private JToolBar animationStateToolbar;
     private JButton removeStateButton;
     private JButton newAnimationStateButton;
     private JButton renameAnimationStateButton;
     private JButton copyStateButton;
     
+    public DefaultComboBoxModel<AnimationState> animationStatesModel;
     //SCROLLPAIN
     public DefaultListModel<ImageIcon> listModel = new DefaultListModel<>();
     private JList<ImageIcon> scrollPaneList;
@@ -576,24 +578,18 @@ public class PoseurGUI extends JFrame
         //SCROLL PANE  
         //FIXME: TESTING CODE
         Image imgg = null;
-        Image imgg2 = null;
         try {
             imgg = ImageIO.read(new File("test.png"));
-            imgg2 = ImageIO.read(new File("testt.png"));
         } catch (IOException e) {
         }
         ImageIcon iii = new ImageIcon(imgg.getScaledInstance(64, 64, Image.SCALE_SMOOTH));
-        ImageIcon iii2 = new ImageIcon(imgg2.getScaledInstance(64, 64, Image.SCALE_SMOOTH));
         
         //listModel = new DefaultListModel<>();
         scrollPaneList = new JList<>(listModel);
         scrollPaneList.setVisibleRowCount(1);
         scrollPaneList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-        for (int i = 0; i < 25; i++) {
-            listModel.addElement(iii);
-            listModel.addElement(iii2);
-        }
-        
+//        listModel.addElement(iii);
+
         scrollPane = new JScrollPane(scrollPaneList);        
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         
@@ -712,7 +708,8 @@ public class PoseurGUI extends JFrame
         animationStateToolbar.setFloatable(false);
         //TODO: testing code
         String sa[] = {"Select Animation State"};
-        stateList = new JComboBox(sa);
+        animationStatesModel = new DefaultComboBoxModel<AnimationState>();
+        stateList = new JComboBox<>(animationStatesModel);
         removeStateButton = (JButton)initButton(REMOVE_STATE_IMAGE_FILE, animationStateToolbar, tracker, idCounter++, JButton.class, null, REMOVE_STATE_TOOLTIP);
         newAnimationStateButton = (JButton)initButton(NEW_POSE_LIST_IMAGE_FILE, animationStateToolbar, tracker, idCounter++, JButton.class, null, NEW_POSE_LIST_TOOLTIP);
         renameAnimationStateButton = (JButton)initButton(RENAME_IMAGE_FILE, animationStateToolbar, tracker, idCounter++, JButton.class, null, RENAME_POSE_LIST_TOOLTIP);

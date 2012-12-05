@@ -8,7 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import poseur.Poseur;
 import poseur.gui.PoseurGUI;
+import poseur.sprite.AnimatedSprite;
+import sprite_renderer.AnimationState;
 
 /**
  *
@@ -37,6 +40,9 @@ public class MovePoseLeftHandler implements ActionListener {
         
         if(gui.getSelectedPoseIndex() > 0){
             int first = gui.getSelectedPoseIndex() -1;
+             //TODO:move on selected state
+            AnimatedSprite as = Poseur.getPoseur().getAnimatedSPrite();
+            as.movePoseLeft(AnimationState.IDLE, first);
             int second =  gui.getSelectedPoseIndex();
 
 
