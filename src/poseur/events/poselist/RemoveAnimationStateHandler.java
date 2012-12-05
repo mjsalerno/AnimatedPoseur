@@ -6,6 +6,7 @@ package poseur.events.poselist;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import poseur.Poseur;
 
 /**
  *
@@ -19,7 +20,9 @@ public class RemoveAnimationStateHandler implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("---CLICKED REMOVE ANIMATION STATE");
+        Poseur p = Poseur.getPoseur();
+        p.getAnimatedSPrite().removeAnimationState(p.getGUI().getSelectedAnimationState());
+        p.getGUI().animationStatesModel.removeElement(p.getGUI().getSelectedAnimationState());
     }
     
 }

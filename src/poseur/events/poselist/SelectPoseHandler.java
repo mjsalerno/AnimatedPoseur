@@ -16,6 +16,7 @@ public class SelectPoseHandler implements ListSelectionListener {
     @Override
     public void valueChanged(ListSelectionEvent lse) {
         if(lse.getValueIsAdjusting()){
+            //TODO:implement selecting a pose
             System.out.println("---SELECTED POSE FROM LIST");
         }
     }

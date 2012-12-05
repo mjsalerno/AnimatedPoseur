@@ -29,7 +29,6 @@ public class CreateNewAnimationStateHandler implements ActionListener {
         if(input==null) return;
         AnimationState state = AnimationState.valueOf(input.toUpperCase());
         p.getGUI().animationStatesModel.addElement(state);
-        System.out.println("---CLICKED CREATE NEW ANIMATION STATE");
     }
     
 }
