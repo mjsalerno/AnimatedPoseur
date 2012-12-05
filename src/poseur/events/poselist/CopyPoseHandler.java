@@ -6,6 +6,11 @@ package poseur.events.poselist;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.DefaultListModel;
+import poseur.Poseur;
+import poseur.gui.PoseurGUI;
+import poseur.sprite.Pose;
+import sprite_renderer.AnimationState;
 
 /**
  *
@@ -16,7 +21,15 @@ public class CopyPoseHandler implements ActionListener{
    
     @Override
     public void actionPerformed(ActionEvent ae) {
-        System.out.println("---PRESSED COPY POSE");
+        Poseur p = Poseur.getPoseur();
+        PoseurGUI gui = p.getGUI();
+        DefaultListModel lm = p.getGUI().listModel;       
+        int index = gui.getSelectedPoseIndex();
+        AnimationState state = gui.getSelectedAnimationState();
+        
+        Pose pose = p.getAnimatedSPrite().getPose(state, index);
+        lm.add(index+1, pose.getIcon());
+        p.getAnimatedSPrite().addPoseAt(gui.getSelectedAnimationState(), pose, index+1);
     }
     
 }

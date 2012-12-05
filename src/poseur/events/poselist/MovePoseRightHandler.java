@@ -40,9 +40,11 @@ public class MovePoseRightHandler implements ActionListener {
         
         if(gui.getSelectedPoseIndex() >= 0 && gui.getSelectedPoseIndex() < lm.getSize()-1){
             int first = gui.getSelectedPoseIndex();
-            //TODO:move on selected state
-            AnimatedSprite as = Poseur.getPoseur().getAnimatedSPrite();
-            as.movePoseRight(AnimationState.IDLE, first);
+            Poseur p = Poseur.getPoseur();
+            AnimatedSprite as = p.getAnimatedSPrite();
+            AnimationState selectedAnimation = (AnimationState)p.getGUI().animationStatesModel.getSelectedItem();
+            System.out.println("animationState: " + selectedAnimation);
+            as.movePoseRight(selectedAnimation, first);
             int second = first + 1;
 
             ImageIcon i1 = lm.get(first);

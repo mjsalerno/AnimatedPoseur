@@ -24,9 +24,9 @@ public class AddPoseHandler implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Poseur p = Poseur.getPoseur();
-        //TODO:add to selected state
         Pose pose = new Pose();
-        p.getAnimatedSPrite().addPose(AnimationState.IDLE, pose);
+        AnimationState selectedAnimation = (AnimationState)p.getGUI().animationStatesModel.getSelectedItem();
+        p.getAnimatedSPrite().addPose(selectedAnimation, pose);
         p.getGUI().listModel.addElement(pose.getIcon());
     }
     

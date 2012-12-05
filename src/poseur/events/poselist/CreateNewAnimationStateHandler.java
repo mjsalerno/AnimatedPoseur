@@ -6,6 +6,9 @@ package poseur.events.poselist;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import poseur.Poseur;
+import sprite_renderer.AnimationState;
 
 /**
  *
@@ -20,6 +23,12 @@ public class CreateNewAnimationStateHandler implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        //TODO: make add animation states actually work.
+        Poseur p = Poseur.getPoseur();
+        String input = JOptionPane.showInputDialog("Enter a state");
+        if(input==null) return;
+        AnimationState state = AnimationState.valueOf(input.toUpperCase());
+        p.getGUI().animationStatesModel.addElement(state);
         System.out.println("---CLICKED CREATE NEW ANIMATION STATE");
     }
     

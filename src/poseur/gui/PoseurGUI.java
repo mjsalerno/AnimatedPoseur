@@ -277,6 +277,8 @@ public class PoseurGUI extends JFrame
     
     public int getSelectedPoseIndex() { return this.scrollPaneList.getSelectedIndex();}
     
+    public AnimationState getSelectedAnimationState() { return (AnimationState)this.stateList.getSelectedItem();}
+    
     public void setSelectedPoseIndex(int index) { this.scrollPaneList.setSelectedIndex(index);}
     
     /**
@@ -991,6 +993,7 @@ public class PoseurGUI extends JFrame
         renameAnimationStateButton.addActionListener(new RenameAnimationStateHandler());
         copyStateButton.addActionListener(new CopyAnimationStateHandler());        
         
+        stateList.addItemListener(new SelectedStateHandler());
         //TODO:add action listeners
         
     }

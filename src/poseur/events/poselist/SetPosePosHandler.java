@@ -47,9 +47,10 @@ public class SetPosePosHandler implements ActionListener {
                 return;
             }
             
-             //TODO:move on selected state
-            AnimatedSprite as = Poseur.getPoseur().getAnimatedSPrite();
-            as.swapPose(AnimationState.IDLE, first, second);
+            Poseur p = Poseur.getPoseur();
+            AnimatedSprite as = p.getAnimatedSPrite();
+            AnimationState selectedAnimation = (AnimationState)p.getGUI().animationStatesModel.getSelectedItem();
+            as.swapPose(selectedAnimation, first, second);
 
             ImageIcon i1 = lm.get(first);
             ImageIcon i2 = lm.get(second);

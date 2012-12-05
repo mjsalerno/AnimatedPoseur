@@ -43,6 +43,7 @@ public class AnimatedSprite implements Serializable{
     }
     
     public ArrayList<Pose> addAnimationState(AnimationState name){
+        if(name == null) throw new IllegalArgumentException("no such animation state null");
         return this.animationStates.put(name, new ArrayList<Pose>());        
     }
     
@@ -53,8 +54,20 @@ public class AnimatedSprite implements Serializable{
         return this.animationStates.get(name).add(pose);
     }
     
+    public void addPoseAt(AnimationState name, Pose pose, int index){
+        if(!this.animationStates.containsKey(name)){
+            this.addAnimationState(name);
+        }
+        this.animationStates.get(name).add(index, pose);
+    }
+    
     public ArrayList<Pose> removeAnimationState(AnimationState name){
         return this.animationStates.remove(name);
+    }
+    
+    public void removePose(AnimationState state, int index){
+        if(!this.animationStates.containsKey(state) || this.animationStates.get(state) == null || this.animationStates.get(state).isEmpty()) return;
+        this.animationStates.get(state).remove(index);
     }
     
     public boolean swapPose(AnimationState name, int from, int to){

@@ -6,6 +6,10 @@ package poseur.events.poselist;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.DefaultListModel;
+import poseur.Poseur;
+import poseur.gui.PoseurGUI;
+import sprite_renderer.AnimationState;
 
 /**
  *
@@ -19,7 +23,12 @@ public class RemovePoseHandler implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("---PRESSED REMOVE POSE BUTTON");        
+        Poseur p = Poseur.getPoseur();
+        PoseurGUI gui = p.getGUI();
+        DefaultListModel lm = p.getGUI().listModel;
+        int index = gui.getSelectedPoseIndex();
+        lm.remove(index);
+        p.getAnimatedSPrite().removePose(gui.getSelectedAnimationState(), index);
     }
     
 }
