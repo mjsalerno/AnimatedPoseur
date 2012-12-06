@@ -27,9 +27,17 @@ public class RenameAnimationStateHandler implements ActionListener {
         AnimationState as = p.getGUI().getSelectedAnimationState();
         if (as==null) return;
         String newName = JOptionPane.showInputDialog("Enter a new state name");
-        AnimationState newAS = AnimationState.valueOf(newName.toUpperCase());
+        
+        AnimationState newAS;
+        try{
+            newAS = AnimationState.valueOf(newName.toUpperCase());
+        }catch(IllegalArgumentException ex){
+            JOptionPane.showMessageDialog(null, "That was not a valid Animation State.", "Error", 0, null);
+            return;
+        }
+        
         if(p.getAnimatedSPrite().containsState(newAS)){
-            JOptionPane.showMessageDialog(null, "You can't have twos tates with the same name.", "Error", 0, null);
+            JOptionPane.showMessageDialog(null, "You can't have two states with the same name.", "Error", 0, null);
             return;
         }
         p.getAnimatedSPrite().renameAnimationState(as, newAS);

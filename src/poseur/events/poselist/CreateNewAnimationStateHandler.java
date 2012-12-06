@@ -27,12 +27,22 @@ public class CreateNewAnimationStateHandler implements ActionListener {
         Poseur p = Poseur.getPoseur();
         String input = JOptionPane.showInputDialog("Enter a state");
         if(input==null) return;
-        AnimationState state = AnimationState.valueOf(input.toUpperCase());
+        
+        AnimationState state;
+        
+        try{
+            state = AnimationState.valueOf(input.toUpperCase());
+        }catch(IllegalArgumentException ex){
+            JOptionPane.showMessageDialog(null, "Not a valid animation state.", "Error", 0, null);
+            return;
+        }
+        
         if(p.getAnimatedSPrite().containsState(state)){
-            JOptionPane.showMessageDialog(null, "You can't have twos tates with the same name.", "Error", 0, null);
+            JOptionPane.showMessageDialog(null, "You can't have two states with the same name.", "Error", 0, null);
             return;
         }
         p.getGUI().animationStatesModel.addElement(state);
+        p.getAnimatedSPrite().addAnimationState(state);
     }
     
 }

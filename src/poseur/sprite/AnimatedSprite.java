@@ -6,6 +6,7 @@ package poseur.sprite;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import sprite_renderer.AnimationState;
 
@@ -17,9 +18,9 @@ public class AnimatedSprite implements Serializable{
     private int width;
     private int height;
     private String name;
-    private HashMap<AnimationState, ArrayList<Pose>> animationStates;
+    private EnumMap<AnimationState, ArrayList<Pose>> animationStates;
     
-    public AnimatedSprite(String name, int height, int width, HashMap<AnimationState, ArrayList<Pose>> animationStates){
+    public AnimatedSprite(String name, int height, int width, EnumMap<AnimationState, ArrayList<Pose>> animationStates){
         this.name = name;
         this.height = height;
         this.width = width;
@@ -27,15 +28,15 @@ public class AnimatedSprite implements Serializable{
     }
     
     public AnimatedSprite(String name){
-        this(name, 64,64, new HashMap<AnimationState, ArrayList<Pose>>());
+        this(name, 64,64, new EnumMap<AnimationState, ArrayList<Pose>>(AnimationState.class));
     }
     
     public AnimatedSprite(){
-        this("AnimatedSprite", 64,64, new HashMap<AnimationState, ArrayList<Pose>>());
+        this("AnimatedSprite", 64,64, new EnumMap<AnimationState, ArrayList<Pose>>(AnimationState.class));
     }
     
-    public String[] getAnimationStates(){
-        return (String[]) this.animationStates.keySet().toArray();
+    public Object[] getAnimationStates(){
+        return this.animationStates.keySet().toArray();
     }
     
     public ArrayList<Pose> addAnimationState(AnimationState name, ArrayList<Pose> poseList){
