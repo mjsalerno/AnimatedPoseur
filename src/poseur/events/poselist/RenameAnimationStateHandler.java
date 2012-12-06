@@ -25,6 +25,7 @@ public class RenameAnimationStateHandler implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Poseur p = Poseur.getPoseur();
         AnimationState as = p.getGUI().getSelectedAnimationState();
+        if (as==null) return;
         String newName = JOptionPane.showInputDialog("Enter a new state name");
         AnimationState newAS = AnimationState.valueOf(newName.toUpperCase());
         p.getAnimatedSPrite().renameAnimationState(as, newAS);

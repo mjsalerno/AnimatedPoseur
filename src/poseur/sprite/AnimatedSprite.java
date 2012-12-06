@@ -61,6 +61,11 @@ public class AnimatedSprite implements Serializable{
         this.animationStates.get(name).add(index, pose);
     }
     
+    public void copyState(AnimationState from, AnimationState to){
+        ArrayList<Pose> list = this.animationStates.get(from);
+        this.animationStates.put(to, list);
+    }
+    
     public ArrayList<Pose> removeAnimationState(AnimationState name){
         return this.animationStates.remove(name);
     }

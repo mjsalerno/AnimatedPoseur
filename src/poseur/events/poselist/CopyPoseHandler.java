@@ -23,6 +23,7 @@ public class CopyPoseHandler implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         Poseur p = Poseur.getPoseur();
         PoseurGUI gui = p.getGUI();
+        if ( gui.getSelectedAnimationState() == null ) return; 
         DefaultListModel lm = p.getGUI().listModel;       
         int index = gui.getSelectedPoseIndex();
         AnimationState state = gui.getSelectedAnimationState();

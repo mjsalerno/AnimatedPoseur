@@ -25,6 +25,7 @@ public class RemovePoseHandler implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Poseur p = Poseur.getPoseur();
         PoseurGUI gui = p.getGUI();
+        if ( gui.getSelectedAnimationState() == null ) return; 
         DefaultListModel lm = p.getGUI().listModel;
         int index = gui.getSelectedPoseIndex();
         lm.remove(index);

@@ -24,6 +24,7 @@ public class AddPoseHandler implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Poseur p = Poseur.getPoseur();
+        if ( p.getGUI().getSelectedAnimationState() == null ) return; 
         Pose pose = new Pose();
         AnimationState selectedAnimation = (AnimationState)p.getGUI().animationStatesModel.getSelectedItem();
         p.getAnimatedSPrite().addPose(selectedAnimation, pose);
