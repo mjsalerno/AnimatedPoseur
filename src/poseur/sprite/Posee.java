@@ -17,14 +17,14 @@ import poseur.shapes.PoseurShape;
  *
  * @author Michael Salerno
  */
-public class Pose implements Serializable{    
+public class Posee implements Serializable{    
     //TODO: start pose
     
     private float pause;
     private ArrayList<PoseurShape> shapeList;
     private ImageIcon icon;
     
-    public Pose(float pause, ArrayList<PoseurShape> shapeList){
+    public Posee(float pause, ArrayList<PoseurShape> shapeList){
         this.pause = pause;
         this.shapeList = shapeList;
 
@@ -40,7 +40,7 @@ public class Pose implements Serializable{
 
     }
     
-    public Pose(){
+    public Posee(){
         this(0.5F, new ArrayList<PoseurShape>());
     }
 

@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import poseur.Poseur;
 import poseur.gui.PoseurGUI;
-import poseur.sprite.Pose;
+import poseur.state.PoseurPose;
 import sprite_renderer.AnimationState;
 
 /**
@@ -30,7 +30,7 @@ public class SetPosePauseHandler implements ActionListener {
         AnimationState state = p.getGUI().getSelectedAnimationState();
         
         int index = gui.getSelectedPoseIndex();
-        Pose pose = p.getAnimatedSPrite().getPose(state, index);
+        PoseurPose pose = p.getAnimatedSPrite().getPose(state, index);
         String newPause = JOptionPane.showInputDialog("Enter a new pause value\npause: " + pose.getPause());
         if(newPause == null) return;
         pose.setPause(Float.parseFloat(newPause));

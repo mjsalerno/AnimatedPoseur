@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.DefaultListModel;
 import poseur.Poseur;
 import poseur.gui.PoseurGUI;
-import poseur.sprite.Pose;
+import poseur.state.PoseurPose;
 import sprite_renderer.AnimationState;
 
 /**
@@ -28,7 +28,7 @@ public class CopyPoseHandler implements ActionListener{
         int index = gui.getSelectedPoseIndex();
         AnimationState state = gui.getSelectedAnimationState();
         
-        Pose pose = p.getAnimatedSPrite().getPose(state, index);
+        PoseurPose pose = p.getAnimatedSPrite().getPose(state, index);
         lm.add(index+1, pose.getIcon());
         p.getAnimatedSPrite().addPoseAt(gui.getSelectedAnimationState(), pose, index+1);
     }

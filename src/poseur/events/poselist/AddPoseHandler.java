@@ -7,7 +7,7 @@ package poseur.events.poselist;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import poseur.Poseur;
-import poseur.sprite.Pose;
+import poseur.state.PoseurPose;
 import sprite_renderer.AnimationState;
 
 /**
@@ -25,7 +25,7 @@ public class AddPoseHandler implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Poseur p = Poseur.getPoseur();
         if ( p.getGUI().getSelectedAnimationState() == null ) return; 
-        Pose pose = new Pose();
+        PoseurPose pose = new PoseurPose();
         AnimationState selectedAnimation = (AnimationState)p.getGUI().animationStatesModel.getSelectedItem();
         p.getAnimatedSPrite().addPose(selectedAnimation, pose);
         p.getGUI().listModel.addElement(pose.getIcon());

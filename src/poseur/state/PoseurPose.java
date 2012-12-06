@@ -1,9 +1,14 @@
 package poseur.state;
 
+import java.awt.Image;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
+import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import poseur.shapes.PoseurLine;
 import poseur.shapes.PoseurShape;
 
@@ -21,6 +26,9 @@ public class PoseurPose
     // HERE'S THIS POSE'S DIMENSIONS
     private int poseWidth;
     private int poseHeight;
+    
+    private ImageIcon icon;
+    float pause;
     
     // AND THESE ARE ALL THE SHAPES TO RENDER FOR IT
     private LinkedList<PoseurShape> shapesList;
@@ -44,7 +52,22 @@ public class PoseurPose
         poseHeight = initPoseHeight;
         
         // AND GET OUR SHAPES LIST READY
-        shapesList = new LinkedList();
+        shapesList = new LinkedList<>();
+        pause = .2F;
+        
+        Image img = null;
+
+        try {
+            img = ImageIO.read(new File("testt.png"));
+        } catch (IOException e) {
+        }
+        ImageIcon ii = new ImageIcon(img.getScaledInstance(64, 64, Image.SCALE_SMOOTH));
+        
+        this.icon = ii;
+    }
+    
+    public PoseurPose(){
+        this(64,64);
     }
     
     // ACCESSOR METHODS
@@ -201,5 +224,17 @@ public class PoseurPose
             }
         }
         return null;
+    }
+
+    public float getPause() {
+        return this.pause;
+    }
+
+    public void setPause(float newPause) {
+        this.pause = newPause;
+    }
+
+    public ImageIcon getIcon() {
+        return this.icon;
     }
 }

@@ -7,7 +7,7 @@ package poseur.sprite;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.HashMap;
+import poseur.state.PoseurPose;
 import sprite_renderer.AnimationState;
 
 /**
@@ -18,9 +18,9 @@ public class AnimatedSprite implements Serializable{
     private int width;
     private int height;
     private String name;
-    private EnumMap<AnimationState, ArrayList<Pose>> animationStates;
+    private EnumMap<AnimationState, ArrayList<PoseurPose>> animationStates;
     
-    public AnimatedSprite(String name, int height, int width, EnumMap<AnimationState, ArrayList<Pose>> animationStates){
+    public AnimatedSprite(String name, int height, int width, EnumMap<AnimationState, ArrayList<PoseurPose>> animationStates){
         this.name = name;
         this.height = height;
         this.width = width;
@@ -28,34 +28,34 @@ public class AnimatedSprite implements Serializable{
     }
     
     public AnimatedSprite(String name){
-        this(name, 64,64, new EnumMap<AnimationState, ArrayList<Pose>>(AnimationState.class));
+        this(name, 64,64, new EnumMap<AnimationState, ArrayList<PoseurPose>>(AnimationState.class));
     }
     
     public AnimatedSprite(){
-        this("AnimatedSprite", 64,64, new EnumMap<AnimationState, ArrayList<Pose>>(AnimationState.class));
+        this("AnimatedSprite", 64,64, new EnumMap<AnimationState, ArrayList<PoseurPose>>(AnimationState.class));
     }
     
     public Object[] getAnimationStates(){
         return this.animationStates.keySet().toArray();
     }
     
-    public ArrayList<Pose> addAnimationState(AnimationState name, ArrayList<Pose> poseList){
+    public ArrayList<PoseurPose> addAnimationState(AnimationState name, ArrayList<PoseurPose> poseList){
         return this.animationStates.put(name, poseList);        
     }
     
-    public ArrayList<Pose> addAnimationState(AnimationState name){
+    public ArrayList<PoseurPose> addAnimationState(AnimationState name){
         if(name == null) throw new IllegalArgumentException("no such animation state null");
-        return this.animationStates.put(name, new ArrayList<Pose>());        
+        return this.animationStates.put(name, new ArrayList<PoseurPose>());        
     }
     
-    public boolean addPose(AnimationState name, Pose pose){
+    public boolean addPose(AnimationState name, PoseurPose pose){
         if(!this.animationStates.containsKey(name)){
             this.addAnimationState(name);
         }
         return this.animationStates.get(name).add(pose);
     }
     
-    public void addPoseAt(AnimationState name, Pose pose, int index){
+    public void addPoseAt(AnimationState name, PoseurPose pose, int index){
         if(!this.animationStates.containsKey(name)){
             this.addAnimationState(name);
         }
@@ -63,11 +63,11 @@ public class AnimatedSprite implements Serializable{
     }
     
     public void copyState(AnimationState from, AnimationState to){
-        ArrayList<Pose> list = this.animationStates.get(from);
+        ArrayList<PoseurPose> list = this.animationStates.get(from);
         this.animationStates.put(to, list);
     }
     
-    public ArrayList<Pose> removeAnimationState(AnimationState name){
+    public ArrayList<PoseurPose> removeAnimationState(AnimationState name){
         return this.animationStates.remove(name);
     }
     
@@ -78,13 +78,13 @@ public class AnimatedSprite implements Serializable{
     
     public boolean swapPose(AnimationState name, int from, int to){
         if(!this.animationStates.containsKey(name)) return false;
-        ArrayList<Pose> poseList = this.animationStates.get(name);
+        ArrayList<PoseurPose> poseList = this.animationStates.get(name);
         if(poseList.size() >= from || from < 0) return false;
         if(poseList.size() >= to || to < 0) return false;
         if(from == to) return false;
         
-        Pose p1 = poseList.get(from);
-        Pose p2 = poseList.get(to);
+        PoseurPose p1 = poseList.get(from);
+        PoseurPose p2 = poseList.get(to);
         poseList.set(from, p2);
         poseList.set(to, p1);
         
@@ -103,18 +103,18 @@ public class AnimatedSprite implements Serializable{
         return this.swapPose(name, index, index-1);
     }
     
-    public ArrayList<Pose> getPoseList(AnimationState name){
+    public ArrayList<PoseurPose> getPoseList(AnimationState name){
         return this.animationStates.get(name);
     }
     
-    public Pose getPose(AnimationState name, int index){
+    public PoseurPose getPose(AnimationState name, int index){
         return this.getPoseList(name).get(index);
     }
     
     
     public float setPosePause(AnimationState name, int index, float newPause){
         float oldPause = -1;
-        Pose p = this.getPose(name, index);
+        PoseurPose p = this.getPose(name, index);
         oldPause = p.getPause();
         p.setPause(newPause);
         return oldPause;
@@ -122,7 +122,7 @@ public class AnimatedSprite implements Serializable{
     
     public boolean renameAnimationState(AnimationState oldS, AnimationState newS){
         if(!this.animationStates.containsKey(oldS)) return false;
-        ArrayList<Pose> postList = this.animationStates.get(oldS);
+        ArrayList<PoseurPose> postList = this.animationStates.get(oldS);
         this.animationStates.remove(oldS);
         this.animationStates.put(newS, postList);
         return true;

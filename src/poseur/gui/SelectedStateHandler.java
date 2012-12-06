@@ -9,7 +9,7 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import poseur.Poseur;
-import poseur.sprite.Pose;
+import poseur.state.PoseurPose;
 import sprite_renderer.AnimationState;
 
 /**
@@ -26,9 +26,9 @@ class SelectedStateHandler implements ItemListener {
         JComboBox box = (JComboBox) ie.getSource();
         AnimationState state = (AnimationState) box.getSelectedItem();
         if (state == null) return;
-        ArrayList<Pose> poseList = p.getAnimatedSPrite().getPoseList(state);
+        ArrayList<PoseurPose> poseList = p.getAnimatedSPrite().getPoseList(state);
         if (poseList == null || poseList.isEmpty()) return;
-        for(Pose pose : poseList){
+        for(PoseurPose pose : poseList){
             p.getGUI().listModel.addElement(pose.getIcon());
         }
     }
