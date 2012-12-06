@@ -90,6 +90,10 @@ public class AnimatedSprite implements Serializable{
         return true;
     }
    
+    public boolean containsState(AnimationState state){
+        return this.animationStates.containsKey(state);
+    }
+    
     public boolean movePoseRight(AnimationState name, int index){
         return this.swapPose(name, index, index+1);
     }

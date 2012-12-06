@@ -23,6 +23,10 @@ public class CopyAnimationStateHandler implements ActionListener {
         if (oldState==null) return;
         String newName = JOptionPane.showInputDialog("Enter a new state name for the copy");
         AnimationState newState = AnimationState.valueOf(newName.toUpperCase());
+        if(p.getAnimatedSPrite().containsState(newState)){
+            JOptionPane.showMessageDialog(null, "You can't have twos tates with the same name.", "Error", 0, null);
+            return;
+        }
         p.getAnimatedSPrite().copyState(oldState, newState);
         p.getGUI().animationStatesModel.addElement(newState);
     }

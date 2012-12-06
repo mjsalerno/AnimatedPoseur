@@ -28,6 +28,10 @@ public class CreateNewAnimationStateHandler implements ActionListener {
         String input = JOptionPane.showInputDialog("Enter a state");
         if(input==null) return;
         AnimationState state = AnimationState.valueOf(input.toUpperCase());
+        if(p.getAnimatedSPrite().containsState(state)){
+            JOptionPane.showMessageDialog(null, "You can't have twos tates with the same name.", "Error", 0, null);
+            return;
+        }
         p.getGUI().animationStatesModel.addElement(state);
     }
     

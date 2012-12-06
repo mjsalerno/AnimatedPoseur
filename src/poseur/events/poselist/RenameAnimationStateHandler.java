@@ -28,6 +28,10 @@ public class RenameAnimationStateHandler implements ActionListener {
         if (as==null) return;
         String newName = JOptionPane.showInputDialog("Enter a new state name");
         AnimationState newAS = AnimationState.valueOf(newName.toUpperCase());
+        if(p.getAnimatedSPrite().containsState(newAS)){
+            JOptionPane.showMessageDialog(null, "You can't have twos tates with the same name.", "Error", 0, null);
+            return;
+        }
         p.getAnimatedSPrite().renameAnimationState(as, newAS);
         p.getGUI().animationStatesModel.removeElement(as);
         p.getGUI().animationStatesModel.addElement(newAS);
