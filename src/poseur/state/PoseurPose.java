@@ -9,8 +9,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import poseur.Poseur;
 import poseur.shapes.PoseurLine;
 import poseur.shapes.PoseurShape;
+import sprite_renderer.AnimationState;
 
 /**
  * This class stores all the information for a pose, including
@@ -177,6 +179,10 @@ public class PoseurPose
         // JUST COPY IT ALL IN, CLEARING OUT ALL OLD SHAPES
         poseWidth = poseData.poseWidth;
         poseHeight = poseData.poseHeight;
+        Poseur p = Poseur.getPoseur();
+        
+        //p.getAnimatedSPrite().setPoseAt(p.getStateManager().getPose(), state, index);
+        
         shapesList.clear();
         for (PoseurShape shape : poseData.shapesList)
         {

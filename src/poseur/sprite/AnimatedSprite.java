@@ -6,6 +6,7 @@ package poseur.sprite;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.EnumMap;
 import poseur.state.PoseurPose;
 import sprite_renderer.AnimationState;
@@ -40,7 +41,13 @@ public class AnimatedSprite implements Serializable{
     }
     
     public ArrayList<PoseurPose> addAnimationState(AnimationState name, ArrayList<PoseurPose> poseList){
+        if(this.animationStates.containsKey(name)) this.animationStates.remove(name);
         return this.animationStates.put(name, poseList);        
+    }
+    
+    public void replaceShapesList(AnimationState state, int i, Collection c){
+        this.animationStates.get(state).get(i).getShapesList().clear();
+        this.animationStates.get(state).get(i).getShapesList().addAll(c);
     }
     
     public ArrayList<PoseurPose> addAnimationState(AnimationState name){

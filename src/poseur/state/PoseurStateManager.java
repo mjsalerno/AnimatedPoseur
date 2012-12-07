@@ -8,6 +8,7 @@ import poseur.files.PoseurFileManager;
 import poseur.gui.PoseCanvas;
 import poseur.gui.PoseurGUI;
 import poseur.shapes.*;
+import sprite_renderer.AnimationState;
 
 /**
  * This class stores all the state information about the application regarding
@@ -84,8 +85,8 @@ public class PoseurStateManager {
     public PoseurState getMode() {
         return state;
     }
-
-    /**
+    
+        /**
      * Gets the canvas state for the canvas on the left, which does not zoom.
      *
      * @return The canvas state for the left canvas.
@@ -364,7 +365,12 @@ public class PoseurStateManager {
                 setState(PoseurState.CREATE_SHAPE_STATE);
             } else {
                 // OUR LITTLE SHAPE HAS GROWN UP
+                Poseur p = Poseur.getPoseur();
+                int index = p.getGUI().getSelectedPoseIndex();
+                AnimationState state = p.getGUI().getSelectedAnimationState();
+                p.getAnimatedSPrite().getPose(state, index).addShape(shapeInProgress);
                 pose.addShape(shapeInProgress);
+                
                 selectedShape = shapeInProgress;
                 shapeInProgress = null;
 

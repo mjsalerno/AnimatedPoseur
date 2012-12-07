@@ -193,7 +193,7 @@ public class PoseurGUI extends JFrame
     public DefaultComboBoxModel<AnimationState> animationStatesModel;
     //SCROLLPAIN
     public DefaultListModel<ImageIcon> listModel = new DefaultListModel<>();
-    private JList<ImageIcon> scrollPaneList;
+    public JList<ImageIcon> scrollPaneList;
     private JScrollPane scrollPane;
 
     /**
