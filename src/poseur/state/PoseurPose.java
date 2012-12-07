@@ -1,8 +1,8 @@
 package poseur.state;
 
 import java.awt.Image;
-import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
@@ -10,9 +10,11 @@ import java.util.LinkedList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import poseur.Poseur;
+import static poseur.PoseurSettings.*;
+import poseur.gui.PoseCanvas;
+import poseur.gui.PoseurGUI;
 import poseur.shapes.PoseurLine;
 import poseur.shapes.PoseurShape;
-import sprite_renderer.AnimationState;
 
 /**
  * This class stores all the information for a pose, including
@@ -69,7 +71,7 @@ public class PoseurPose
     }
     
     public PoseurPose(){
-        this(64,64);
+        this(DEFAULT_POSE_WIDTH, DEFAULT_POSE_HEIGHT);
     }
     
     // ACCESSOR METHODS
@@ -243,4 +245,41 @@ public class PoseurPose
     public ImageIcon getIcon() {
         return this.icon;
     }
+    
+    public void updateIcon(){
+           // WE DON'T HAVE TO ASK THE USER, WE'LL JUST EXPORT IT
+        // FIRST GET THE STUFF WE'LL NEED
+        Poseur singleton = Poseur.getPoseur();
+        PoseurGUI gui = singleton.getGUI();
+        PoseurStateManager state = singleton.getStateManager();
+        PoseCanvas trueCanvas = gui.getTruePoseCanvas();
+        PoseurPose pose = state.getPose();
+        
+        // THEN MAKE OUR IMAGE THE SAME DIMENSIONS AS THE POSE
+        BufferedImage imageToExport = new BufferedImage(    pose.getPoseWidth(), 
+                                                            pose.getPoseHeight(),
+                                                            BufferedImage.TYPE_INT_ARGB);
+        
+        // AND ASK THE CANVAS TO FILL IN THE IMAGE,
+        // SINCE IT ALREADY KNOWS HOW TO DRAW THE POSE
+        trueCanvas.paintToImage(imageToExport);
+        ImageIcon ii = new ImageIcon(imageToExport.getScaledInstance(64, 64, Image.SCALE_SMOOTH));
+        
+        this.icon = ii;
+    }
+
+    @Override
+    public Object clone() {
+        PoseurPose pose = new PoseurPose();
+        pose.loadPoseData(this);
+        pose.getShapesList().clear();
+        shapesList.clear();
+        for (PoseurShape shape : this.shapesList)
+        {
+            shapesList.add(shape.clone());
+        }
+        return pose;
+    }
+    
+    
 }

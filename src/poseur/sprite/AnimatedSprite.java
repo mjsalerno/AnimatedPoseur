@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumMap;
+import javax.swing.ImageIcon;
 import poseur.state.PoseurPose;
 import sprite_renderer.AnimationState;
 
@@ -74,6 +75,15 @@ public class AnimatedSprite implements Serializable{
         this.animationStates.put(to, list);
     }
     
+    public ImageIcon[] getImageIcons(AnimationState state){
+        ArrayList<PoseurPose> poses = this.animationStates.get(state);
+        ImageIcon[] iia = new ImageIcon[poses.size()];
+        for(int i = 0; i < iia.length; i++){
+            iia[i] = poses.get(i).getIcon();
+        }
+        return iia;
+    }
+    
     public ArrayList<PoseurPose> removeAnimationState(AnimationState name){
         return this.animationStates.remove(name);
     }
@@ -90,10 +100,12 @@ public class AnimatedSprite implements Serializable{
         if(poseList.size() >= to || to < 0) return false;
         if(from == to) return false;
         
-        PoseurPose p1 = poseList.get(from);
-        PoseurPose p2 = poseList.get(to);
+        PoseurPose p1 = (PoseurPose) poseList.get(from).clone();
+        PoseurPose p2 = (PoseurPose) poseList.get(to).clone();
         poseList.set(from, p2);
         poseList.set(to, p1);
+        this.animationStates.remove(name);
+        this.animationStates.put(name, poseList);
         
         return true;
     }

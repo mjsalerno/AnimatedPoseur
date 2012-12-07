@@ -29,11 +29,18 @@ public class SelectPoseHandler implements ListSelectionListener {
             Poseur p = Poseur.getPoseur();
             JList list = (JList) lse.getSource();
             int index = list.getSelectedIndex();
+            if (index < 0) return;
             AnimationState state = p.getGUI().getSelectedAnimationState();
             PoseurPose pose = p.getAnimatedSPrite().getPose(state, index);
-
+            
             p.getStateManager().getPose().loadPoseData(pose);
             p.getStateManager().setState(PoseurState.SELECT_SHAPE_STATE);
+            
+            p.getAnimatedSPrite().getPose(state, index).updateIcon();
+            p.getGUI().listModel.setElementAt(p.getAnimatedSPrite().getPose(state, index).getIcon(), index);
+            
+            
+            
             
         }
     }
