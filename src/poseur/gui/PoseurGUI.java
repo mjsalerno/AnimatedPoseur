@@ -418,6 +418,15 @@ public class PoseurGUI extends JFrame
         }
     }
     
+    public void updateIcon(){
+        Poseur singleton = Poseur.getPoseur();
+        int index = singleton.getGUI().getSelectedPoseIndex();
+        AnimationState onState = singleton.getGUI().getSelectedAnimationState();
+        PoseurPose pose = singleton.getAnimatedSPrite().getPose(onState, index);
+        pose.updateIcon();
+        singleton.getGUI().listModel.set(index, pose.getIcon());
+    }
+    
     
     /**
      * Called each time the application's state changes, this method
@@ -440,6 +449,7 @@ public class PoseurGUI extends JFrame
         // COMPLETE THE DRAWING OF A SINGLE SHAPE
         if (mode == PoseurState.COMPLETE_SHAPE_STATE)
         {
+            updateIcon();
             // THIS USES THE CROSSHAIR
             selectCursor(Cursor.CROSSHAIR_CURSOR);            
         }
@@ -448,11 +458,7 @@ public class PoseurGUI extends JFrame
         else if (mode == PoseurState.CREATE_SHAPE_STATE)
         {            
             
-            int index = singleton.getGUI().getSelectedPoseIndex();
-            AnimationState onState = singleton.getGUI().getSelectedAnimationState();
-            PoseurPose pose = singleton.getAnimatedSPrite().getPose(onState, index);
-            pose.updateIcon();
-            singleton.getGUI().listModel.set(index, pose.getIcon());
+            updateIcon();
             // THIS USES THE CROSSHAIR
             selectCursor(Cursor.CROSSHAIR_CURSOR);
             
@@ -473,6 +479,8 @@ public class PoseurGUI extends JFrame
         else if (mode == PoseurState.SELECT_SHAPE_STATE)
         {
             
+            updateIcon();
+            
             // THIS USES THE ARROW CURSOR
             selectCursor(Cursor.DEFAULT_CURSOR);
             
@@ -489,6 +497,7 @@ public class PoseurGUI extends JFrame
         // MAY EDIT IT, LIKE CHANGE IT'S COLORS OR TRANSPARENCY
         else if (mode == PoseurState.SHAPE_SELECTED_STATE)
         {
+            updateIcon();
             // THIS USES THE ARROW CURSOR
             selectCursor(Cursor.DEFAULT_CURSOR);
             
