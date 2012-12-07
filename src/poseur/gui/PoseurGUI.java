@@ -183,7 +183,6 @@ public class PoseurGUI extends JFrame
     private JButton setPosePauseButton;
     private JButton copyPoseButton;
     
-    //TODO:make buttons
     private JComboBox<AnimationState> stateList;
     private JToolBar animationStateToolbar;
     private JButton removeStateButton;
@@ -707,7 +706,6 @@ public class PoseurGUI extends JFrame
         
         //ADDED
         //POSE LIST CONTROLS TOOLBAR
-        //TODO:make img for pose controles        
         poseListToolbar = new JToolBar();
         poseListToolbar.setFloatable(false);
         addPoseButton = (JButton)initButton(ADD_POSE_IMAGE_FILE, poseListToolbar, tracker, idCounter++, JButton.class, null, ADD_POSE_TOOLTIP);
@@ -1006,7 +1004,6 @@ public class PoseurGUI extends JFrame
         copyStateButton.addActionListener(new CopyAnimationStateHandler());        
         
         stateList.addItemListener(new SelectedStateHandler());
-        //TODO:add action listeners
         
     }
        

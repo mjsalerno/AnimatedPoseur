@@ -36,7 +36,6 @@ public class MovePoseRightHandler implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {        
-        //FIXME: still needs to move them to the actualobject
         
         if(gui.getSelectedPoseIndex() >= 0 && gui.getSelectedPoseIndex() < lm.getSize()-1){
             int first = gui.getSelectedPoseIndex();

@@ -25,7 +25,6 @@ public class SelectPoseHandler implements ListSelectionListener {
     @Override
     public void valueChanged(ListSelectionEvent lse) {
         if(lse.getValueIsAdjusting()){
-            //TODO:implement selecting a pose
             Poseur p = Poseur.getPoseur();
             JList list = (JList) lse.getSource();
             int index = list.getSelectedIndex();

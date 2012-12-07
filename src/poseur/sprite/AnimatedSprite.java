@@ -161,7 +161,6 @@ public class AnimatedSprite implements Serializable{
         return true;
     }
     
-    //TODO: finish animatedsprite
 
     @Override
     public String toString() {

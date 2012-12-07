@@ -23,7 +23,6 @@ public class CreateNewAnimationStateHandler implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        //TODO: make add animation states actually work.
         Poseur p = Poseur.getPoseur();
         String input = JOptionPane.showInputDialog("Enter a state");
         if(input==null) return;
