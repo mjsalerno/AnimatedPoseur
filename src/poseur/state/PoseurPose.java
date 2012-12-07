@@ -182,6 +182,7 @@ public class PoseurPose
         poseWidth = poseData.poseWidth;
         poseHeight = poseData.poseHeight;
         Poseur p = Poseur.getPoseur();
+        this.icon = poseData.getIcon();
         
         //p.getAnimatedSPrite().setPoseAt(p.getStateManager().getPose(), state, index);
         
@@ -262,7 +263,7 @@ public class PoseurPose
         
         // AND ASK THE CANVAS TO FILL IN THE IMAGE,
         // SINCE IT ALREADY KNOWS HOW TO DRAW THE POSE
-        trueCanvas.paintToImage(imageToExport);
+        trueCanvas.paintToImage(imageToExport, this);
         ImageIcon ii = new ImageIcon(imageToExport.getScaledInstance(64, 64, Image.SCALE_SMOOTH));
         
         this.icon = ii;
@@ -273,10 +274,10 @@ public class PoseurPose
         PoseurPose pose = new PoseurPose();
         pose.loadPoseData(this);
         pose.getShapesList().clear();
-        shapesList.clear();
+        //shapesList.clear();
         for (PoseurShape shape : this.shapesList)
         {
-            shapesList.add(shape.clone());
+            pose.getShapesList().add(shape.clone());
         }
         return pose;
     }

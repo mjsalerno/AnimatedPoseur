@@ -43,8 +43,8 @@ public class MovePoseLeftHandler implements ActionListener {
             Poseur p = Poseur.getPoseur();
             AnimatedSprite as = p.getAnimatedSPrite();
             AnimationState selectedAnimation = (AnimationState)p.getGUI().animationStatesModel.getSelectedItem();
-            as.movePoseLeft(selectedAnimation, first);
             int second =  gui.getSelectedPoseIndex();
+            as.movePoseLeft(selectedAnimation, second);
 
 
             ImageIcon i1 = lm.get(first);

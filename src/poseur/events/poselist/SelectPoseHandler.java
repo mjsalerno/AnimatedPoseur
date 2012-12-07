@@ -30,6 +30,7 @@ public class SelectPoseHandler implements ListSelectionListener {
             JList list = (JList) lse.getSource();
             int index = list.getSelectedIndex();
             if (index < 0) return;
+            p.getStateManager().getPose().updateIcon();
             AnimationState state = p.getGUI().getSelectedAnimationState();
             PoseurPose pose = p.getAnimatedSPrite().getPose(state, index);
             

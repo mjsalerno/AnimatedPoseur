@@ -128,6 +128,34 @@ public class PoseCanvas extends JPanel
         // WOULD NORMALLY DRAW INSIDE THE POSE AREA
     }
     
+    public void paintToImage(BufferedImage imageToPaintTo, PoseurPose pose)
+    {
+        Graphics2D imageG2 = (Graphics2D)imageToPaintTo.getGraphics();
+        Poseur singleton = Poseur.getPoseur();
+        PoseurStateManager poseurStateManager = singleton.getStateManager();
+        //PoseurPose pose = poseurStateManager.getPose();
+        
+        // FIRST LET'S PUT A TRANSPARENT BACKGROUND THE SIZE OF THE POSE
+        Rectangle2D.Double transparentRect = new Rectangle2D.Double(
+                0, 0, pose.getPoseWidth(), pose.getPoseHeight());
+        imageG2.setColor(TRANSPARENT_BACKGROUND_COLOR);
+        imageG2.fill(transparentRect);
+        imageG2.draw(transparentRect);
+        
+        // NOW LET'S DRAW ALL THE SHAPES ON TOP, BUT WE'LL
+        // FAKE THE POSE AREA SO WE ONLY DRAW THE MIDDLE PART
+        Rectangle2D.Double poseArea = new Rectangle2D.Double(
+                0, 0, pose.getPoseWidth(), pose.getPoseHeight());
+        renderShapes(imageG2, poseArea);
+        
+        // ALL DONE, WE'VE JUST PAINTED TO THE IMAGE WHAT WE
+        // WOULD NORMALLY DRAW INSIDE THE POSE AREA
+    }
+    
+    
+    
+    
+    
     // HELPER METHODS
 
     /**

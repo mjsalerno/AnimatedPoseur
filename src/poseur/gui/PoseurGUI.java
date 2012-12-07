@@ -83,6 +83,7 @@ import poseur.files.PoseurFileManager;
 import poseur.shapes.PoseurShape;
 import poseur.state.ColorPalletState;
 import poseur.state.PoseCanvasState;
+import poseur.state.PoseurPose;
 import poseur.state.PoseurState;
 import poseur.state.PoseurStateManager;
 import sprite_renderer.AnimationState;
@@ -418,6 +419,7 @@ public class PoseurGUI extends JFrame
         }
     }
     
+    
     /**
      * Called each time the application's state changes, this method
      * is responsible for enabling, disabling, and generally updating 
@@ -426,11 +428,14 @@ public class PoseurGUI extends JFrame
      */
     public final void updateMode()
     {
+        
+        
         // WE'LL NEED THESE GUYS
         Poseur singleton = Poseur.getPoseur();
         PoseurStateManager state = singleton.getStateManager();
         PoseurState mode = state.getMode();
         PoseurFileManager fileManager = singleton.getFileManager();
+       
 
         // IN THIS MODE THE USER IS DRAGGING THE MOUSE TO
         // COMPLETE THE DRAWING OF A SINGLE SHAPE
@@ -442,7 +447,13 @@ public class PoseurGUI extends JFrame
         // IN THIS MODE THE USER IS ABOUT TO START DRAGGING
         // THE MOUSE TO CREATE A SHAPE
         else if (mode == PoseurState.CREATE_SHAPE_STATE)
-        {
+        {            
+            
+            int index = singleton.getGUI().getSelectedPoseIndex();
+            AnimationState onState = singleton.getGUI().getSelectedAnimationState();
+            PoseurPose pose = singleton.getAnimatedSPrite().getPose(onState, index);
+            pose.updateIcon();
+            singleton.getGUI().listModel.set(index, pose.getIcon());
             // THIS USES THE CROSSHAIR
             selectCursor(Cursor.CROSSHAIR_CURSOR);
             
@@ -462,6 +473,7 @@ public class PoseurGUI extends JFrame
         // STATE AND IS THE DEFAULT AT THE START OF THE APP
         else if (mode == PoseurState.SELECT_SHAPE_STATE)
         {
+            
             // THIS USES THE ARROW CURSOR
             selectCursor(Cursor.DEFAULT_CURSOR);
             
