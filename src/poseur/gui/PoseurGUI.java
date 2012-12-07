@@ -420,6 +420,7 @@ public class PoseurGUI extends JFrame
     
     public void updateIcon(){
         Poseur singleton = Poseur.getPoseur();
+        if(singleton.getGUI().getSelectedPoseIndex() < 0) return;
         int index = singleton.getGUI().getSelectedPoseIndex();
         AnimationState onState = singleton.getGUI().getSelectedAnimationState();
         PoseurPose pose = singleton.getAnimatedSPrite().getPose(onState, index);
@@ -760,7 +761,7 @@ public class PoseurGUI extends JFrame
         // THE SPLIT PANE. WE'LL PUT THE DIVIDER
         // RIGHT IN THE MIDDLE AND WON'T LET
         // THE USER MOVE IT - FOOLPROOF DESIGN!
-        canvasSplitPane.setLeftComponent(trueCanvas);
+        //canvasSplitPane.setLeftComponent(trueCanvas);
         canvasSplitPane.setRightComponent(zoomableCanvas);
         canvasSplitPane.setResizeWeight(0.5);
         canvasSplitPane.setEnabled(false);
