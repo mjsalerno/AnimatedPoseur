@@ -30,6 +30,7 @@ public class PoseCanvasMouseHandler implements MouseListener, MouseMotionListene
     public void mousePressed(MouseEvent e) 
     {
         Poseur singleton = Poseur.getPoseur();
+        if(singleton.getGUI().getSelectedPoseIndex() < 0) return;
         PoseurStateManager state = singleton.getStateManager();
         state.processMousePress(e.getX(), e.getY());
     }
@@ -44,8 +45,9 @@ public class PoseCanvasMouseHandler implements MouseListener, MouseMotionListene
      */
     @Override
     public void mouseReleased(MouseEvent e) 
-    {
+    {        
         Poseur singleton = Poseur.getPoseur();
+        if(singleton.getGUI().getSelectedPoseIndex() < 0) return;
         PoseurStateManager state = singleton.getStateManager();
         state.processMouseReleased(e.getX(), e.getY());
     }
@@ -62,6 +64,7 @@ public class PoseCanvasMouseHandler implements MouseListener, MouseMotionListene
     public void mouseDragged(MouseEvent e) 
     {
         Poseur singleton = Poseur.getPoseur();
+        if(singleton.getGUI().getSelectedPoseIndex() < 0) return;
         PoseurStateManager poseurStateManager = singleton.getStateManager();
         poseurStateManager.processMouseDragged(e.getX(), e.getY());
     }
