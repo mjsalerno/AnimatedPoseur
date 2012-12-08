@@ -244,7 +244,7 @@ public class PoseurStateManager {
                 incX /= zoomLevel;
                 incY /= zoomLevel;
                 Rectangle2D.Double truePoseArea = trueCanvasState.getPoseArea();
-                selectedShape.moveShape(incX, incY, truePoseArea);
+                selectedShape.moveShape(incX, incY, zoomableCanvasState.getPoseArea());
                 repaintCanvases();
             } // WE WENT WAY OFF THE EDGE, LET'S STOP DRAGGING
             else {

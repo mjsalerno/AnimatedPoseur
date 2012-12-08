@@ -767,6 +767,7 @@ public class PoseurGUI extends JFrame
         // THE SPLIT PANE. WE'LL PUT THE DIVIDER
         // RIGHT IN THE MIDDLE AND WON'T LET
         // THE USER MOVE IT - FOOLPROOF DESIGN!
+        //TODO:fix the moving mouse
         //canvasSplitPane.setLeftComponent(trueCanvas);
         canvasSplitPane.setLeftComponent(this.sceneRenderingPanel);
         canvasSplitPane.setRightComponent(zoomableCanvas);
