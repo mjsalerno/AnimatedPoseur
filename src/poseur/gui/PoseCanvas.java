@@ -146,7 +146,7 @@ public class PoseCanvas extends JPanel
         // FAKE THE POSE AREA SO WE ONLY DRAW THE MIDDLE PART
         Rectangle2D.Double poseArea = new Rectangle2D.Double(
                 0, 0, pose.getPoseWidth(), pose.getPoseHeight());
-        renderShapes(imageG2, poseArea);
+        renderShapes(imageG2, poseArea, pose);
         
         // ALL DONE, WE'VE JUST PAINTED TO THE IMAGE WHAT WE
         // WOULD NORMALLY DRAW INSIDE THE POSE AREA
@@ -236,6 +236,36 @@ public class PoseCanvas extends JPanel
             shape.render(g2, (int)poseArea.getX(), (int)poseArea.getY(), zoomLevel, isSelected);
         }        
     }
+    
+    
+    
+    private void renderShapes(Graphics2D g2, Rectangle2D.Double poseArea, PoseurPose pose)
+    {
+        // LET'S GET THE POSE AREA AND THE POSE
+        //PoseurPose pose = state.getPose();
+        float zoomLevel = state.getZoomLevel();        
+        
+        // RENDER THE ENTIRE POSE
+        Iterator<PoseurShape> shapesIt = pose.getShapesIterator();
+        Poseur singleton = Poseur.getPoseur();
+        PoseurStateManager poseurStateManager = singleton.getStateManager();
+        while (shapesIt.hasNext())
+        {
+            PoseurShape shape = shapesIt.next();
+            boolean isSelected = poseurStateManager.isSelectedShape(shape);
+            
+            // NOTE THAT WE NEVER DEPICT SELECTED SHAPES DIFFERENTLY
+            // IN THE TRUE CANVAS, ONLY THE ZOOMABLE CANVAS
+            if (!state.isZoomable())
+            {
+                isSelected = false;
+            }
+            shape.render(g2, (int)poseArea.getX(), (int)poseArea.getY(), zoomLevel, isSelected);
+        }        
+    }
+    
+    
+    
     
     /**
      * Renders the shape that is currently being sized by the user as they

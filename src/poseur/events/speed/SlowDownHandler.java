@@ -19,7 +19,7 @@ public class SlowDownHandler implements ActionListener {
      * @param ae an event that will be thrown to this method 
      */
     @Override
-    public void actionPerformed(ActionEvent ae) {
+    public void actionPerformed(ActionEvent ae) {        
         System.out.println("---PRESSED SLOW DOWN BUTTON");
     }
     

@@ -4,14 +4,15 @@
  */
 package poseur.sprite;
 
+import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumMap;
 import javax.swing.ImageIcon;
+import poseur.Poseur;
 import poseur.state.PoseurPose;
 import sprite_renderer.AnimationState;
-import sprite_renderer.Pose;
 import sprite_renderer.PoseList;
 import sprite_renderer.Sprite;
 import sprite_renderer.SpriteType;
@@ -220,21 +221,18 @@ public class AnimatedSprite implements Serializable{
         SpriteType st = new SpriteType();
         int temp = 1;
         PoseList tempPoseList;
-//        Pose p = new Pose;
         
             tempPoseList = st.addPoseList(state);
-            
             for(PoseurPose pose : this.getPoseList(state)){
                 st.addImage(temp, pose.getImage());                
                 tempPoseList.addPose(temp++, pose.getPause());
-            }
+            }            
             
             st.setHeight(height);
             st.setHeight(width);
         
         
         Sprite s = new Sprite(st, state);
-        s.update(.5F);
         return s;
     }
     
