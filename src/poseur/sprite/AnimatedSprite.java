@@ -11,7 +11,10 @@ import java.util.EnumMap;
 import javax.swing.ImageIcon;
 import poseur.state.PoseurPose;
 import sprite_renderer.AnimationState;
+import sprite_renderer.Pose;
+import sprite_renderer.PoseList;
 import sprite_renderer.Sprite;
+import sprite_renderer.SpriteType;
 
 /**
  *
@@ -146,7 +149,7 @@ public class AnimatedSprite implements Serializable{
     }
     
     
-    public float setPosePause(AnimationState name, int index, float newPause){
+    public float setPosePause(AnimationState name, int index, int newPause){
         float oldPause = -1;
         PoseurPose p = this.getPose(name, index);
         oldPause = p.getPause();
@@ -193,9 +196,23 @@ public class AnimatedSprite implements Serializable{
         this.name = name;
     }
     
-//    public Sprite convertToSprite(){
-//        Sprite s = new Sprite();
-//        return null;
-//    }
-//    
+    public Sprite convertToSprite(){
+        SpriteType st = new SpriteType();
+        int temp = 0;
+        PoseList tempPoseList;
+//        Pose p = new Pose;
+        for(AnimationState state : this.animationStates.keySet()){
+            tempPoseList = st.addPoseList(state);
+            
+            for(PoseurPose pose : this.getPoseList(state)){
+                st.addImage(temp, pose.getImage());                
+                tempPoseList.addPose(temp++, pose.getPause());
+            }
+        }
+        
+        Sprite s = new Sprite(st, (AnimationState)this.animationStates.keySet().toArray()[0]);
+        s.update(.5F);
+        return s;
+    }
+    
 }

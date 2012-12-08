@@ -23,7 +23,10 @@ public class StartHandler implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         System.out.println("---PRESSED START BUTTON");     
         PoseurGUI gui = Poseur.getPoseur().getGUI();
+        gui.spriteList.clear();
         gui.sceneRenderingPanel.startScene();
+        gui.spriteList.add(Poseur.getPoseur().getAnimatedSPrite().convertToSprite());
+        
         gui.sceneRenderingPanel.unpauseScene();
     }
     

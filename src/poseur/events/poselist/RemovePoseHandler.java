@@ -29,8 +29,9 @@ public class RemovePoseHandler implements ActionListener {
         DefaultListModel lm = p.getGUI().listModel;
         int index = gui.getSelectedPoseIndex();
         lm.remove(index);
-        if(!lm.isEmpty())gui.scrollPaneList.setSelectedIndex(0);
+        //if(!lm.isEmpty())gui.scrollPaneList.setSelectedIndex(0);
         p.getAnimatedSPrite().removePose(gui.getSelectedAnimationState(), index);
+        p.getStateManager().getPose().getShapesList().clear();
     }
     
 }

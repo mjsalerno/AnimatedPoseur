@@ -33,7 +33,7 @@ public class PoseurPose
     private int poseHeight;
     
     private ImageIcon icon;
-    float pause;
+    int pause;
     
     // AND THESE ARE ALL THE SHAPES TO RENDER FOR IT
     private LinkedList<PoseurShape> shapesList;
@@ -58,7 +58,7 @@ public class PoseurPose
         
         // AND GET OUR SHAPES LIST READY
         shapesList = new LinkedList<>();
-        pause = .2F;
+        pause = 1;
         
         Image img = null;
 
@@ -236,11 +236,11 @@ public class PoseurPose
         return null;
     }
 
-    public float getPause() {
+    public int getPause() {
         return this.pause;
     }
 
-    public void setPause(float newPause) {
+    public void setPause(int newPause) {
         this.pause = newPause;
     }
 
@@ -268,6 +268,26 @@ public class PoseurPose
         ImageIcon ii = new ImageIcon(imageToExport.getScaledInstance(64, 64, Image.SCALE_SMOOTH));
         
         this.icon = ii;
+    }
+    
+    public BufferedImage getImage(){
+           // WE DON'T HAVE TO ASK THE USER, WE'LL JUST EXPORT IT
+        // FIRST GET THE STUFF WE'LL NEED
+        Poseur singleton = Poseur.getPoseur();
+        PoseurGUI gui = singleton.getGUI();
+        PoseurStateManager state = singleton.getStateManager();
+        PoseCanvas trueCanvas = gui.getTruePoseCanvas();
+        PoseurPose pose = state.getPose();
+        
+        // THEN MAKE OUR IMAGE THE SAME DIMENSIONS AS THE POSE
+        BufferedImage imageToExport = new BufferedImage(    pose.getPoseWidth(), 
+                                                            pose.getPoseHeight(),
+                                                            BufferedImage.TYPE_INT_ARGB);
+        
+        // AND ASK THE CANVAS TO FILL IN THE IMAGE,
+        // SINCE IT ALREADY KNOWS HOW TO DRAW THE POSE
+        trueCanvas.paintToImage(imageToExport, this);
+        return imageToExport;
     }
 
     @Override

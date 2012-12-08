@@ -33,7 +33,7 @@ public class SetPosePauseHandler implements ActionListener {
         PoseurPose pose = p.getAnimatedSPrite().getPose(state, index);
         String newPause = JOptionPane.showInputDialog("Enter a new pause value\npause: " + pose.getPause());
         if(newPause == null) return;
-        pose.setPause(Float.parseFloat(newPause));
+        pose.setPause(Integer.parseInt(newPause));
     }
     
 }
