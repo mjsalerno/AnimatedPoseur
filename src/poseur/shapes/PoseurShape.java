@@ -23,7 +23,7 @@ import poseur.gui.PoseurGUI;
 public abstract class PoseurShape implements Serializable 
 {
     // LINE THICKNESS OF THE SHAPE OUTLINE
-    protected BasicStroke outlineThickness;
+    protected transient BasicStroke outlineThickness;
     
     // COLOR TO USE FOR RENDERING THE SHAPE OUTLINE
     protected Color outlineColor;

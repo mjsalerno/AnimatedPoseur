@@ -119,6 +119,7 @@ public class PoseurGUI extends JFrame
     public ArrayList<Sprite> spriteList = new ArrayList<>();
     public SceneRenderer sceneRenderingPanel = new SceneRenderer(spriteList);
     
+    
     // NORTH PANEL - EVERYTHING ELSE GOES IN HERE
     private JPanel northPanel;
     private JPanel northOfNorthPanel;
@@ -634,6 +635,10 @@ public class PoseurGUI extends JFrame
         saveAsButton   = (JButton)initButton(SAVE_AS_IMAGE_FILE,     fileToolbar,  tracker, idCounter++, JButton.class, null, SAVE_TOOLTIP);
         exportButton = (JButton)initButton(EXPORT_IMAGE_FILE,   fileToolbar,  tracker, idCounter++, JButton.class, null, EXPORT_TOOLTIP);
         exitButton   = (JButton)initButton(EXIT_IMAGE_FILE,     fileToolbar,  tracker, idCounter++, JButton.class, null, EXIT_TOOLTIP);
+        
+        
+        sceneRenderingPanel.startScene();
+        
         
         // EDITING CONTROLS
         editToolbar = new JToolBar();

@@ -21,10 +21,8 @@ public class StartHandler implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
-        System.out.println("---PRESSED START BUTTON");     
         PoseurGUI gui = Poseur.getPoseur().getGUI();
-        gui.spriteList.clear();
-        gui.sceneRenderingPanel.startScene();
+        gui.spriteList.clear();        
         gui.spriteList.add(Poseur.getPoseur().getAnimatedSprite().convertToSprite(gui.getSelectedAnimationState()));
         
         gui.sceneRenderingPanel.unpauseScene();

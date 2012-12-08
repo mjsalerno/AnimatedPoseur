@@ -1,11 +1,13 @@
 package poseur.state;
 
+import java.awt.BasicStroke;
 import java.awt.Image;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import javax.imageio.ImageIO;
@@ -37,6 +39,7 @@ public class PoseurPose implements Serializable
     
     // AND THESE ARE ALL THE SHAPES TO RENDER FOR IT
     private LinkedList<PoseurShape> shapesList;
+    private ArrayList<Float> shapeThickness;
     
     /**
      * This constructor fully sets up a blank pose using the
@@ -55,6 +58,7 @@ public class PoseurPose implements Serializable
         // KEEP THE DIMENSIONS
         poseWidth = initPoseWidth;
         poseHeight = initPoseHeight;
+        shapeThickness = new ArrayList<>();
         
         // AND GET OUR SHAPES LIST READY
         shapesList = new LinkedList<>();
@@ -301,6 +305,24 @@ public class PoseurPose implements Serializable
             pose.getShapesList().add(shape.clone());
         }
         return pose;
+    }
+    
+    public void saveShapeThicknesses(){
+        this.shapeThickness.clear();
+        
+        for(PoseurShape shape : this.shapesList){
+            this.shapeThickness.add(shape.getOutlineThickness().getLineWidth());
+        }
+    }
+    
+    public void loadShapeThicknesses(){
+        //this.shapeThickness.clear();
+        
+        //System.out.println("shapes: " + this.shapesList.size() + " thickness: " + this.shapeThickness.size());
+        
+        for (int i = 0; i < this.shapesList.size(); i++) {
+            this.shapesList.get(i).setOutlineThickness(new BasicStroke(this.shapeThickness.get(i)));
+        }
     }
     
     

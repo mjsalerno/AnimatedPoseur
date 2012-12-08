@@ -1,11 +1,15 @@
 package poseur.files;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import poseur.Poseur;
 import static poseur.PoseurSettings.*;
 import poseur.gui.PoseurGUI;
+import poseur.sprite.AnimatedSprite;
 import poseur.state.PoseurState;
 import poseur.state.PoseurStateManager;
 
@@ -201,9 +205,13 @@ public class PoseurFileManager
             currentPoseName = fileName;
             currentFileName = fileName + POSE_FILE_EXTENSION;
             currentFile = new File(POSES_PATH + currentFileName);
-
-            // SAVE OUR NEW FILE
-            poseIO.savePose(currentFile);
+            try {
+                // SAVE OUR NEW FILE
+                //poseIO.savePose(currentFile);
+                Poseur.getPoseur().getAnimatedSprite().saveToFile(currentFile);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(PoseurFileManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
             saved = true;
 
             // AND PUT THE FILE NAME IN THE TITLE BAR
@@ -284,15 +292,20 @@ public class PoseurFileManager
             // GET THE FILE THE USER ENTERED
             currentFile = poseFileChooser.getSelectedFile();
             currentFileName = currentFile.getName();
-            currentPoseName = currentFileName.substring(0, currentFileName.indexOf("."));
+            //currentPoseName = currentFileName.substring(0, currentFileName.indexOf("."));
             saved = true;
  
             // AND PUT THE FILE NAME IN THE TITLE BAR
             String appName = gui.getAppName();
             gui.setTitle(appName + APP_NAME_FILE_NAME_SEPARATOR + currentFile);             
-            
-            // AND LOAD THE .pose (XML FORMAT) FILE
-            poseIO.loadPose(currentFile.getAbsolutePath());
+            try {
+                // AND LOAD THE .pose (XML FORMAT) FILE
+                //poseIO.loadPose(currentFile.getAbsolutePath());
+                AnimatedSprite as = Poseur.getPoseur().getAnimatedSprite().loadFromFile(currentFile);
+                Poseur.getPoseur().getAnimatedSprite().loadAnimatedSpriteData(as);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(PoseurFileManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     

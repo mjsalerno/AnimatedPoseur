@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import poseur.Poseur;
 import poseur.files.PoseurFileManager;
+import sprite_renderer.AnimationState;
 
 /**
  * This handler responds to when the user wants to open an existing Pose
@@ -30,5 +31,15 @@ public class OpenPoseHandler implements ActionListener
         Poseur singleton = Poseur.getPoseur();
         PoseurFileManager poseurFileManager = singleton.getFileManager();
         poseurFileManager.requestOpenPose();
+        
+        singleton.getGUI().animationStatesModel.removeAllElements();
+        for(AnimationState state : singleton.getAnimatedSprite().getAnimationStates()){
+            singleton.getGUI().animationStatesModel.addElement(state);
+        }
+        
+//        singleton.getGUI().
+//        for(AnimationState state : singleton.getAnimatedSprite().getAnimationStates()){
+//            singleton.getGUI().animationStatesModel.addElement(state);
+//        }
     }
 }

@@ -4,13 +4,23 @@
  */
 package poseur.sprite;
 
-import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumMap;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import poseur.Poseur;
 import poseur.state.PoseurPose;
 import sprite_renderer.AnimationState;
 import sprite_renderer.PoseList;
@@ -42,8 +52,8 @@ public class AnimatedSprite implements Serializable{
         this("AnimatedSprite", 64,64, new EnumMap<AnimationState, ArrayList<PoseurPose>>(AnimationState.class));
     }
     
-    public Object[] getAnimationStates(){
-        return this.animationStates.keySet().toArray();
+    public Set<AnimationState> getAnimationStates(){
+        return this.animationStates.keySet();
     }
     
     public ArrayList<PoseurPose> addAnimationState(AnimationState name, ArrayList<PoseurPose> poseList){
@@ -235,6 +245,55 @@ public class AnimatedSprite implements Serializable{
         Sprite s = new Sprite(st, state);
         return s;
     }
+    
+    
+    public void saveToFile(File file) throws FileNotFoundException{
+        
+        for(AnimationState state : this.animationStates.keySet()){
+            for(PoseurPose pose : this.getPoseList(state)){
+                pose.saveShapeThicknesses();
+            }
+        }
+        
+        try {
+            ObjectOutput os = new ObjectOutputStream(new FileOutputStream(file));
+            os.writeObject(this);
+        } catch (IOException ex) {
+            Logger.getLogger(AnimatedSprite.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void fixShapeThickness(){
+        for(AnimationState state : this.animationStates.keySet()){
+            for(PoseurPose pose : this.getPoseList(state)){
+                pose.loadShapeThicknesses();
+            }
+        }
+    }
+    
+    public AnimatedSprite loadFromFile(File file) throws FileNotFoundException{
+        //throw new UnsupportedOperationException();
+        try {
+            ObjectInput is = new ObjectInputStream(new FileInputStream(file));
+            AnimatedSprite as = (AnimatedSprite) is.readObject();
+            as.fixShapeThickness();
+            return as;
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(AnimatedSprite.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public void loadAnimatedSpriteData(AnimatedSprite that) {
+        //throw new UnsupportedOperationException("Not yet implemented");
+        this.animationStates = that.animationStates;
+        this.height = that.height;
+        this.name = that.name;
+        this.width = that.width;
+        
+    }
+    
+    
     
     
 }
