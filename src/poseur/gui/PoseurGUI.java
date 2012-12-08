@@ -429,7 +429,7 @@ public class PoseurGUI extends JFrame
         if(singleton.getGUI().getSelectedPoseIndex() < 0) return;
         int index = singleton.getGUI().getSelectedPoseIndex();
         AnimationState onState = singleton.getGUI().getSelectedAnimationState();
-        PoseurPose pose = singleton.getAnimatedSPrite().getPose(onState, index);
+        PoseurPose pose = singleton.getAnimatedSprite().getPose(onState, index);
         pose.updateIcon();
         singleton.getGUI().listModel.set(index, pose.getIcon());
     }

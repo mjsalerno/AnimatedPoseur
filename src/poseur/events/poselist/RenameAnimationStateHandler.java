@@ -36,11 +36,11 @@ public class RenameAnimationStateHandler implements ActionListener {
             return;
         }
         
-        if(p.getAnimatedSPrite().containsState(newAS)){
+        if(p.getAnimatedSprite().containsState(newAS)){
             JOptionPane.showMessageDialog(null, "You can't have two states with the same name.", "Error", 0, null);
             return;
         }
-        p.getAnimatedSPrite().renameAnimationState(as, newAS);
+        p.getAnimatedSprite().renameAnimationState(as, newAS);
         p.getGUI().animationStatesModel.removeElement(as);
         p.getGUI().animationStatesModel.addElement(newAS);
     }

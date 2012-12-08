@@ -25,7 +25,7 @@ public class StartHandler implements ActionListener {
         PoseurGUI gui = Poseur.getPoseur().getGUI();
         gui.spriteList.clear();
         gui.sceneRenderingPanel.startScene();
-        gui.spriteList.add(Poseur.getPoseur().getAnimatedSPrite().convertToSprite());
+        gui.spriteList.add(Poseur.getPoseur().getAnimatedSprite().convertToSprite(gui.getSelectedAnimationState()));
         
         gui.sceneRenderingPanel.unpauseScene();
     }

@@ -30,7 +30,7 @@ public class RemovePoseHandler implements ActionListener {
         int index = gui.getSelectedPoseIndex();
         lm.remove(index);
         //if(!lm.isEmpty())gui.scrollPaneList.setSelectedIndex(0);
-        p.getAnimatedSPrite().removePose(gui.getSelectedAnimationState(), index);
+        p.getAnimatedSprite().removePose(gui.getSelectedAnimationState(), index);
         p.getStateManager().getPose().getShapesList().clear();
     }
     

@@ -167,7 +167,7 @@ public class Poseur
      * Accessor method for getting this application's AnimatedSprite. Note
      * that since this is a singleton, anyone can get access to this object.
      */
-    public AnimatedSprite getAnimatedSPrite(){return this.sprite;}
+    public AnimatedSprite getAnimatedSprite(){return this.sprite;}
 
     /**
      * Entry point for the Poseur application, code starts its execution

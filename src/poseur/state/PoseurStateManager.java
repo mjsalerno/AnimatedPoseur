@@ -368,7 +368,7 @@ public class PoseurStateManager {
                 Poseur p = Poseur.getPoseur();
                 int index = p.getGUI().getSelectedPoseIndex();
                 AnimationState state = p.getGUI().getSelectedAnimationState();
-                p.getAnimatedSPrite().getPose(state, index).addShape(shapeInProgress);
+                p.getAnimatedSprite().getPose(state, index).addShape(shapeInProgress);
                 pose.addShape(shapeInProgress);
                 
                 selectedShape = shapeInProgress;

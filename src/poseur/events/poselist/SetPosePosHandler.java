@@ -47,7 +47,7 @@ public class SetPosePosHandler implements ActionListener {
             }
             
             Poseur p = Poseur.getPoseur();
-            AnimatedSprite as = p.getAnimatedSPrite();
+            AnimatedSprite as = p.getAnimatedSprite();
             AnimationState selectedAnimation = (AnimationState)p.getGUI().animationStatesModel.getSelectedItem();
             as.swapPose(selectedAnimation, first, second);
 

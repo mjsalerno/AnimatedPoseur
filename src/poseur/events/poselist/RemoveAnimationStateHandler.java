@@ -24,7 +24,7 @@ public class RemoveAnimationStateHandler implements ActionListener {
         Poseur p = Poseur.getPoseur();
         AnimationState state = p.getGUI().getSelectedAnimationState();
         if(state == null)return;
-        p.getAnimatedSPrite().removeAnimationState(state);
+        p.getAnimatedSprite().removeAnimationState(state);
         p.getGUI().animationStatesModel.removeElement(state);
     }
     

@@ -215,4 +215,28 @@ public class AnimatedSprite implements Serializable{
         return s;
     }
     
+    
+    public Sprite convertToSprite(AnimationState state){
+        SpriteType st = new SpriteType();
+        int temp = 1;
+        PoseList tempPoseList;
+//        Pose p = new Pose;
+        
+            tempPoseList = st.addPoseList(state);
+            
+            for(PoseurPose pose : this.getPoseList(state)){
+                st.addImage(temp, pose.getImage());                
+                tempPoseList.addPose(temp++, pose.getPause());
+            }
+            
+            st.setHeight(height);
+            st.setHeight(width);
+        
+        
+        Sprite s = new Sprite(st, state);
+        s.update(.5F);
+        return s;
+    }
+    
+    
 }

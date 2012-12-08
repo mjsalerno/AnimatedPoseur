@@ -30,7 +30,7 @@ public class SetPosePauseHandler implements ActionListener {
         AnimationState state = p.getGUI().getSelectedAnimationState();
         
         int index = gui.getSelectedPoseIndex();
-        PoseurPose pose = p.getAnimatedSPrite().getPose(state, index);
+        PoseurPose pose = p.getAnimatedSprite().getPose(state, index);
         String newPause = JOptionPane.showInputDialog("Enter a new pause value\npause: " + pose.getPause());
         if(newPause == null) return;
         pose.setPause(Integer.parseInt(newPause));

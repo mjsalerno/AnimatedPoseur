@@ -32,12 +32,12 @@ public class CopyAnimationStateHandler implements ActionListener {
             return;
         }
         
-        if(p.getAnimatedSPrite().containsState(newState)){
+        if(p.getAnimatedSprite().containsState(newState)){
             JOptionPane.showMessageDialog(null, "You can't have two states with the same name.", "Error", 0, null);
             return;
         }
         
-        p.getAnimatedSPrite().copyState(oldState, newState);
+        p.getAnimatedSprite().copyState(oldState, newState);
         p.getGUI().animationStatesModel.addElement(newState);
     }
     

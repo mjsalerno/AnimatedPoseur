@@ -36,12 +36,12 @@ public class CreateNewAnimationStateHandler implements ActionListener {
             return;
         }
         
-        if(p.getAnimatedSPrite().containsState(state)){
+        if(p.getAnimatedSprite().containsState(state)){
             JOptionPane.showMessageDialog(null, "You can't have two states with the same name.", "Error", 0, null);
             return;
         }
         p.getGUI().animationStatesModel.addElement(state);
-        p.getAnimatedSPrite().addAnimationState(state);
+        p.getAnimatedSprite().addAnimationState(state);
     }
     
 }

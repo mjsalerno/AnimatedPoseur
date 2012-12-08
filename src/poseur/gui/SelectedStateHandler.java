@@ -26,7 +26,7 @@ class SelectedStateHandler implements ItemListener {
         JComboBox box = (JComboBox) ie.getSource();
         AnimationState state = (AnimationState) box.getSelectedItem();
         if (state == null) return;
-        ArrayList<PoseurPose> poseList = p.getAnimatedSPrite().getPoseList(state);
+        ArrayList<PoseurPose> poseList = p.getAnimatedSprite().getPoseList(state);
         if (poseList == null || poseList.isEmpty()) return;
         for(PoseurPose pose : poseList){
             p.getGUI().listModel.addElement(pose.getIcon());

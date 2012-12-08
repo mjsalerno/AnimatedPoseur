@@ -40,7 +40,7 @@ public class MovePoseLeftHandler implements ActionListener {
         if(gui.getSelectedPoseIndex() > 0){
             int first = gui.getSelectedPoseIndex() -1;
             Poseur p = Poseur.getPoseur();
-            AnimatedSprite as = p.getAnimatedSPrite();
+            AnimatedSprite as = p.getAnimatedSprite();
             AnimationState selectedAnimation = (AnimationState)p.getGUI().animationStatesModel.getSelectedItem();
             int second =  gui.getSelectedPoseIndex();
             as.movePoseLeft(selectedAnimation, second);
