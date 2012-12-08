@@ -35,6 +35,7 @@ public class SelectPoseHandler implements ListSelectionListener {
             
             p.getStateManager().getPose().loadPoseData(pose);
             p.getStateManager().setState(PoseurState.SELECT_SHAPE_STATE);
+//            p.getStateManager().unselectSelectedShape();
             
             p.getAnimatedSPrite().getPose(state, index).updateIcon();
             p.getGUI().listModel.setElementAt(p.getAnimatedSPrite().getPose(state, index).getIcon(), index);

@@ -12,6 +12,7 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -87,6 +88,8 @@ import poseur.state.PoseurPose;
 import poseur.state.PoseurState;
 import poseur.state.PoseurStateManager;
 import sprite_renderer.AnimationState;
+import sprite_renderer.SceneRenderer;
+import sprite_renderer.Sprite;
 /**
  * This class provides the full Graphical User Interface for the
  * Poseur application. It contains references to all GUI components,
@@ -112,6 +115,9 @@ public class PoseurGUI extends JFrame
     private JSplitPane canvasSplitPane;
     private PoseCanvas trueCanvas;
     private PoseCanvas zoomableCanvas;
+    //TODO:fix up
+    public ArrayList<Sprite> spriteList = new ArrayList<>();
+    public SceneRenderer sceneRenderingPanel = new SceneRenderer(spriteList);
     
     // NORTH PANEL - EVERYTHING ELSE GOES IN HERE
     private JPanel northPanel;
@@ -762,6 +768,7 @@ public class PoseurGUI extends JFrame
         // RIGHT IN THE MIDDLE AND WON'T LET
         // THE USER MOVE IT - FOOLPROOF DESIGN!
         //canvasSplitPane.setLeftComponent(trueCanvas);
+        canvasSplitPane.setLeftComponent(this.sceneRenderingPanel);
         canvasSplitPane.setRightComponent(zoomableCanvas);
         canvasSplitPane.setResizeWeight(0.5);
         canvasSplitPane.setEnabled(false);

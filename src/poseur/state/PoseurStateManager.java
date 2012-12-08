@@ -515,4 +515,8 @@ public class PoseurStateManager {
         PoseurFileManager fileManager = singleton.getFileManager();
         fileManager.markFileAsNotSaved();
     }
+
+    public void unselectSelectedShape() {
+        this.selectedShape = null;
+    }
 }

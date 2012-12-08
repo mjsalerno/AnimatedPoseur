@@ -11,6 +11,7 @@ import java.util.EnumMap;
 import javax.swing.ImageIcon;
 import poseur.state.PoseurPose;
 import sprite_renderer.AnimationState;
+import sprite_renderer.Sprite;
 
 /**
  *
@@ -192,6 +193,9 @@ public class AnimatedSprite implements Serializable{
         this.name = name;
     }
     
-    
-    
+//    public Sprite convertToSprite(){
+//        Sprite s = new Sprite();
+//        return null;
+//    }
+//    
 }

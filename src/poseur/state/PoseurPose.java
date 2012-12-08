@@ -15,6 +15,7 @@ import poseur.gui.PoseCanvas;
 import poseur.gui.PoseurGUI;
 import poseur.shapes.PoseurLine;
 import poseur.shapes.PoseurShape;
+import sprite_renderer.Sprite;
 
 /**
  * This class stores all the information for a pose, including

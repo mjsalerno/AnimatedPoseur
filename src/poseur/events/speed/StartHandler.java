@@ -7,6 +7,7 @@ package poseur.events.speed;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import poseur.Poseur;
+import poseur.gui.PoseurGUI;
 
 /**
  *
@@ -20,7 +21,10 @@ public class StartHandler implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
-        System.out.println("---PRESSED START BUTTON");                
+        System.out.println("---PRESSED START BUTTON");     
+        PoseurGUI gui = Poseur.getPoseur().getGUI();
+        gui.sceneRenderingPanel.startScene();
+        gui.sceneRenderingPanel.unpauseScene();
     }
     
 }
