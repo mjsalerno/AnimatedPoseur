@@ -6,6 +6,8 @@ package poseur.events.speed;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import poseur.Poseur;
+import sprite_renderer.SceneRenderer;
 
 /**
  *
@@ -19,7 +21,8 @@ public class StopHandler implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
-        System.out.println("---PRESSED STOP BUTTON");
+        SceneRenderer renderer = Poseur.getPoseur().getGUI().sceneRenderingPanel;
+        renderer.pauseScene();
     }
     
 }

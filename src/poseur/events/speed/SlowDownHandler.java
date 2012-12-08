@@ -6,6 +6,8 @@ package poseur.events.speed;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import poseur.Poseur;
+import sprite_renderer.SceneRenderer;
 
 /**
  *
@@ -20,7 +22,8 @@ public class SlowDownHandler implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent ae) {        
-        System.out.println("---PRESSED SLOW DOWN BUTTON");
+        SceneRenderer renderer = Poseur.getPoseur().getGUI().sceneRenderingPanel;
+        renderer.setTimeScaler(renderer.getTimeScaler() + 0.1f);
     }
     
 }

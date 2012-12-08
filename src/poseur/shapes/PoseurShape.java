@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.io.Serializable;
 import org.w3c.dom.Element;
 import poseur.Poseur;
 import static poseur.PoseurSettings.*;
@@ -19,7 +20,7 @@ import poseur.gui.PoseurGUI;
  *          Debugging Enterprises
  * @version 1.0
  */
-public abstract class PoseurShape 
+public abstract class PoseurShape implements Serializable 
 {
     // LINE THICKNESS OF THE SHAPE OUTLINE
     protected BasicStroke outlineThickness;

@@ -3,6 +3,7 @@ package poseur.shapes;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.io.Serializable;
 import org.w3c.dom.Element;
 import static poseur.PoseurSettings.*;
 
@@ -17,7 +18,7 @@ import static poseur.PoseurSettings.*;
  *          Debugging Enterprises
  * @version 1.0
  */
-public class PoseurRectangle extends PoseurShape
+public class PoseurRectangle extends PoseurShape  implements Serializable
 {
     // THIS STORES ALL THE GEOMETRY FOR THIS RECTANGLE
     private Rectangle2D.Double geometry;

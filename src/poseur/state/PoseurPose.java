@@ -5,6 +5,7 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import javax.imageio.ImageIO;
@@ -15,7 +16,6 @@ import poseur.gui.PoseCanvas;
 import poseur.gui.PoseurGUI;
 import poseur.shapes.PoseurLine;
 import poseur.shapes.PoseurShape;
-import sprite_renderer.Sprite;
 
 /**
  * This class stores all the information for a pose, including
@@ -26,7 +26,7 @@ import sprite_renderer.Sprite;
  *          Debugging Enterprises
  * @version 1.0
  */
-public class PoseurPose 
+public class PoseurPose implements Serializable
 {
     // HERE'S THIS POSE'S DIMENSIONS
     private int poseWidth;

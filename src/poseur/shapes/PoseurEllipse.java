@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.io.Serializable;
 import org.w3c.dom.Element;
 import static poseur.PoseurSettings.*;
 
@@ -15,7 +16,7 @@ import static poseur.PoseurSettings.*;
  *
  * @author Michael Salerno
  */
-public class PoseurEllipse extends PoseurShape{
+public class PoseurEllipse extends PoseurShape implements Serializable{
 
     private Ellipse2D.Double geometry;
     private static Ellipse2D.Double sharedGeometry = new Ellipse2D.Double();
