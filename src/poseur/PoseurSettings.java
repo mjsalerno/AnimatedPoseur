@@ -47,7 +47,7 @@ public class PoseurSettings
     // WE'LL NEED THESE TO DYNAMICALLY BUILD TEXT
     public static final String PNG_FORMAT_NAME = "png";
     public static final String PNG_FILE_EXTENSION = "." + PNG_FORMAT_NAME;
-    public static final String POSE_FILE_EXTENSION = ".pose";
+    public static final String POSE_FILE_EXTENSION = ".bin";
     public static final String STROKE_SELECTION_FILE_PREFIX = BUTTON_IMAGES_PATH + "Stroke";
     public static final String ZOOM_LABEL_TEXT_PREFIX = "Zoom: ";
     public static final String ZOOM_LABEL_TEXT_POSTFIX = "X";
