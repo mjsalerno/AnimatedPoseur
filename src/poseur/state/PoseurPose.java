@@ -68,7 +68,7 @@ public class PoseurPose implements Serializable
         Image img = null;
 
         try {
-            img = ImageIO.read(new File("testt.png"));
+            img = ImageIO.read(new File(poseur.PoseurSettings.BUTTON_IMAGES_PATH + "/Blank.png"));
         } catch (IOException e) {
         }
         ImageIcon ii = new ImageIcon(img.getScaledInstance(64, 64, Image.SCALE_SMOOTH));

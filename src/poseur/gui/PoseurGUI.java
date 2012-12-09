@@ -607,18 +607,10 @@ public class PoseurGUI extends JFrame
         
         //SCROLL PANE  
         //FIXME: TESTING CODE
-        Image imgg = null;
-        try {
-            imgg = ImageIO.read(new File("test.png"));
-        } catch (IOException e) {
-        }
-        ImageIcon iii = new ImageIcon(imgg.getScaledInstance(64, 64, Image.SCALE_SMOOTH));
         
-        //listModel = new DefaultListModel<>();
         scrollPaneList = new JList<>(listModel);
         scrollPaneList.setVisibleRowCount(1);
         scrollPaneList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-//        listModel.addElement(iii);
 
         scrollPane = new JScrollPane(scrollPaneList);        
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
