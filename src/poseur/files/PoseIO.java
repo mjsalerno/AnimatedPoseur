@@ -6,11 +6,11 @@ import java.awt.HeadlessException;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
-import javax.imageio.ImageIO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -29,13 +29,13 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import poseur.Poseur;
 import static poseur.PoseurSettings.*;
-import poseur.gui.PoseCanvas;
 import poseur.gui.PoseurGUI;
 import poseur.shapes.PoseurEllipse;
 import poseur.shapes.PoseurLine;
 import poseur.shapes.PoseurRectangle;
 import poseur.shapes.PoseurShape;
 import poseur.shapes.PoseurShapeType;
+import poseur.sprite.AnimatedSprite;
 import poseur.state.PoseurPose;
 import poseur.state.PoseurState;
 import poseur.state.PoseurStateManager;
@@ -378,46 +378,61 @@ public class PoseIO
      * 
      * @param currentPoseName Name of the pose to export.
      */
-    public void exportPose(String currentPoseName)
-    {
-        // WE DON'T HAVE TO ASK THE USER, WE'LL JUST EXPORT IT
-        // FIRST GET THE STUFF WE'LL NEED
-        Poseur singleton = Poseur.getPoseur();
-        PoseurGUI gui = singleton.getGUI();
-        PoseurStateManager state = singleton.getStateManager();
-        PoseCanvas trueCanvas = gui.getTruePoseCanvas();
-        PoseurPose pose = state.getPose();
-        
-        // THEN MAKE OUR IMAGE THE SAME DIMENSIONS AS THE POSE
-        BufferedImage imageToExport = new BufferedImage(    pose.getPoseWidth(), 
-                                                            pose.getPoseHeight(),
-                                                            BufferedImage.TYPE_INT_ARGB);
-        
-        // AND ASK THE CANVAS TO FILL IN THE IMAGE,
-        // SINCE IT ALREADY KNOWS HOW TO DRAW THE POSE
-        trueCanvas.paintToImage(imageToExport);
-
-        // AND NOW SAVE THE IMAGE TO A .png FILE
-        File imageFile = new File(EXPORTED_IMAGES_PATH 
-                                    + currentPoseName 
-                                    + PNG_FILE_EXTENSION);
-        // LET'S SAVE THE FILE
-        try
-        {
-            ImageIO.write(imageToExport, PNG_FORMAT_NAME, imageFile);
-            JOptionPane.showMessageDialog(
-                gui,
-                IMAGE_EXPORTED_TEXT + currentPoseName + POSE_FILE_EXTENSION,
-                IMAGE_EXPORTED_TITLE_TEXT,
-                JOptionPane.INFORMATION_MESSAGE);
+//    public void exportPose(String currentPoseName)
+//    {
+//        // WE DON'T HAVE TO ASK THE USER, WE'LL JUST EXPORT IT
+//        // FIRST GET THE STUFF WE'LL NEED
+//        Poseur singleton = Poseur.getPoseur();
+//        PoseurGUI gui = singleton.getGUI();
+//        PoseurStateManager state = singleton.getStateManager();
+//        PoseCanvas trueCanvas = gui.getTruePoseCanvas();
+//        PoseurPose pose = state.getPose();
+//        
+//        // THEN MAKE OUR IMAGE THE SAME DIMENSIONS AS THE POSE
+//        BufferedImage imageToExport = new BufferedImage(    pose.getPoseWidth(), 
+//                                                            pose.getPoseHeight(),
+//                                                            BufferedImage.TYPE_INT_ARGB);
+//        
+//        // AND ASK THE CANVAS TO FILL IN THE IMAGE,
+//        // SINCE IT ALREADY KNOWS HOW TO DRAW THE POSE
+//        trueCanvas.paintToImage(imageToExport);
+//
+//        // AND NOW SAVE THE IMAGE TO A .png FILE
+//        File imageFile = new File(EXPORTED_IMAGES_PATH 
+//                                    + currentPoseName 
+//                                    + PNG_FILE_EXTENSION);
+//        // LET'S SAVE THE FILE
+//        try
+//        {
+//            ImageIO.write(imageToExport, PNG_FORMAT_NAME, imageFile);
+//            JOptionPane.showMessageDialog(
+//                gui,
+//                IMAGE_EXPORTED_TEXT + currentPoseName + POSE_FILE_EXTENSION,
+//                IMAGE_EXPORTED_TITLE_TEXT,
+//                JOptionPane.INFORMATION_MESSAGE);
+//        }
+//        catch(IOException ioe)
+//        {
+//            JOptionPane.showMessageDialog(
+//                gui,
+//                IMAGE_EXPORTING_ERROR_TEXT,
+//                IMAGE_EXPORTING_ERROR_TITLE_TEXT,
+//                JOptionPane.ERROR_MESSAGE);            
+//        }            
+//    }
+    
+    public void exportPose(String currentPoseName){
+        AnimatedSprite sprite = Poseur.getPoseur().getAnimatedSprite();
+        File file = new File(sprite.getName());
+        file.mkdir();
+        file = new File(sprite.getName() + "/" + sprite.getName() + ".xml");
+        try {
+            file.createNewFile();
+            XMLwriter w = new XMLwriter(Poseur.getPoseur().getAnimatedSprite(),file, new File(sprite.getName()));
+            w.writeFile();
+        } catch (IOException ex) {
+            Logger.getLogger(PoseIO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch(IOException ioe)
-        {
-            JOptionPane.showMessageDialog(
-                gui,
-                IMAGE_EXPORTING_ERROR_TEXT,
-                IMAGE_EXPORTING_ERROR_TITLE_TEXT,
-                JOptionPane.ERROR_MESSAGE);            
-        }            
     }
+    
 }
