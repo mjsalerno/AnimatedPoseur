@@ -191,7 +191,7 @@ public class PoseurStateManager {
         // AND UPDATE THE GUI
         Poseur singleton = Poseur.getPoseur();
         PoseurGUI gui = singleton.getGUI();
-        gui.updateMode();
+        if (!singleton.getAnimatedSprite().getAnimationStates().isEmpty()) gui.updateMode();
     }
 
     // METHODS MADE AVAILBLE TO OTHER CLASSES

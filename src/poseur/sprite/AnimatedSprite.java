@@ -212,26 +212,6 @@ public class AnimatedSprite implements Serializable{
         this.name = name;
     }
     
-    public Sprite convertToSprite(){
-        SpriteType st = new SpriteType();
-        int temp = 0;
-        PoseList tempPoseList;
-//        Pose p = new Pose;
-        for(AnimationState state : this.animationStates.keySet()){
-            tempPoseList = st.addPoseList(state);
-            
-            for(PoseurPose pose : this.getPoseList(state)){
-                st.addImage(temp, pose.getImage());                
-                tempPoseList.addPose(temp++, pose.getPause());
-            }
-        }
-        
-        Sprite s = new Sprite(st, (AnimationState)this.animationStates.keySet().toArray()[0]);
-        s.update(.5F);
-        return s;
-    }
-    
-    
     public Sprite convertToSprite(AnimationState state){
         SpriteType st = new SpriteType();
         int temp = 1;
@@ -309,6 +289,13 @@ public class AnimatedSprite implements Serializable{
 
     public void addShape(PoseurShape shapeToPaste, AnimationState selectedAnimationState, int selectedPoseIndex) {
         this.animationStates.get(selectedAnimationState).get(selectedPoseIndex).addShape(shapeToPaste);
+    }
+
+    public void clear(String newName) {
+        this.animationStates.clear();
+        this.height = DEFAULT_POSE_HEIGHT;
+        this.width = DEFAULT_POSE_WIDTH;
+        this.name = newName;
     }
     
     

@@ -201,6 +201,7 @@ public class PoseurFileManager
                 &&
             (fileName.length() > 0))
         {
+            Poseur.getPoseur().getAnimatedSprite().clear(fileName);
             // UPDATE THE FILE NAMES AND FILE
             currentPoseName = fileName;
             currentFileName = fileName + POSE_FILE_EXTENSION;
