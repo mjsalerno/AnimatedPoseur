@@ -295,6 +295,9 @@ public class PoseurFileManager
             currentFileName = currentFile.getName();
             //currentPoseName = currentFileName.substring(0, currentFileName.indexOf("."));
             saved = true;
+            
+            singleton.getStateManager().setState(PoseurState.SELECT_SHAPE_STATE);
+            gui.updateMode();
  
             // AND PUT THE FILE NAME IN THE TITLE BAR
             String appName = gui.getAppName();

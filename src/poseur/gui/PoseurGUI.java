@@ -451,7 +451,7 @@ public class PoseurGUI extends JFrame
         PoseurStateManager state = singleton.getStateManager();
         PoseurState mode = state.getMode();
         PoseurFileManager fileManager = singleton.getFileManager();
-       
+        
 
         // IN THIS MODE THE USER IS DRAGGING THE MOUSE TO
         // COMPLETE THE DRAWING OF A SINGLE SHAPE
@@ -459,7 +459,11 @@ public class PoseurGUI extends JFrame
         {
             updateIcon();
             // THIS USES THE CROSSHAIR
-            selectCursor(Cursor.CROSSHAIR_CURSOR);            
+            selectCursor(Cursor.CROSSHAIR_CURSOR);             
+            this.enablePoseListControls(true);
+            this.enableSpeedControls(true);
+            this.enableStateControls(true);
+            this.enableAddPoseControls(true);
         }
         // IN THIS MODE THE USER IS ABOUT TO START DRAGGING
         // THE MOUSE TO CREATE A SHAPE
@@ -473,6 +477,10 @@ public class PoseurGUI extends JFrame
             // TURN THE APPROPRIATE CONTROLS ON/OFF
             setEnabledEditControls(false);
             selectionButton.setEnabled(true);            
+            this.enablePoseListControls(true);
+            this.enableSpeedControls(true);
+            this.enableStateControls(true);
+            this.enableAddPoseControls(true);
         }
         // IN THIS STATE THE USER HAS SELECTED A SHAPE
         // ON THE CANVAS AND IS DRAGGING IT
@@ -480,6 +488,10 @@ public class PoseurGUI extends JFrame
         {
             // THIS USES THE MOVE 
             selectCursor(Cursor.MOVE_CURSOR);
+            this.enablePoseListControls(true);
+            this.enableSpeedControls(true);
+            this.enableStateControls(true);
+            this.enableAddPoseControls(true);
         }
         // IN THIS STATE THE USER IS ABLE TO CLICK ON
         // A SHAPE TO SELECT IT. THIS IS THE MOST COMMON
@@ -500,6 +512,10 @@ public class PoseurGUI extends JFrame
             setEnabledColorControls(true);
             setEnabledShapeControls(true);
             setEnabledZoomControls(true);
+            this.enablePoseListControls(true);
+            this.enableSpeedControls(true);
+            this.enableStateControls(true);
+            this.enableAddPoseControls(true);
         }
         // IN THIS STATE A SHAPE HAS BEEN SELECTED AND SO WE
         // MAY EDIT IT, LIKE CHANGE IT'S COLORS OR TRANSPARENCY
@@ -511,6 +527,11 @@ public class PoseurGUI extends JFrame
             
             // THE EDIT CONTROLS CAN NOW BE USED
             setEnabledEditControls(true);
+            
+            this.enablePoseListControls(true);
+            this.enableSpeedControls(true);
+            this.enableStateControls(true);
+            this.enableAddPoseControls(true);
         }
         // THIS IS THE STATE WHEN THE Poseur APP FIRST
         // STARTS. THERE IS NO Pose YET, SO MOST CONTROLS
@@ -528,6 +549,11 @@ public class PoseurGUI extends JFrame
             toggleOutlineColorButton();
             setEnabledZoomControls(false);
             setEnabledShapeControls(false);
+            
+            this.enablePoseListControls(false);
+            this.enableSpeedControls(false);
+            this.enableStateControls(false);
+            this.enableAddPoseControls(false);
         }
         saveButton.setEnabled(!fileManager.isSaved());
         
@@ -540,6 +566,31 @@ public class PoseurGUI extends JFrame
             // EVEN IS A SELECTED SHAPE
             transparencySlider.setValue(selectedShape.getAlpha());
         }    
+        
+        if(this.listModel.isEmpty() || this.scrollPaneList.getSelectedIndex() < 0){
+            this.enablePoseListControls(false);
+            this.enableSpeedControls(false);
+            this.setEnabledColorControls(false);
+            this.setEnabledEditControls(false);
+            this.setEnabledShapeControls(false);
+            this.setEnabledZoomControls(false);
+            this.setEnabledColorControls(false);
+        }else{
+            this.enablePoseListControls(true);
+            this.enableSpeedControls(true);
+            this.enableAddPoseControls(true);
+            this.setEnabledColorControls(true);
+            this.setEnabledEditControls(true);
+            this.setEnabledShapeControls(true);
+            this.setEnabledZoomControls(true);
+            this.setEnabledColorControls(true);
+        }
+        
+        if(this.stateList.getSelectedIndex() < 0){
+            this.enableAddPoseControls(false);
+        }else {
+            this.enableAddPoseControls(true);
+        }
 
         // REDRAW EVERYTHING
         trueCanvas.repaint();
@@ -1038,6 +1089,38 @@ public class PoseurGUI extends JFrame
         //saveAsButton.setEnabled(false);
         exportButton.setEnabled(false);
         saveAsButton.setEnabled(false);
+    }
+    
+    
+    
+    public void enableSpeedControls(boolean enable){
+        this.startButton.setEnabled(enable);
+        this.stopButton.setEnabled(enable);
+        this.speedUpButton.setEnabled(enable);
+        this.slowDownButton.setEnabled(enable);
+    }
+    
+    
+    public void enablePoseListControls(boolean enable){
+        //this.addPoseButton.setEnabled(enable);
+        this.removePoseButton.setEnabled(enable);
+        this.movePoseLeftButton.setEnabled(enable);
+        this.movePoseRightButton.setEnabled(enable);
+        this.setPosePauseButton.setEnabled(enable);
+        this.setPosePosButton.setEnabled(enable);
+        this.copyPoseButton.setEnabled(enable);
+    }
+    
+    public void enableAddPoseControls(boolean enable){
+        this.addPoseButton.setEnabled(enable);
+    }
+    
+    public void enableStateControls(boolean enable){
+        this.renameAnimationStateButton.setEnabled(enable);
+        this.removeStateButton.setEnabled(enable);
+        this.copyStateButton.setEnabled(enable);
+        this.newAnimationStateButton.setEnabled(enable);
+        this.stateList.setEnabled(enable);
     }
     
     private void enableSaveAsAndExport()

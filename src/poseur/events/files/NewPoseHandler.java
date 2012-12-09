@@ -35,6 +35,7 @@ public class NewPoseHandler implements ActionListener
         gui.spriteList.clear();
         gui.sceneRenderingPanel.unpauseScene();
         gui.sceneRenderingPanel.pauseScene();
+        gui.enableStateControls(true);
         
     }
 }

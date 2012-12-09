@@ -26,6 +26,7 @@ public class RemoveAnimationStateHandler implements ActionListener {
         if(state == null)return;
         p.getAnimatedSprite().removeAnimationState(state);
         p.getGUI().animationStatesModel.removeElement(state);
+        p.getGUI().updateMode();
     }
     
 }

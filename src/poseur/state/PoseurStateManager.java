@@ -492,6 +492,7 @@ public class PoseurStateManager {
         // CHANGE THE DATA0
         pose.setPoseWidth(initWidth);
         pose.setPoseHeight(initHeight);
+        Poseur.getPoseur().getAnimatedSprite().setDimentions(initWidth, initHeight);
         trueCanvasState.updatePoseArea();
         zoomableCanvasState.updatePoseArea();
 

@@ -42,6 +42,7 @@ public class CreateNewAnimationStateHandler implements ActionListener {
         }
         p.getGUI().animationStatesModel.addElement(state);
         p.getAnimatedSprite().addAnimationState(state);
+        p.getGUI().enableAddPoseControls(true);
     }
     
 }
