@@ -66,36 +66,30 @@ public class PoseDimensionsDialog extends JDialog
         setLocation(x, y);
     }
 
-    public void changePoseDimensions()
-    {
-                String newPoseWidth = poseWidthPromptTextField.getText();
-                String newPoseHeight = poseHeightPromptTextField.getText();
-                try
-                {
-                    int poseWidth = Integer.parseInt(newPoseWidth);
-                    int poseHeight = Integer.parseInt(newPoseHeight);
-                    if (    (poseWidth < MIN_POSE_DIM) || 
-                            (poseHeight < MIN_POSE_DIM) ||
-                            (poseWidth > MAX_POSE_DIM) ||
-                            (poseHeight > MAX_POSE_DIM))
-                    {
-                        JOptionPane.showMessageDialog(PoseDimensionsDialog.this, INVALID_POSE_DIM_TEXT, 
-                                INVALID_POSE_DIM_TITLE_TEXT, JOptionPane.ERROR_MESSAGE);
-                    }
-                    else
-                    {
-                        Poseur singleton = Poseur.getPoseur();
-                        PoseurStateManager state = singleton.getStateManager();
-                        state.setPoseDimensions(poseWidth, poseHeight); 
-                        setVisible(false);
-                    }
-                }
-                catch(NumberFormatException | NullPointerException ex)
-                {
-                        JOptionPane.showMessageDialog(PoseDimensionsDialog.this, INVALID_POSE_DIM_TEXT, 
-                                INVALID_POSE_DIM_TITLE_TEXT, JOptionPane.ERROR_MESSAGE);                    
-                }
-    }        
+    public void changePoseDimensions() {
+        String newPoseWidth = poseWidthPromptTextField.getText();
+        String newPoseHeight = poseHeightPromptTextField.getText();
+        try {
+            int poseWidth = Integer.parseInt(newPoseWidth);
+            int poseHeight = Integer.parseInt(newPoseHeight);
+            if ((poseWidth < MIN_POSE_DIM)
+                    || (poseHeight < MIN_POSE_DIM)
+                    || (poseWidth > MAX_POSE_DIM)
+                    || (poseHeight > MAX_POSE_DIM)) {
+                JOptionPane.showMessageDialog(PoseDimensionsDialog.this, INVALID_POSE_DIM_TEXT,
+                        INVALID_POSE_DIM_TITLE_TEXT, JOptionPane.ERROR_MESSAGE);
+            } else {
+                Poseur singleton = Poseur.getPoseur();
+                PoseurStateManager state = singleton.getStateManager();
+                state.setPoseDimensions(poseWidth, poseHeight);
+                Poseur.getPoseur().getAnimatedSprite().setDimentions(poseWidth, poseHeight);
+                setVisible(false);
+            }
+        } catch (NumberFormatException | NullPointerException ex) {
+            JOptionPane.showMessageDialog(PoseDimensionsDialog.this, INVALID_POSE_DIM_TEXT,
+                    INVALID_POSE_DIM_TITLE_TEXT, JOptionPane.ERROR_MESSAGE);
+        }
+    }      
     
     // PRIVATE HELPER METHODS
     

@@ -24,5 +24,6 @@ public class PasteHandler implements ActionListener
         Poseur singleton = Poseur.getPoseur();
         PoseurStateManager poseurStateManager = singleton.getStateManager();
         poseurStateManager.pasteSelectedItem();
+        singleton.getStateManager().refreshState();
     }   
 }

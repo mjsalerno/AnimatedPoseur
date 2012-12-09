@@ -24,7 +24,9 @@ import javax.swing.ImageIcon;
 import poseur.Poseur;
 import static poseur.PoseurSettings.*;
 import poseur.gui.PoseurGUI;
+import poseur.shapes.PoseurShape;
 import poseur.state.PoseurPose;
+import poseur.state.PoseurStateManager;
 import sprite_renderer.AnimationState;
 import sprite_renderer.PoseList;
 import sprite_renderer.Sprite;
@@ -64,9 +66,9 @@ public class AnimatedSprite implements Serializable{
         return this.animationStates.put(name, poseList);        
     }
     
-    public void replaceShapesList(AnimationState state, int i, Collection c){
-        this.animationStates.get(state).get(i).getShapesList().clear();
-        this.animationStates.get(state).get(i).getShapesList().addAll(c);
+    public void replaceShapesList(AnimationState state, int poseIndex, Collection c){
+        this.animationStates.get(state).get(poseIndex).getShapesList().clear();
+        this.animationStates.get(state).get(poseIndex).getShapesList().addAll(c);
     }
     
     public ArrayList<PoseurPose> addAnimationState(AnimationState name){
@@ -296,7 +298,17 @@ public class AnimatedSprite implements Serializable{
         this.height = that.height;
         this.name = that.name;
         this.width = that.width;
+        Poseur.getPoseur().getStateManager().setPoseDimensions(width, height);
         
+    }
+
+    public void setDimentions(int poseWidth, int poseHeight) {
+        this.width = poseWidth;
+        this.height = poseHeight;
+    }
+
+    public void addShape(PoseurShape shapeToPaste, AnimationState selectedAnimationState, int selectedPoseIndex) {
+        this.animationStates.get(selectedAnimationState).get(selectedPoseIndex).addShape(shapeToPaste);
     }
     
     

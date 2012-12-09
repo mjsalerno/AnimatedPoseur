@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import poseur.Poseur;
+import poseur.gui.PoseurGUI;
 import poseur.shapes.PoseurShape;
 import poseur.state.PoseurStateManager;
 
@@ -30,12 +31,14 @@ public class CutHandler implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         Poseur singleton = Poseur.getPoseur();
+        PoseurGUI gui = singleton.getGUI();
         PoseurStateManager poseurStateManager = singleton.getStateManager();
         poseurStateManager.copySelectedItem();
         PoseurShape selectedShape = singleton.getStateManager().getSelectedShape();
         LinkedList<PoseurShape> shapeList = singleton.getStateManager().getPose().getShapesList();
         int shapeIndex = shapeList.indexOf(selectedShape);
-        shapeList.remove(shapeIndex);        
+        shapeList.remove(shapeIndex);  
+        singleton.getAnimatedSprite().replaceShapesList(gui.getSelectedAnimationState(), gui.getSelectedPoseIndex(), shapeList);
         singleton.getStateManager().refreshState();
     }
     

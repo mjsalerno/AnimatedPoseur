@@ -18,6 +18,7 @@ import poseur.gui.PoseCanvas;
 import poseur.gui.PoseurGUI;
 import poseur.shapes.PoseurLine;
 import poseur.shapes.PoseurShape;
+import poseur.sprite.AnimatedSprite;
 
 /**
  * This class stores all the information for a pose, including
@@ -252,25 +253,8 @@ public class PoseurPose implements Serializable
         return this.icon;
     }
     
-    public void updateIcon(){
-           // WE DON'T HAVE TO ASK THE USER, WE'LL JUST EXPORT IT
-        // FIRST GET THE STUFF WE'LL NEED
-        Poseur singleton = Poseur.getPoseur();
-        PoseurGUI gui = singleton.getGUI();
-        PoseurStateManager state = singleton.getStateManager();
-        PoseCanvas trueCanvas = gui.getTruePoseCanvas();
-        PoseurPose pose = state.getPose();
-        
-        // THEN MAKE OUR IMAGE THE SAME DIMENSIONS AS THE POSE
-        BufferedImage imageToExport = new BufferedImage(    pose.getPoseWidth(), 
-                                                            pose.getPoseHeight(),
-                                                            BufferedImage.TYPE_INT_ARGB);
-        
-        // AND ASK THE CANVAS TO FILL IN THE IMAGE,
-        // SINCE IT ALREADY KNOWS HOW TO DRAW THE POSE
-        trueCanvas.paintToImage(imageToExport, this);
-        ImageIcon ii = new ImageIcon(imageToExport.getScaledInstance(64, 64, Image.SCALE_SMOOTH));
-        
+    public void updateIcon(){           
+        ImageIcon ii = new ImageIcon(this.getImage().getScaledInstance(64, 64, Image.SCALE_SMOOTH));        
         this.icon = ii;
     }
     
@@ -279,13 +263,13 @@ public class PoseurPose implements Serializable
         // FIRST GET THE STUFF WE'LL NEED
         Poseur singleton = Poseur.getPoseur();
         PoseurGUI gui = singleton.getGUI();
+        AnimatedSprite sprite = singleton.getAnimatedSprite();
         PoseurStateManager state = singleton.getStateManager();
         PoseCanvas trueCanvas = gui.getTruePoseCanvas();
-        PoseurPose pose = state.getPose();
         
         // THEN MAKE OUR IMAGE THE SAME DIMENSIONS AS THE POSE
-        BufferedImage imageToExport = new BufferedImage(    pose.getPoseWidth(), 
-                                                            pose.getPoseHeight(),
+        BufferedImage imageToExport = new BufferedImage(    sprite.getWidth(), 
+                                                            sprite.getHeight(),
                                                             BufferedImage.TYPE_INT_ARGB);
         
         // AND ASK THE CANVAS TO FILL IN THE IMAGE,

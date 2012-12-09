@@ -38,5 +38,6 @@ public class ColorPalletHandler implements ActionListener
         Poseur singleton = Poseur.getPoseur();
         PoseurStateManager poseurStateManager = singleton.getStateManager();
         poseurStateManager.selectPalletColor(selectedColor);
+        singleton.getStateManager().refreshState();
     }
 }

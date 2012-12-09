@@ -409,6 +409,8 @@ public class PoseurStateManager {
         PoseurShape shapeToPaste = clipboard.clone();
         shapeToPaste.move(0, 0);
         pose.addShape(shapeToPaste);
+        Poseur p = Poseur.getPoseur();
+        p.getAnimatedSprite().addShape(shapeToPaste, p.getGUI().getSelectedAnimationState(), p.getGUI().getSelectedPoseIndex());
 
         // REPAINT THE CANVASES
         repaintCanvases();
