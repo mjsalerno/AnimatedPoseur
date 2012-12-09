@@ -193,7 +193,7 @@ public class AnimatedSprite implements Serializable{
     }
 
     public void setWidth(int width) {
-        this.width = width;
+        this.setDimentions(width, this.height);
     }
 
     public int getHeight() {
@@ -201,7 +201,7 @@ public class AnimatedSprite implements Serializable{
     }
 
     public void setHeight(int height) {
-        this.height = height;
+        this.setDimentions(this.width, height);
     }
 
     public String getName() {
@@ -285,6 +285,13 @@ public class AnimatedSprite implements Serializable{
     public void setDimentions(int poseWidth, int poseHeight) {
         this.width = poseWidth;
         this.height = poseHeight;
+        
+        for(AnimationState state : this.getAnimationStates()){
+            for(PoseurPose pose : this.getPoseList(state)){
+                pose.setPoseHeight(poseHeight);
+                pose.setPoseWidth(poseWidth);
+            }
+        }
     }
 
     public void addShape(PoseurShape shapeToPaste, AnimationState selectedAnimationState, int selectedPoseIndex) {
