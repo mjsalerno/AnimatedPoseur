@@ -21,6 +21,9 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import poseur.Poseur;
+import static poseur.PoseurSettings.*;
+import poseur.gui.PoseurGUI;
 import poseur.state.PoseurPose;
 import sprite_renderer.AnimationState;
 import sprite_renderer.PoseList;
@@ -45,11 +48,11 @@ public class AnimatedSprite implements Serializable{
     }
     
     public AnimatedSprite(String name){
-        this(name, 64,64, new EnumMap<AnimationState, ArrayList<PoseurPose>>(AnimationState.class));
+        this(name, DEFAULT_POSE_HEIGHT,DEFAULT_POSE_WIDTH, new EnumMap<AnimationState, ArrayList<PoseurPose>>(AnimationState.class));
     }
     
     public AnimatedSprite(){
-        this("AnimatedSprite", 64,64, new EnumMap<AnimationState, ArrayList<PoseurPose>>(AnimationState.class));
+        this("AnimatedSprite", DEFAULT_POSE_HEIGHT,DEFAULT_POSE_WIDTH, new EnumMap<AnimationState, ArrayList<PoseurPose>>(AnimationState.class));
     }
     
     public Set<AnimationState> getAnimationStates(){
@@ -243,6 +246,9 @@ public class AnimatedSprite implements Serializable{
         
         
         Sprite s = new Sprite(st, state);
+        PoseurGUI gui = Poseur.getPoseur().getGUI();
+        s.setPositionX((gui.sceneRenderingPanel.getWidth()/2) - ((this.width)/2));
+        s.setPositionY((gui.sceneRenderingPanel.getHeight()/2) - ((this.height)/2));
         return s;
     }
     

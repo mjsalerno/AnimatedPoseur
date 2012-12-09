@@ -638,6 +638,7 @@ public class PoseurGUI extends JFrame
         
         
         sceneRenderingPanel.startScene();
+        sceneRenderingPanel.setBackground(ZOOMABLE_CANVAS_COLOR);
         
         
         // EDITING CONTROLS

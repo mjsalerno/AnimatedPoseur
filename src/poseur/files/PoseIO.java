@@ -7,6 +7,7 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.logging.Level;
@@ -220,103 +221,16 @@ public class PoseIO
      * possible that another program could lock out ours from writing to it,
      * so we need to let the caller know when this happens.
      */
-    public boolean savePose(File poseFile)
-    {
-        // GET THE POSE AND ITS DATA THAT WE HAVE TO SAVE
-        Poseur singleton = Poseur.getPoseur();
-        PoseurStateManager poseurStateManager = singleton.getStateManager();
-        PoseurPose poseToSave = poseurStateManager.getPose();
-        LinkedList<PoseurShape> shapesList = poseToSave.getShapesList();
-        
-        try 
-        {
-            // THESE WILL US BUILD A DOC
-            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-            
-            // FIRST MAKE THE DOCUMENT
-            Document doc = docBuilder.newDocument();
-            
-            // THEN THE ROOT ELEMENT
-            Element rootElement = doc.createElement(POSEUR_POSE_NODE);
-            doc.appendChild(rootElement);
- 
-            // THEN MAKE AND ADD THE WIDTH, HEIGHT, AND NUM SHAPES
-            Element poseWidthElement = makeElement(doc, rootElement, 
-                    POSE_WIDTH_NODE, "" + poseToSave.getPoseWidth());
-            Element poseHeightElement = makeElement(doc, rootElement, 
-                    POSE_HEIGHT_NODE, "" + poseToSave.getPoseHeight());
-            Element numShapesElement = makeElement(doc, rootElement,
-                    NUM_SHAPES_NODE, "" + shapesList.size());
-
-            // NOW LET'S MAKE THE SHAPES LIST AND ADD THAT TO THE ROOT AS WELL
-            Element shapesListElement = makeElement(doc, rootElement,
-                    SHAPES_LIST_NODE, "");
-            
-            // AND LET'S ADD ALL THE SHAPES TO THE SHAPES LIST
-            for (PoseurShape shape : shapesList)
-            {
-                // MAKE THE SHAPE NODE AND ADD IT TO THE LIST
-                Element shapeNodeElement = makeElement(doc, shapesListElement,
-                        POSEUR_SHAPE_NODE, "");
-                
-                // NOW LET'S FILL IN THE SHAPE'S DATA
-                
-                // FIRST THE OUTLINE THICKNESS
-                Element outlineThicknessNode = makeElement(doc, shapeNodeElement,
-                        OUTLINE_THICKNESS_NODE, "" + (int)(shape.getOutlineThickness().getLineWidth()));
-                
-                // THEN THE OUTLINE COLOR
-                Element outlineColorNode = makeColorNode(doc, shapeNodeElement,
-                        OUTLINE_COLOR_NODE, shape.getOutlineColor());
-                
-                // AND THE FILL COLOR
-                Element fillColorNode = makeColorNode(doc, shapeNodeElement,
-                        FILL_COLOR_NODE, shape.getFillColor());
-                
-                // AND THE THE ALPHA VALUE
-                Element alphaNode = makeElement(doc, shapeNodeElement,
-                        ALPHA_NODE, "" + shape.getAlpha());
-                
-                // SHAPES HAVE BEEN GIVEN THE GIFT OF KNOWING HOW TO
-                // ADD THEMESELVES AND THEIR DATA TO THE SHAPE ELEMENT
-                Element geometryNode = doc.createElement(GEOMETRY_NODE);
-                shape.addNodeData(geometryNode);         
-                shapeNodeElement.appendChild(geometryNode);        
+    public boolean savePose(File poseFile){
+        try {
+                // SAVE OUR NEW FILE
+                //poseIO.savePose(currentFile);
+                Poseur.getPoseur().getAnimatedSprite().saveToFile(poseFile);
+                return true;
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(PoseurFileManager.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
             }
-            
-            // THE TRANSFORMER KNOWS HOW TO WRITE A DOC TO
-            // An XML FORMATTED FILE, SO LET'S MAKE ONE
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            transformer.setOutputProperty(OutputKeys.INDENT, YES_VALUE);
-            transformer.setOutputProperty(XML_INDENT_PROPERTY, XML_INDENT_VALUE);
-            DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(poseFile);
-            
-            // SAVE THE POSE TO AN XML FILE
-            transformer.transform(source, result);    
-            
-            // WE MADE IT THIS FAR WITH NO ERRORS
-            PoseurGUI gui = singleton.getGUI();
-            JOptionPane.showMessageDialog(
-                gui,
-                POSE_SAVED_TEXT,
-                POSE_SAVED_TITLE_TEXT,
-                JOptionPane.INFORMATION_MESSAGE);
-            return true;
-        }
-        catch(TransformerException | ParserConfigurationException | DOMException | HeadlessException ex)
-        {
-            // SOMETHING WENT WRONG WRITING THE XML FILE
-            PoseurGUI gui = singleton.getGUI();
-            JOptionPane.showMessageDialog(
-                gui,
-                POSE_SAVING_ERROR_TEXT,
-                POSE_SAVING_ERROR_TITLE_TEXT,
-                JOptionPane.ERROR_MESSAGE);  
-            return false;
-        }    
     }
     
     /**
