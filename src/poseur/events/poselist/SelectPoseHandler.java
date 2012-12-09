@@ -4,14 +4,10 @@
  */
 package poseur.events.poselist;
 
-import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
 import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import poseur.Poseur;
-import poseur.shapes.PoseurRectangle;
-import poseur.shapes.PoseurShape;
 import poseur.state.PoseurPose;
 import poseur.state.PoseurState;
 import sprite_renderer.AnimationState;

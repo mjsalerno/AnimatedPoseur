@@ -153,7 +153,7 @@ public class PoseurGUI extends JFrame
     private JToggleButton ellipseToggleButton;
     private JToggleButton lineToggleButton;
     private ButtonGroup shapeButtonGroup;
-    private JComboBox lineStrokeSelectionComboBox;
+    private JComboBox<ImageIcon> lineStrokeSelectionComboBox;
     
     // ZOOM CONTROLS
     private JToolBar zoomToolbar;
@@ -650,7 +650,7 @@ public class PoseurGUI extends JFrame
         lineToggleButton= (JToggleButton)initButton( LINE_SELECTION_IMAGE_FILE, shapeToolbar, tracker, idCounter++, JToggleButton.class, shapeButtonGroup, LINE_TOOLTIP);
         
         // THE LINE THICKNESS SELECTION COMBO BOX WILL GO WITH THE SHAPE CONTROLS
-        DefaultComboBoxModel lineThicknessModel = new DefaultComboBoxModel();
+        DefaultComboBoxModel<ImageIcon> lineThicknessModel = new DefaultComboBoxModel<>();
         for (int i = 0; i < NUM_STROKES_TO_CHOOSE_FROM; i++)
         {
             String imageFileName =  STROKE_SELECTION_FILE_PREFIX
@@ -660,7 +660,7 @@ public class PoseurGUI extends JFrame
             ImageIcon ii = new ImageIcon(img);
             lineThicknessModel.addElement(ii);
         }
-        lineStrokeSelectionComboBox = new JComboBox(lineThicknessModel);
+        lineStrokeSelectionComboBox = new JComboBox<>(lineThicknessModel);
 
         // NOW THE ZOOM TOOLBAR
         zoomToolbar = new JToolBar();
@@ -733,8 +733,7 @@ public class PoseurGUI extends JFrame
         animationStateToolbar = new JToolBar();
         animationStateToolbar.setFloatable(false);
         //TODO: testing code
-        String sa[] = {"Select Animation State"};
-        animationStatesModel = new DefaultComboBoxModel<AnimationState>();
+        animationStatesModel = new DefaultComboBoxModel<>();
         stateList = new JComboBox<>(animationStatesModel);
         removeStateButton = (JButton)initButton(REMOVE_STATE_IMAGE_FILE, animationStateToolbar, tracker, idCounter++, JButton.class, null, REMOVE_STATE_TOOLTIP);
         newAnimationStateButton = (JButton)initButton(NEW_POSE_LIST_IMAGE_FILE, animationStateToolbar, tracker, idCounter++, JButton.class, null, NEW_POSE_LIST_TOOLTIP);
