@@ -590,6 +590,7 @@ public class PoseurGUI extends JFrame
             this.enableAddPoseControls(false);
         }else {
             this.enableAddPoseControls(true);
+            if(!this.listModel.isEmpty())this.enableSpeedControls(true);
         }
         
         if(!Poseur.getPoseur().getFileManager().isSaved())saveButton.setEnabled(true);

@@ -37,6 +37,7 @@ class SelectedStateHandler implements ItemListener {
         for(PoseurPose pose : poseList){
             p.getGUI().listModel.addElement(pose.getIcon());
         }
+        p.getGUI().updateMode();
     }
     
 }
