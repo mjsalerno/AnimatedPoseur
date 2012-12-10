@@ -119,10 +119,10 @@ public class PoseurSettings
     // ARE GROUPED BY TOOLBAR
     
     // TOOLTIPS FOR CONTROLS ON FILE TOOLBAR
-    public static final String NEW_TOOLTIP = "New Pose";
-    public static final String OPEN_TOOLTIP = "Open Pose";
-    public static final String SAVE_TOOLTIP = "Save Pose";
-    public static final String EXPORT_TOOLTIP = "Export Pose to Image";
+    public static final String NEW_TOOLTIP = "New Sprite";
+    public static final String OPEN_TOOLTIP = "Open Sprite";
+    public static final String SAVE_TOOLTIP = "Save Sprite";
+    public static final String EXPORT_TOOLTIP = "Export Sprite to XML";
     public static final String EXIT_TOOLTIP = "Exit Application";
 
     // TOOLTIPS FOR CONTROLS ON EDIT TOOLBAR
@@ -136,7 +136,7 @@ public class PoseurSettings
     // TOOLTIPS FOR CONTROLS ON ZOOM TOOLBAR
     public static final String ZOOM_IN_TOOLTIP = "Zoom In";
     public static final String ZOOM_OUT_TOOLTIP = "Zoom Out";
-    public static final String CHANGE_POSE_DIMENSIONS_TOOLTIP = "Change Pose Dimensions";
+    public static final String CHANGE_POSE_DIMENSIONS_TOOLTIP = "Change Sprite Dimensions";
     
     //TOOLTIPS FOR SPEED CONTROLES
     public static final String SPEED_UP_TOOLTIP = "Speed Up";
@@ -155,7 +155,7 @@ public class PoseurSettings
     
     //TOOLTIPS FOR POSLIST CONTROLES
     public static final String REMOVE_STATE_TOOLTIP = "Remove Animation State";
-    public static final String NEW_POSE_LIST_TOOLTIP = "Create New Pose List";
+    public static final String NEW_POSE_LIST_TOOLTIP = "Create New Animation State";
     public static final String RENAME_POSE_LIST_TOOLTIP = "Rename Animation State";
     public static final String COPY_ANIMATION_STATE_TOOLTIP ="Copy Animation Satae";
 
@@ -236,37 +236,37 @@ public class PoseurSettings
     /***** DIALOG MESSAGES AND TITLES *****/
     // DIALOG BOX MESSAGES TO GIVE FEEDBACK BACK TO THE USER
     public static final String SELECT_CUSTOM_COLOR_TEXT = "Select Custom Color";
-    public static final String PROMPT_TO_SAVE_TEXT = "Would you like to save your Pose?";
-    public static final String PROMPT_TO_SAVE_TITLE_TEXT = "Save your pose?";
-    public static final String POSE_NAME_REQUEST_TEXT = "What do you want to name your pose?";
-    public static final String POSE_NAME_REQUEST_TITLE_TEXT = "Enter Pose File Name";
-    public static final String IMAGE_EXPORTED_TEXT = "Your pose has been exportetd to ";
-    public static final String IMAGE_EXPORTED_TITLE_TEXT = "Image Exported";
-    public static final String IMAGE_EXPORTING_ERROR_TEXT = "An Error Occured While Exporting the Image";
-    public static final String IMAGE_EXPORTING_ERROR_TITLE_TEXT = "Image Exporting Error";
-    public static final String POSE_SAVED_TEXT = "Pose File has been Saved";
-    public static final String POSE_SAVED_TITLE_TEXT = "Pose File Saved";
-    public static final String POSE_SAVING_ERROR_TEXT = "An Error Occured While Saving the Pose";
-    public static final String POSE_SAVING_ERROR_TITLE_TEXT = "Pose Saving Error";
-    public static final String POSE_LOADED_TEXT = "Pose File has been Loaded";
-    public static final String POSE_LOADED_TITLE_TEXT = "Pose File Loaded";
-    public static final String POSE_LOADING_ERROR_TEXT = "An Error Occured While Loading the Pose";
-    public static final String POSE_LOADING_ERROR_TITLE_TEXT = "Pose Loading Error";
-    public static final String CHANGE_POSE_DIMENSIONS_TEXT = "Enter New Pose Dimensions";
-    public static final String CHANGE_POSE_DIMENSIONS_TITLE_TEXT = "Change Pose Dimensions";
-    public static final String ENTER_POSE_WIDTH_TEXT = "Enter Pose Width: ";
-    public static final String ENTER_POSE_HEIGHT_TEXT = "Enter Pose Height: ";
-    public static final String INVALID_POSE_DIMENSIONS_ENTRY_TEXT = "Invalid Pose Dimensions Entered";
+    public static final String PROMPT_TO_SAVE_TEXT = "Would you like to save your Sprite?";
+    public static final String PROMPT_TO_SAVE_TITLE_TEXT = "Save your sprite?";
+    public static final String POSE_NAME_REQUEST_TEXT = "What do you want to name your sprite?";
+    public static final String POSE_NAME_REQUEST_TITLE_TEXT = "Enter Sprite File Name";
+    public static final String IMAGE_EXPORTED_TEXT = "Your sprite has been exportetd to ";
+    public static final String IMAGE_EXPORTED_TITLE_TEXT = "XML Exported";
+    public static final String IMAGE_EXPORTING_ERROR_TEXT = "An Error Occured While Exporting the XML";
+    public static final String IMAGE_EXPORTING_ERROR_TITLE_TEXT = "XML Exporting Error";
+    public static final String POSE_SAVED_TEXT = "Sprite File has been Saved";
+    public static final String POSE_SAVED_TITLE_TEXT = "Sprite File Saved";
+    public static final String POSE_SAVING_ERROR_TEXT = "An Error Occured While Saving the Spreit";
+    public static final String POSE_SAVING_ERROR_TITLE_TEXT = "Sprite Saving Error";
+    public static final String POSE_LOADED_TEXT = "Sprite has been Loaded";
+    public static final String POSE_LOADED_TITLE_TEXT = "Sprite Loaded";
+    public static final String POSE_LOADING_ERROR_TEXT = "An Error Occured While Loading the Sprite";
+    public static final String POSE_LOADING_ERROR_TITLE_TEXT = "Sprite Loading Error";
+    public static final String CHANGE_POSE_DIMENSIONS_TEXT = "Enter New Sprite Dimensions";
+    public static final String CHANGE_POSE_DIMENSIONS_TITLE_TEXT = "Change Sprite Dimensions";
+    public static final String ENTER_POSE_WIDTH_TEXT = "Enter Sprite Width: ";
+    public static final String ENTER_POSE_HEIGHT_TEXT = "Enter Sprite Height: ";
+    public static final String INVALID_POSE_DIMENSIONS_ENTRY_TEXT = "Invalid Sprite Dimensions Entered";
     public static final String INVALID_POSE_DIMENSIONS_TITLE_TEXT = "Invalid Dimensions Entry";
     public static final String LOADING_XML_ERROR_TEXT = "Error Loading XML";
-    public static final String EXPORT_POSE_TEXT = "Pose will be exported to ";
-    public static final String EXPORT_POSE_TITLE_TEXT = "Export Pose?";
+    public static final String EXPORT_POSE_TEXT = "Sprite will be exported to ";
+    public static final String EXPORT_POSE_TITLE_TEXT = "Export Sprite?";
     
     /***** POSE DIMENSIONS DIALOG TEXT *****/
-    public static final String POSE_DIMENSIONS_DIALOG_TITLE = "Changing Pose Dimensions";
-    public static final String POSE_DIMENSIONS_PROMPT_TEXT = "Enter New Pose Dimensions";
-    public static final String POSE_WIDTH_PROMPT_TEXT = "Enter Pose Width: ";
-    public static final String POSE_HEIGHT_PROMPT_TEXT = "Enter Pose Height: ";
+    public static final String POSE_DIMENSIONS_DIALOG_TITLE = "Changing Sprite Dimensions";
+    public static final String POSE_DIMENSIONS_PROMPT_TEXT = "Enter New Sprite Dimensions";
+    public static final String POSE_WIDTH_PROMPT_TEXT = "Enter Sprite Width: ";
+    public static final String POSE_HEIGHT_PROMPT_TEXT = "Enter Sprite Height: ";
     public static final String OK_TEXT = "Ok";
     public static final String CANCEL_TEXT = "Cancel";
     
