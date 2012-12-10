@@ -33,10 +33,14 @@ public class SetPosePauseHandler implements ActionListener {
         PoseurPose pose = p.getAnimatedSprite().getPose(state, index);
         String newPause = JOptionPane.showInputDialog("Enter a new pause value\npause: " + pose.getPause());
         if(newPause == null) return;
+        if(newPause.contains("-")){
+            JOptionPane.showMessageDialog(null,"Sorry but \"" + newPause + "\" is not a valid number");
+            return;
+        }
         try{
             pose.setPause(Integer.parseInt(newPause));
         }catch(Exception ex){
-            JOptionPane.showInputDialog("Sorry but \"" + newPause + "\" is not a number");
+            JOptionPane.showMessageDialog(null, "Sorry but \"" + newPause + "\" is not a number");
         }
     }
     
