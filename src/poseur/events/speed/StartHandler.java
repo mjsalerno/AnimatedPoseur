@@ -22,9 +22,7 @@ public class StartHandler implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         PoseurGUI gui = Poseur.getPoseur().getGUI();
-        gui.spriteList.clear();        
-        gui.spriteList.add(Poseur.getPoseur().getAnimatedSprite().convertToSprite(gui.getSelectedAnimationState()));
-        
+        gui.updateSprite();
         gui.sceneRenderingPanel.unpauseScene();
     }
     

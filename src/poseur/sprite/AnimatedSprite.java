@@ -93,7 +93,6 @@ public class AnimatedSprite implements Serializable{
     public void copyState(AnimationState from, AnimationState to){
         ArrayList<PoseurPose> list = this.animationStates.get(from);
         if(list == null) {
-            System.out.println("the state was null");
             return;
         }
         ArrayList<PoseurPose> temp = new ArrayList<>();
@@ -123,20 +122,16 @@ public class AnimatedSprite implements Serializable{
     
     public boolean swapPose(AnimationState name, int from, int to){
         if(!this.animationStates.containsKey(name)){
-            System.out.println("no key named" + name);
             return false;
         }
         ArrayList<PoseurPose> poseList = this.animationStates.get(name);
         if(poseList.size() <= from || from < 0){
-            System.out.println("list size: " + poseList.size() + " from: " + from);
             return false;
         }
         if(poseList.size() <= to || to < 0){
-            System.out.println("list size: " + poseList.size() + " to: " + to);
             return false;
         }
         if(from == to){
-            System.out.println("to = from");
             return false;
         }
         
@@ -144,7 +139,6 @@ public class AnimatedSprite implements Serializable{
         tmp.loadPoseData(this.getPose(name, from));
         this.getPose(name, from).loadPoseData(this.getPose(name, to));
         this.getPose(name, to).loadPoseData(tmp);
-        System.out.println("SWAPED");
         return true;
     }
    

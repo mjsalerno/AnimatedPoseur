@@ -42,7 +42,6 @@ public class MovePoseRightHandler implements ActionListener {
             Poseur p = Poseur.getPoseur();
             AnimatedSprite as = p.getAnimatedSprite();
             AnimationState selectedAnimation = (AnimationState)p.getGUI().animationStatesModel.getSelectedItem();
-            System.out.println("animationState: " + selectedAnimation);
             as.movePoseRight(selectedAnimation, first);
             int second = first + 1;
 
@@ -52,7 +51,8 @@ public class MovePoseRightHandler implements ActionListener {
             lm.set(first, i2);
             lm.set(second, i1);
 
-            gui.setSelectedPoseIndex(second);       
+            gui.setSelectedPoseIndex(second);   
+            gui.updateSprite();
         }
     }
     

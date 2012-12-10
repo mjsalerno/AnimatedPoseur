@@ -336,7 +336,6 @@ public class PoseIO
 //    }
     
     public void exportPose(String currentPoseName){
-        System.out.println("POSE NAME: " + currentPoseName);
         AnimatedSprite sprite = Poseur.getPoseur().getAnimatedSprite();
         File file = new File(sprite.getName());
         file.mkdir();

@@ -327,6 +327,12 @@ public class PoseurGUI extends JFrame
         appName = initAppName;
     }    
     
+    public void updateSprite(){
+        this.spriteList.clear();        
+        this.spriteList.add(Poseur.getPoseur().getAnimatedSprite().convertToSprite(this.getSelectedAnimationState()));        
+        
+    }
+    
     /**
      * This mutator method sets the background color for the
      * outline toggle button, which can then be used for 

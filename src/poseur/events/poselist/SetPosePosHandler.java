@@ -57,7 +57,8 @@ public class SetPosePosHandler implements ActionListener {
             lm.set(first, i2);
             lm.set(second, i1);
 
-            gui.setSelectedPoseIndex(second);       
+            gui.setSelectedPoseIndex(second); 
+            gui.updateSprite();
         }
     }
     

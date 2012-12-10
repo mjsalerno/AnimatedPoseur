@@ -302,8 +302,6 @@ public class PoseurPose implements Serializable
     public void loadShapeThicknesses(){
         //this.shapeThickness.clear();
         
-        //System.out.println("shapes: " + this.shapesList.size() + " thickness: " + this.shapeThickness.size());
-        
         for (int i = 0; i < this.shapesList.size(); i++) {
             this.shapesList.get(i).setOutlineThickness(new BasicStroke(this.shapeThickness.get(i)));
         }
