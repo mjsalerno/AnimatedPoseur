@@ -52,7 +52,9 @@ public class MovePoseRightHandler implements ActionListener {
             lm.set(second, i1);
 
             gui.setSelectedPoseIndex(second);   
-            gui.updateSprite();
+            if(!p.getGUI().spriteList.isEmpty()){
+                gui.updateSprite();
+            }
         }
     }
     

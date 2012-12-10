@@ -22,7 +22,8 @@ public class StopHandler implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         SceneRenderer renderer = Poseur.getPoseur().getGUI().sceneRenderingPanel;
-        renderer.pauseScene();
+        Poseur.getPoseur().getGUI().spriteList.clear();
+        renderer.pauseScene();        
     }
     
 }

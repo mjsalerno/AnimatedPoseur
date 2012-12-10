@@ -33,7 +33,9 @@ public class AddPoseHandler implements ActionListener {
         p.getGUI().listModel.addElement(pose.getIcon());
         p.getStateManager().markPoseChanged();
         p.getGUI().updateMode();
-        p.getGUI().updateSprite();
+        if(!p.getGUI().spriteList.isEmpty()){
+            p.getGUI().updateSprite();
+        }
     }
     
 }

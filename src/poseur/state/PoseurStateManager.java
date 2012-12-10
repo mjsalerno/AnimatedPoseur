@@ -383,6 +383,7 @@ public class PoseurStateManager {
         }
 
         if (state == PoseurState.DRAG_SHAPE_STATE) {
+            Poseur.getPoseur().getGUI().updateSprite();
             setState(PoseurState.SHAPE_SELECTED_STATE);
         }
     }

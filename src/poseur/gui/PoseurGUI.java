@@ -329,6 +329,10 @@ public class PoseurGUI extends JFrame
     
     public void updateSprite(){
         this.spriteList.clear();        
+        if(this.listModel.isEmpty()){
+            this.sceneRenderingPanel.pauseScene();
+            return;
+        }
         this.spriteList.add(Poseur.getPoseur().getAnimatedSprite().convertToSprite(this.getSelectedAnimationState()));        
         
     }

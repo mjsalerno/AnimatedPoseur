@@ -31,7 +31,9 @@ public class CopyPoseHandler implements ActionListener{
         PoseurPose pose = (PoseurPose) p.getAnimatedSprite().getPose(state, index).clone();
         lm.add(index+1, pose.getIcon());
         p.getAnimatedSprite().addPoseAt(gui.getSelectedAnimationState(), pose, index+1);
-        gui.updateSprite();
+        if(!p.getGUI().spriteList.isEmpty()){
+            gui.updateSprite();
+        }
     }
     
 }

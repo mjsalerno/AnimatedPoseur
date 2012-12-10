@@ -42,7 +42,9 @@ public class SetPosePauseHandler implements ActionListener {
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Sorry but \"" + newPause + "\" is not a number");
         }
-        gui.updateSprite();
+        if(!p.getGUI().spriteList.isEmpty()){
+            gui.updateSprite();
+        }
     }
     
 }
