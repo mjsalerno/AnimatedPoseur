@@ -140,6 +140,7 @@ public class PoseurFileManager
     public void requestExportPose()
     {
         // ASK THE USER TO MAKE SURE THEY WANT TO GO AHEAD WITH IT
+        currentPoseName = Poseur.getPoseur().getAnimatedSprite().getName();
         PoseurGUI gui = Poseur.getPoseur().getGUI();
         int selection = JOptionPane.showOptionDialog(   gui, 
                 EXPORT_POSE_TEXT + currentPoseName + POSE_FILE_EXTENSION,
