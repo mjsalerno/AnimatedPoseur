@@ -6,7 +6,6 @@ package poseur.events.poselist;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 import javax.swing.JOptionPane;
 import poseur.Poseur;
 import sprite_renderer.AnimationState;
@@ -23,6 +22,7 @@ public class CopyAnimationStateHandler implements ActionListener {
         AnimationState oldState = p.getGUI().getSelectedAnimationState();
         if (oldState==null) return;
         String newName = JOptionPane.showInputDialog("Enter a new state name for the copy");
+        if (newName==null) return;
         AnimationState newState;
         
         try{

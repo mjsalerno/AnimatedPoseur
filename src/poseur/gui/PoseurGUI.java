@@ -591,6 +591,8 @@ public class PoseurGUI extends JFrame
         }else {
             this.enableAddPoseControls(true);
         }
+        
+        if(!Poseur.getPoseur().getFileManager().isSaved())saveButton.setEnabled(true);
 
         // REDRAW EVERYTHING
         trueCanvas.repaint();

@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import poseur.Poseur;
 import poseur.files.PoseurFileManager;
+import poseur.sprite.AnimatedSprite;
 
 /**
  *

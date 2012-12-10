@@ -201,7 +201,7 @@ public class PoseurFileManager
                 &&
             (fileName.length() > 0))
         {
-            Poseur.getPoseur().getAnimatedSprite().clear(fileName);
+            //Poseur.getPoseur().getAnimatedSprite().clear(fileName);
             // UPDATE THE FILE NAMES AND FILE
             currentPoseName = fileName;
             currentFileName = fileName + POSE_FILE_EXTENSION;
@@ -209,7 +209,11 @@ public class PoseurFileManager
             try {
                 // SAVE OUR NEW FILE
                 //poseIO.savePose(currentFile);
-                Poseur.getPoseur().getAnimatedSprite().saveToFile(currentFile);
+                AnimatedSprite oldSprite = Poseur.getPoseur().getAnimatedSprite();
+                oldSprite.setName(currentPoseName);
+                oldSprite.saveToFile(currentFile);
+                AnimatedSprite sprite = AnimatedSprite.loadFromFile(currentFile);
+                oldSprite.loadAnimatedSpriteData(sprite);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(PoseurFileManager.class.getName()).log(Level.SEVERE, null, ex);
             }

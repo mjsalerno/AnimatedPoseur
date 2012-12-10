@@ -31,6 +31,8 @@ public class AddPoseHandler implements ActionListener {
         AnimationState selectedAnimation = (AnimationState)p.getGUI().animationStatesModel.getSelectedItem();
         p.getAnimatedSprite().addPose(selectedAnimation, pose);
         p.getGUI().listModel.addElement(pose.getIcon());
+        p.getStateManager().markPoseChanged();
+        p.getGUI().updateMode();
     }
     
 }

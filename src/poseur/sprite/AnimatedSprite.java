@@ -92,6 +92,10 @@ public class AnimatedSprite implements Serializable{
     
     public void copyState(AnimationState from, AnimationState to){
         ArrayList<PoseurPose> list = this.animationStates.get(from);
+        if(list == null) {
+            System.out.println("the state was null");
+            return;
+        }
         ArrayList<PoseurPose> temp = new ArrayList<>();
         for(PoseurPose pose: list){
             temp.add((PoseurPose)pose.clone());
@@ -259,7 +263,7 @@ public class AnimatedSprite implements Serializable{
         }
     }
     
-    public AnimatedSprite loadFromFile(File file) throws FileNotFoundException{
+    public static AnimatedSprite loadFromFile(File file) throws FileNotFoundException{
         //throw new UnsupportedOperationException();
         try {
             ObjectInput is = new ObjectInputStream(new FileInputStream(file));
